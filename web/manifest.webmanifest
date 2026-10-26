@@ -1,0 +1,26 @@
+{
+  "id": "./",
+  "name": "ASCENT Fitness Quest RPG 3.4",
+  "short_name": "ASCENT",
+  "description": "Fitness RPG: คลังอาหาร 24 ชนิด สแกนใบเสร็จ OCR ตารางงาน เควสตามเวลา สเตตัส RPG และวิ่ง GPS",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#080d18",
+  "theme_color": "#0a0f1e",
+  "lang": "th",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
