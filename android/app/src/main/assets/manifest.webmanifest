@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "ASCENT Fitness Quest RPG 3.7",
+  "name": "ASCENT Fitness Quest RPG 3.8.3",
   "short_name": "ASCENT",
-  "description": "ASCENT v3.7: Post-Run Analysis, Barcode Scanner, Character Equipment, Weekly Report, Health Connect Android",
+  "description": "ASCENT v3.8.3 Black Flame — Pantry Redesign, GPS Quests, Food Logging and Health Connect",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

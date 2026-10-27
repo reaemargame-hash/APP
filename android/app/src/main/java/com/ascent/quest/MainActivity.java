@@ -96,8 +96,9 @@ public class MainActivity extends Activity {
    p.edit().putInt("pending_widget_water",0).apply();return amount;
   }
  }
- void startRunService(){try{startForegroundService(new Intent(this,RunService.class).setAction("START"));}catch(Exception ex){android.util.Log.e("ASCENT","run start",ex);}}
- @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] grants){super.onRequestPermissionsResult(request,permissions,grants);if(request==PERMISSION_LOCATION&&grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)startRunService();if(request==PERMISSION_CAMERA&&pendingCameraRequest!=null){PermissionRequest pr=pendingCameraRequest;pendingCameraRequest=null;if(grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)pr.grant(new String[]{PermissionRequest.RESOURCE_VIDEO_CAPTURE});else pr.deny();}}
+ void runError(String message){if(web==null)return;web.post(()->web.evaluateJavascript("window.ascentNativeRunError&&window.ascentNativeRunError("+org.json.JSONObject.quote(message)+")",null));}
+ void startRunService(){try{startForegroundService(new Intent(this,RunService.class).setAction("START"));}catch(Exception ex){android.util.Log.e("ASCENT","run start",ex);runError("ไม่สามารถเปิดบริการ GPS: "+ex.getMessage());}}
+ @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] grants){super.onRequestPermissionsResult(request,permissions,grants);if(request==PERMISSION_LOCATION){if(grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)startRunService();else runError("ยังไม่ได้อนุญาตตำแหน่ง GPS กรุณาให้สิทธิ์ตำแหน่งแบบแม่นยำ");}if(request==PERMISSION_CAMERA&&pendingCameraRequest!=null){PermissionRequest pr=pendingCameraRequest;pendingCameraRequest=null;if(grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)pr.grant(new String[]{PermissionRequest.RESOURCE_VIDEO_CAPTURE});else pr.deny();}}
  @Override protected void onResume(){super.onResume();if(web!=null)web.postDelayed(()->web.evaluateJavascript("window.ascentWidgetSync&&window.ascentWidgetSync()",null),400);}
  @Override protected void onActivityResult(int request,int result,Intent info){super.onActivityResult(request,result,info);
    if(request==BACKUP_CREATE){String json=pendingBackup;pendingBackup=null;
