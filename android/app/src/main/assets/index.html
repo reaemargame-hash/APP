@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#0a0f1e"><meta name="description" content="ASCENT — ภารกิจสุขภาพส่วนตัว สะสม EXP บันทึกอาหาร วิ่ง และการนอน">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
-<title>ASCENT — Black Flame 3.8.3</title>
+<title>ASCENT — Black Flame 3.8.6</title>
 <style>
 :root{--bg:#080d18;--panel:#111a2b;--panel2:#151f33;--panel3:#1c2940;--line:#27364b;--text:#ecf5ff;--muted:#90a0b7;--quiet:#65758e;--cyan:#55e5e6;--lime:#b3f16b;--violet:#a994ff;--orange:#ffc883;--red:#ff7f90;--shadow:0 24px 70px #0004;--radius:20px;font-family:system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 800px 480px at 75% -130px,#193e52a6,transparent),radial-gradient(ellipse 500px 380px at 20% 18%,#22234b42,transparent),var(--bg);color:var(--text);min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}a{color:var(--cyan)}svg{display:block}input,select{outline:none}input:focus,select:focus,button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
@@ -173,6 +173,110 @@ input[readonly]{opacity:.85;cursor:default}
 .v372-metrics>div{display:flex;flex-direction:column;gap:3px;min-width:0}.v372-metrics b{font-size:18px;color:#c6f7ff}.v372-metrics small{font-size:10px;color:#9db4cc}.v372-metrics p{grid-column:1/-1;margin:0;font-size:10px;color:#b0bfcf}
 .v372-quality{margin:0 0 12px;padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.7}.v372-pass{border-color:#316d61;background:#102b30;color:#b1f4d7}.v372-warn{border-color:#99672e;background:#32251c;color:#ffe1b2}
 @media(max-width:590px){.v372-metrics{gap:6px;padding:9px}.v372-metrics b{font-size:14px}.v372-metrics small{font-size:9px}.v372-metrics p{font-size:9px}}
+
+
+/* ASCENT v3.8.4 — DAILY QUEST FIRST: isolated styles to avoid previous CSS collisions */
+.v384-home{max-width:1180px;margin:0 auto;display:grid;gap:17px;min-width:0}
+.v384-home *{box-sizing:border-box}
+.v384-home .v384-panel{border-radius:20px;border:1px solid #344c75;background:linear-gradient(150deg,#11223c,#101a30);position:relative;overflow:hidden;min-width:0}
+.v384-home .v384-primarypanel{padding:24px;background:linear-gradient(128deg,#101c38,#182a4a 58%,#17183a);border-color:#466da0;isolation:isolate}
+.v384-primarypanel::before,.v384-primarypanel::after{content:"";position:absolute;pointer-events:none;border-radius:50%;filter:blur(33px);opacity:.35;will-change:transform}
+.v384-primarypanel::before{width:220px;height:280px;top:-145px;right:0;background:radial-gradient(circle,#1c0a21 14%,#3e2471 48%,transparent 74%);animation:v384FlameA 3.2s ease-in-out infinite alternate}
+.v384-primarypanel::after{width:235px;height:240px;bottom:-160px;left:18%;background:radial-gradient(circle,#09070b 20%,#32255d 52%,transparent 74%);animation:v384FlameB 4.2s ease-in-out infinite alternate}
+@keyframes v384FlameA{to{transform:translate3d(-40px,57px,0) scale(1.28)}}
+@keyframes v384FlameB{to{transform:translate3d(65px,-48px,0) scale(1.22)}}
+.v384-primarypanel>*{position:relative;z-index:1}
+.v384-kicker{display:block;color:#85bfff;font-size:10px;letter-spacing:2px;font-weight:850}
+.v384-titleline{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:9px 0 11px}
+.v384-titleline h2{margin:0;font-size:clamp(22px,3vw,30px);color:#f6faff;line-height:1.25}
+.v384-pill{display:inline-flex;border:1px solid #5679a8;background:#24395ba6;color:#c9e4ff;font-size:11px;border-radius:99px;padding:7px 11px;white-space:nowrap;font-weight:750}
+.v384-main-num{font-weight:900;font-size:clamp(33px,5vw,49px);color:#f8fcff;line-height:1.1;letter-spacing:-1.5px;margin:8px 0}
+.v384-main-num small{font-size:clamp(14px,2vw,18px);color:#b1c9e8;letter-spacing:0;font-weight:700}
+.v384-caption{font-size:12px;color:#b4c9e4;line-height:1.7}
+.v384-progress{height:10px;border-radius:12px;background:#081327;border:1px solid #2e4666;overflow:hidden;margin:13px 0 9px}
+.v384-progress>span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#549ee8,#93e7e1);box-shadow:0 0 16px #62bfeeaa;transition:width .35s ease}
+.v384-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.v384-home button.v384-mainbtn,.v384-home button.v384-softbtn{min-height:49px;border-radius:12px;font-size:14px;font-weight:850;cursor:pointer;padding:12px 20px}
+.v384-home button.v384-mainbtn{color:#062334;background:linear-gradient(110deg,#67d7e7,#a6efba);border:1px solid #b1fff0;box-shadow:0 7px 22px #34baae20}
+.v384-home button.v384-softbtn{color:#d9eaff;background:#203553;border:1px solid #477098}
+.v384-home button:focus-visible{outline:3px solid #b5e9ff;outline-offset:2px}
+.v384-home .v384-sectionhead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:2px 2px 0}
+.v384-sectionhead h3{font-size:17px;color:#f2f8ff;margin:0}
+.v384-sectionhead span{color:#93b4d8;font-size:12px}
+.v384-missions{padding:17px 19px;display:grid;gap:0}
+.v384-mission{display:flex;align-items:center;gap:13px;padding:14px 0;min-width:0}
+.v384-mission+.v384-mission{border-top:1px solid #33445b}
+.v384-symbol{width:42px;height:42px;display:grid;place-items:center;border:1px solid #4d647f;border-radius:12px;background:#1b3048;font-size:20px;flex:none}
+.v384-symbol.food{background:#183a32;border-color:#386f61}.v384-symbol.water{background:#173655;border-color:#3c6b98}.v384-symbol.sleep{background:#362d4d;border-color:#695887}
+.v384-missionbody{flex:1;min-width:0}.v384-missionbody strong{font-size:14px;color:#f1f7ff;display:block}.v384-missionbody small{font-size:11px;color:#a6bad3;line-height:1.6;display:block;margin-top:3px}
+.v384-home button.v384-rowaction{border-radius:10px;border:1px solid #4d738e;background:#193b54;color:#c8f1ff;padding:10px 13px;min-height:40px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
+.v384-rowaction:disabled{opacity:.55;cursor:default}
+.v384-checked{font-size:12px;color:#a1ebc3;font-weight:800;white-space:nowrap}
+.v384-summarygrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.v384-summarygrid .v384-panel{padding:17px 19px}
+.v384-metrictop{font-size:12px;color:#afc6e0;font-weight:800}
+.v384-metricnum{font-size:24px;font-weight:900;color:#f4faff;letter-spacing:-.5px;margin:8px 0 2px}
+.v384-metricnum small{font-size:12px;font-weight:600;color:#9eb5d2}
+.v384-summarygrid .v384-progress{height:7px;margin:10px 0}
+.v384-cardlink{display:inline-block;color:#a9eafa;font-weight:750;font-size:12px;margin-top:8px;text-decoration:none;border:0;background:transparent;cursor:pointer;padding:6px 0}
+.v384-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.v384-shortcuts button{min-height:69px;text-align:left;border-radius:13px;border:1px solid #365078;background:linear-gradient(132deg,#172740,#14213a);padding:13px;cursor:pointer;color:#eef7ff;font-weight:800;font-size:12px;line-height:1.5}
+.v384-shortcuts button small{display:block;color:#a7bfda;font-weight:500;font-size:10px;margin-top:4px}
+.v384-shortcuts button:nth-child(1){border-color:#4f745f;background:linear-gradient(135deg,#19372f,#152b34)}
+.v384-shortcuts button:nth-child(2){border-color:#69618e;background:linear-gradient(135deg,#2b294e,#1b2340)}
+.v384-extra{border:1px solid #354761;border-radius:15px;background:#101d30;overflow:hidden}
+.v384-extra>summary{padding:15px 18px;cursor:pointer;color:#c2d6ef;font-size:12px;font-weight:800;list-style-position:inside}
+.v384-extrabody{padding:0 14px 15px}.v384-extrabody .v35-health{margin:0}.v384-extrabody .v33-board{margin:12px 0}
+.v384-extrabody .v384-rpg{display:flex;gap:12px;flex-wrap:wrap;padding:14px;margin-bottom:13px;border:1px solid #354e70;border-radius:12px;color:#bccde5;font-size:12px}
+.v384-extrabody .v384-rpg b{color:#eaf3ff}
+.v384-home .v384-statusnote{margin:0;color:#93a8c5;font-size:11px}
+@media(max-width:700px){.v384-home{gap:12px}.v384-home .v384-primarypanel{padding:18px}.v384-titleline{align-items:flex-start;flex-wrap:wrap}.v384-home button.v384-mainbtn{flex:1}.v384-home button.v384-softbtn{flex:1}.v384-missions{padding:7px 13px}.v384-mission{gap:9px}.v384-symbol{width:35px;height:35px;border-radius:9px;font-size:17px}.v384-missionbody strong{font-size:12px}.v384-missionbody small{font-size:10px}.v384-home button.v384-rowaction{font-size:11px;padding:9px 10px}.v384-summarygrid{grid-template-columns:1fr}.v384-shortcuts{grid-template-columns:1fr 1fr}.v384-shortcuts button:last-child{grid-column:1/-1}.v384-sectionhead h3{font-size:15px}}
+@media(prefers-reduced-motion:reduce){.v384-primarypanel::before,.v384-primarypanel::after{animation:none}.v384-progress>span{transition:none}}
+
+/* v3.8.5: The ORIGINAL full-size RPG Daily Quest card is the main home hero. */
+.v385-home{display:grid;gap:13px;min-width:0}
+.v385-hero{position:relative;isolation:isolate;overflow:hidden;border:1px solid #337ac0;border-radius:21px;background:linear-gradient(145deg,#0d244a 0%,#081632 60%,#12122b 100%);padding:20px 24px 23px;box-shadow:0 10px 32px #0004,inset 0 0 0 3px #101d3a}
+.v385-hero:before,.v385-hero:after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:48%;background:radial-gradient(ellipse at center,#030307 13%,#100b21 39%,#4f338b55 61%,transparent 75%);filter:blur(20px);opacity:.65;will-change:transform}
+.v385-hero:before{width:320px;height:300px;bottom:-205px;left:-130px;animation:v385flame 3.5s ease-in-out infinite alternate}
+.v385-hero:after{width:360px;height:260px;top:-160px;right:-155px;animation:v385flame 4.6s ease-in-out infinite alternate-reverse}
+@keyframes v385flame{to{transform:translate3d(46px,-47px,0) scale(1.18) skewX(9deg)}}
+.v385-hero .v33-title-frame{margin:0 auto 10px}
+.v385-hero .v33-flavor{margin:8px 0 16px;text-align:center}
+.v385-headline{text-align:center;font-size:18px;font-weight:950;letter-spacing:1px;color:#f1f7ff;margin:0 0 9px}
+.v385-run{max-width:680px;margin:auto;text-align:center}
+.v385-runstat{font-weight:950;font-size:clamp(31px,5vw,46px);letter-spacing:-1px;color:#fafcff;line-height:1.22}
+.v385-runstat small{font-size:17px;letter-spacing:0;color:#a8c3e9}
+.v385-message{color:#a9c0e3;font-size:12px;line-height:1.5;margin-top:7px}
+.v385-track{height:9px;border-radius:10px;background:#152948;border:1px solid #3a5383;margin:12px auto;overflow:hidden}
+.v385-track span{display:block;height:100%;background:linear-gradient(90deg,#538be6,#7bd9f0,#a5e9b1);border-radius:10px;transition:width .3s ease}
+.v385-hero-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:17px}
+.v385-hero button.v385-runbutton{min-height:48px;min-width:220px;background:linear-gradient(110deg,#5db6ee,#9ce2c2);border:1px solid #b1ecf5;border-radius:11px;color:#062238;font-size:14px;font-weight:900;cursor:pointer}
+.v385-hero button.v385-minor{min-height:43px;background:#183054;border:1px solid #446eaa;color:#d9ebff;border-radius:11px;padding:9px 16px;font-size:12px;font-weight:750;cursor:pointer}
+.v385-questline{margin:17px auto 0;max-width:700px;padding:12px 14px;border:1px solid #38527b;border-radius:13px;background:#142844bb;text-align:left}
+.v385-questline strong{font-size:12px;color:#d9e9ff;display:block;margin-bottom:6px}
+.v385-questline .v33-goals{margin:0;padding:0}
+.v385-questline .v33-goal{padding:7px 0}
+.v385-questline .v33-actions{margin:8px 0 0;display:flex;flex-wrap:wrap;justify-content:start;gap:8px}
+.v385-questline .v33-actions button{font-size:12px;min-height:36px}
+.v385-next{margin-top:15px;font-size:11px;color:#9ab6e0;text-align:center}
+.v385-rank{display:flex;justify-content:center;gap:13px;flex-wrap:wrap;margin-top:12px;color:#afc9e8;font-size:11px}
+.v385-rank b{color:#eaf5ff}
+.v385-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.v385-task{border:1px solid #3a4e6c;border-radius:12px;background:#142238;padding:13px;display:flex;align-items:center;gap:10px;min-width:0}
+.v385-task.food{border-color:#365b50;background:#142b2b}.v385-task.water{border-color:#365b75;background:#14283e}.v385-task.sleep{border-color:#635478;background:#222039}
+.v385-task>span{font-size:23px}.v385-task-copy{flex:1;min-width:0}.v385-task-copy b{display:block;font-size:12px;color:#f0f8ff}.v385-task-copy small{display:block;color:#a9bfd7;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:3px}
+.v385-task button{border:1px solid #4f7594;background:#24415d;border-radius:9px;color:#deefff;min-height:34px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}
+.v385-bottom{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid #34496b;background:#101e35;border-radius:13px;padding:14px 18px;min-width:0}
+.v385-foodline{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;font-size:12px;color:#adcae5}
+.v385-foodline b{color:#f5fbff;font-size:16px}
+.v385-bottom button{min-height:38px;border:1px solid #477a79;background:#214a4a;color:#ccfff0;border-radius:9px;padding:9px 12px;font-size:12px;font-weight:850;cursor:pointer}
+.v385-links{display:flex;gap:8px;flex-wrap:wrap}.v385-links button{flex:1;min-width:115px;min-height:43px;color:#b9d6ee;background:#12233a;border:1px solid #304661;border-radius:9px;padding:9px;font-size:12px;font-weight:750;cursor:pointer}
+.v385-home .v384-extra{background:#0d1b30}.v385-home .v384-extra>summary{padding:11px 14px;font-size:11px;color:#a8bbd1}
+.v385-home button:focus-visible{outline:3px solid #a6ddff;outline-offset:3px}
+@media(max-width:760px){.v385-actions{grid-template-columns:1fr}.v385-task{padding:10px 12px}.v385-hero{padding:16px 13px 20px}.v385-hero button.v385-runbutton{width:100%}.v385-hero button.v385-minor{flex:1}.v385-hero .v33-title-frame{margin-top:0}.v385-bottom{grid-template-columns:1fr}.v385-bottom button{width:100%}.v385-rank{gap:7px}}
+@media(prefers-reduced-motion:reduce){.v385-hero:before,.v385-hero:after{animation:none!important}.v385-track span{transition:none}}
+
+
 </style>
 <style id="v380-black-flame">
 :root{--v380-violet:#8567c7}body{background:#090b16!important}body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:0;width:65vw;height:85vh;bottom:-30vh;border-radius:48% 52% 35% 65%;background:radial-gradient(ellipse at 50% 65%,#020207 10%,#090613 34%,#281942bb 55%,transparent 75%);filter:blur(24px);opacity:.72;animation:v380flame 3.1s ease-in-out infinite alternate}body:before{left:-23vw}body:after{right:-23vw;animation-delay:-1.6s;animation-duration:3.8s}.app{position:relative;z-index:1}.panel,.v36-card{border-color:#71609450!important;box-shadow:0 0 22px #25134220}.v380-snack{margin-bottom:16px;border:1px solid #b27c5b66!important}.v380-food-intro{margin-bottom:15px}.v380-quick{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:10px 0}.v380-modal{position:fixed;inset:0;background:#03040bcf;z-index:100000;display:none;align-items:center;justify-content:center;padding:14px;overflow:auto}.v380-modal.open{display:flex}.v380-dialog{width:min(550px,100%);max-height:95vh;overflow:auto;background:#101427;border:1px solid #7b68a4;border-radius:18px;padding:18px;box-shadow:0 0 55px #1c123a}.v380-dialog h3{margin:0 0 14px}.v380-risk{padding:12px;background:#242038;border:1px solid #795d8a;border-radius:10px;font-size:13px;line-height:1.6}@keyframes v380flame{0%{transform:translate3d(-12px,35px,0) skewX(-9deg) scale(.9)}50%{transform:translate3d(28px,-20px,0) skewX(8deg) scale(1.12)}100%{transform:translate3d(-15px,-65px,0) skewX(-5deg) scale(.95)}}@media(prefers-reduced-motion:reduce){body:before,body:after{animation:none!important}}@media(max-width:600px){body:before,body:after{width:90vw;opacity:.5}.v380-dialog{padding:12px}}
@@ -215,6 +319,46 @@ body:has(#v34-run-modal:not([hidden])){overflow:hidden}
 @media(min-width:1120px){.v383-stock .v383-foodgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){.v383-stock .v383-hero:before{animation:none}}
 
+</style>
+<style id="v386-popup-css">
+/* v3.8.6: single reusable Home quick-action dialog; no extra page navigation. */
+#v386-overlay[hidden]{display:none!important}
+#v386-overlay{position:fixed!important;inset:0;z-index:100015;display:grid;place-items:center;padding:clamp(8px,2.5vw,25px);background:rgba(2,5,15,.84);backdrop-filter:blur(11px);-webkit-backdrop-filter:blur(11px);overscroll-behavior:contain}
+body.v386-overlay-open{overflow:hidden!important}
+#v386-overlay .v386-dialog{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;width:min(890px,100%);max-height:min(92dvh,950px);border-radius:22px;background:#0b1428;border:1px solid #5264a277;box-shadow:0 25px 80px #000b,0 0 40px #25144b55;color:#eaf3ff}
+#v386-overlay .v386-dialog:before{content:"";position:absolute;inset:-38% -20%;z-index:-1;pointer-events:none;opacity:.23;background:radial-gradient(ellipse at 18% 65%,#100b21 8%,#3c225e 25%,transparent 45%),radial-gradient(ellipse at 82% 55%,#050812 10%,#342657 29%,transparent 51%);filter:blur(24px);animation:v386aura 4s ease-in-out infinite alternate}
+@keyframes v386aura{from{transform:translate3d(-3%,2%,0) rotate(-5deg)}to{transform:translate3d(4%,-3%,0) rotate(6deg)}}
+#v386-overlay .v386-head{position:relative;z-index:2;flex:none;display:flex;align-items:center;gap:12px;justify-content:space-between;padding:16px 19px;background:linear-gradient(95deg,#12254a,#1b1835);border-bottom:1px solid #40548c66}
+#v386-overlay .v386-head small{color:#a5abdb;font-size:10px;letter-spacing:.17em;font-weight:800}
+#v386-overlay .v386-head h2{font-size:21px;margin:3px 0 0;color:#eff5ff}
+#v386-overlay .v386-close{border-radius:12px;border:1px solid #5f78a8;background:#1a3155;color:#eff7ff;min-width:44px;min-height:44px;font-size:20px;cursor:pointer}
+#v386-overlay .v386-scroll{padding:18px 19px;overflow-y:auto;overscroll-behavior:contain;min-height:0;scrollbar-color:#52649b #0a1529}
+#v386-overlay .v386-scroll>.v34-hub,#v386-overlay .v386-scroll>.v386-simple{position:relative}
+#v386-overlay .v386-simple{display:grid;gap:14px}
+#v386-overlay .v386-statline{display:flex;justify-content:space-between;flex-wrap:wrap;align-items:center;gap:12px;padding:16px;background:#132640;border:1px solid #375579;border-radius:14px}
+#v386-overlay .v386-statline strong{font-size:27px;color:#b8e8fa}
+#v386-overlay .v386-statline small{display:block;color:#a7bbd7}
+#v386-overlay .v386-rowbuttons{display:flex;gap:10px;flex-wrap:wrap}
+#v386-overlay .v386-rowbuttons>*{flex:1 1 130px;min-height:45px}
+#v386-overlay .v386-shortcut{border:1px solid #425c82;background:#152942;padding:12px;border-radius:12px;color:#cde9fa;text-align:left;cursor:pointer}
+#v386-overlay .v386-note{color:#abbad3;font-size:12px;line-height:1.65}
+#v386-overlay .v386-simple form{display:grid;gap:12px}
+#v386-overlay .v386-simple input:not([type="checkbox"]),#v386-overlay .v386-simple select{max-width:100%}
+#v386-overlay .v386-form-wrap>.grid{display:block}
+#v386-overlay .v386-form-wrap #settings-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#v386-overlay .v386-form-wrap #settings-form .fullspan{grid-column:1/-1}
+#v386-overlay .v386-form-wrap #settings-form input,#v386-overlay .v386-form-wrap #settings-form select{min-width:0;width:100%}
+#v386-overlay .v386-form-wrap .v382-live-calcs{display:grid;gap:4px}
+#v386-overlay .v34-hub{margin:0}#v386-overlay .v34-hub-content{min-width:0}#v386-overlay .v34-hub .panel{box-shadow:none}
+#v386-overlay .v34-hub .grid{grid-template-columns:minmax(0,1fr)}
+#v386-overlay .v34-hub .two,#v386-overlay .v34-hub .four{grid-column:auto}
+#v386-overlay .v383-actionbar{position:sticky;bottom:0;z-index:5;background:#101d35f2}
+#v386-overlay .v386-detail-trigger{display:none}
+.v386-detail-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;gap:10px;min-height:48px;border-radius:15px;border:1px solid #344566;background:#101f34;color:#cddaf0;font-size:12px;font-weight:750;padding:12px 16px;cursor:pointer}
+.v386-detail-trigger span{color:#b6a6f5}
+.v385-task button,.v385-links button{min-height:43px}
+@media(max-width:580px){#v386-overlay{padding:7px}#v386-overlay .v386-dialog{border-radius:16px;max-height:calc(100dvh - 14px)}#v386-overlay .v386-head{padding:12px}#v386-overlay .v386-head h2{font-size:18px}#v386-overlay .v386-scroll{padding:12px}#v386-overlay .v386-form-wrap #settings-form{grid-template-columns:minmax(0,1fr)}#v386-overlay .v386-form-wrap #settings-form .fullspan{grid-column:auto}#v386-overlay .v383-foodgrid{grid-template-columns:minmax(0,1fr)}#v386-overlay .v34-tabbar{position:sticky;top:0;z-index:5;background:#101b30f2}}
+@media(prefers-reduced-motion:reduce){#v386-overlay .v386-dialog:before{animation:none}}
 </style>
 </head>
 <body><div id="app"></div><div id="toasts" class="toastbox" aria-live="polite"></div>
@@ -428,7 +572,7 @@ function pantryView(){const forecast=weeklyForecast(),s=shortageWeek();return `<
 function forecastPanel(f){if(!f.stockEnough)return `<div class="warn">⚠️ แผน 7 วันยังไม่สมดุลหรือวัตถุดิบไม่พอ แอปจะไม่คาดการณ์การลดไขมันจากเมนูที่ยังไม่ครบ โปรดเติมคลังหรือปรับแผน</div><p class="hint">ปัญหาที่ตรวจพบ: ${esc(f.warnings.slice(0,5).join(', '))}${f.warnings.length>5?' และอื่น ๆ':''}</p>`;
 if(f.avg>f.maintenance*1.05)return `<div class="warn">จากรายการอาหารประมาณ ${Math.round(f.avg)} kcal/วัน อาจไม่เกิดการขาดดุลพลังงานเมื่อเทียบกับค่าที่ใช้ประมาณ ${f.maintenance} kcal/วัน จึงยังไม่ควรคาดการณ์การลดไขมัน</div>`;const range=x=>x[0]+'–'+x[1]+' กก.';return `<div class="forecast-number">${range(f.range7)}</div><span class="subtle">การเปลี่ยนแปลงไขมันโดยประมาณใน 7 วัน</span><div class="muteline"></div><div class="forecast-number">${range(f.range30)}</div><span class="subtle">ประมาณ 30 วัน หากเติมอาหารตามแผนซ้ำ</span><p class="hint">ประมาณจากพลังงานอาหารเฉลี่ย ${Math.round(f.avg)} kcal/วัน และพลังงานที่ใช้โดยประมาณ ${f.maintenance} kcal/วัน (กรอบการคำนวณพลังงาน ±20% (ยังไม่ครอบคลุมความผันผวนทั้งหมด)) · ประมาณจากเพศ อายุ และส่วนสูงในตั้งค่า ไม่ใช่คำรับรองผลจริง น้ำหนักน้ำและการปรับตัวของร่างกายทำให้ผลต่างออกไปได้ · หากไม่ลดให้ดูน้ำหนักเฉลี่ยจริง 2–3 สัปดาห์</p>`}
 function dueNotifications(){const entries=[];for(let i=0;i<7;i++){const date=shift(localDate(),i),d=day(date);for(const rec of RECIPES){if(i===0&&(d.meals?.includes(rec.id)||d.canceled?.['meal:'+rec.id]))continue;entries.push({key:date+'-'+rec.id,time:date+'T'+(d.snoozed?.['meal:'+rec.id]||rec.time)+':00',title:'🍽 เควส '+rec.name,body:rec.name+' ถึงเวลาแล้ว เปิดดูเมนูจากคลังอาหาร'})}for(const slot of waterSlots()){if(i===0&&(d.waterSlots?.[slot.key]||d.canceled?.['water:'+slot.key]))continue;entries.push({key:date+'-'+slot.key,time:date+'T'+(d.snoozed?.['water:'+slot.key]||slot.time)+':00',title:'💧 เควสดื่มน้ำ',body:'ดื่มน้ำประมาณ '+slot.ml+' มล. ตามความกระหาย'})}if(schedule(date).active&&!d.runQuestAwarded&&!d.canceled?.exercise&&!d.recovery)entries.push({key:date+'-run',time:date+'T'+(d.snoozed?.exercise||schedule(date).exerciseTime||'18:00')+':00',title:'🏃 เควสวิ่ง / เดิน',body:'เปิดแผนฝึกและ GPS ตามความพร้อม'});entries.push({key:date+'-sleep',time:date+'T22:15:00',title:'🌙 เตรียมเข้านอน',body:'พักจากหน้าจอและเตรียมตัวนอนตามเป้าหมาย'});}return entries}
-function rescheduleNative(){if(!window.AscentNative?.scheduleReminders)return;try{window.AscentNative.scheduleReminders(JSON.stringify(data.profile.notifications?dueNotifications():[]));window.AscentNative.updateWidget(JSON.stringify({level:lvl(score()).level,xp:score(),km:pctNum(totals().km),next:(nextQuest()?.title||'เควสครบแล้ว'),water:(day(localDate()).water||0),waterGoal:waterSlots().length}))}catch(e){console.warn('native sync',e)}}
+function rescheduleNative(){if(!window.AscentNative?.scheduleReminders)return;try{window.AscentNative.scheduleReminders(JSON.stringify(data.profile.notifications?dueNotifications():[]));window.AscentNative.updateWidget(JSON.stringify({level:lvl(score()).level,rank:lvl(score()).rank,xp:score(),day:localDate(),km:pctNum(totals().km),todayKm:pctNum(totalDistance(day(localDate()))),goalKm:schedule(localDate()).active?pctNum(schedule(localDate()).targetKm):0,done:!!day(localDate()).runQuestAwarded,next:(nextQuest()?.title||'ภารกิจวันนี้'),water:(day(localDate()).water||0),waterGoal:waterSlots().length}))}catch(e){console.warn('native sync',e)}}
 let lastCheck=Date.now();let noticed=new Set();const audioDbKey='ascent_audio_v2';let audioBytes=null;
 function openAudioDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('ascent_settings',1);r.onupgradeneeded=()=>r.result.createObjectStore('files');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 async function storeAudio(file){if(file.size>3e6)throw Error('ไฟล์เสียงเกิน 3 MB');const db=await openAudioDB();await new Promise((ok,no)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').put(file,audioDbKey);tx.oncomplete=ok;tx.onerror=()=>no(tx.error)});db.close();audioBytes=file}
@@ -815,7 +959,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('[data-action="
 document.addEventListener('click',e=>{if(e.target.closest('.receipt-drawer > summary'))receiptDrawerOpen=!receiptDrawerOpen});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&moreMenuOpen){moreMenuOpen=false;render()}});
 
-function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.8.3 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
+function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.8.6 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
 function commit(fn,msg){const oldScore=score(),oldLevel=lvl(oldScore).level;fn();save();render();rescheduleNative();const now=score(),newLevel=lvl(now).level;if(newLevel>oldLevel)toast('⚡ LEVEL UP! → LV.'+newLevel+' · '+fmtNum(now-oldScore)+' EXP');else if(msg)toast(msg+(now>oldScore?' · +'+fmtNum(now-oldScore)+' EXP':''))}
 let pendingInstall=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pendingInstall=e});
 document.addEventListener('click',async e=>{const target=e.target.closest('[data-tab],[data-date],[data-meal],[data-water-slot],[data-ready],[data-action],[data-remove-food],[data-remove-run]');if(!target)return;
@@ -1349,6 +1493,157 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-v383-cat],
  if(b.hasAttribute('data-v383-seed')){if(!confirm('เติมปริมาณวัตถุดิบตามแผน 7 วันในแบบร่าง? คุณจะต้องกดบันทึกอีกครั้ง'))return;const before={...data.inventory};seedInventory();const after={...data.inventory};data.inventory=before;const draft=v383Current();for(const k of Object.keys(ING)){draft[k]=Number(after[k])||0;const input=document.querySelector(`#v383-stock [data-stock="${k}"]`);if(input)input.value=draft[k];v383Touched.add(k)}v383Dirty=true;v383UpdateView();return}
  if(!b.hasAttribute('data-v383-save'))return;const draft=v383Current();for(const k of Object.keys(ING)){const raw=document.querySelector(`#v383-stock [data-stock="${k}"]`);if(!raw||raw.value.trim()===''||!Number.isFinite(Number(raw.value))||Number(raw.value)<0||Number(raw.value)>99999){toast('กรุณาตรวจจำนวนของ '+ING[k].name);raw?.focus();return}draft[k]=Number(raw.value)}
  for(const k of v383Touched)data.inventory[k]=pctNum(draft[k]);v383Draft=null;v383Touched.clear();v383Dirty=false;save();render();rescheduleNative();toast('✓ บันทึกคลังแล้ว · เลือกหลายรายการได้โดยไม่เด้งหน้า');},true);
+
+
+// v3.8.4: DAILY QUEST FIRST. Reuse existing state, GPS, meal and nutrition handlers.
+// Do not render the former duplicate quest board on the front page.
+function v384DailyHome(){
+ const date=localDate(),d=day(date),s=schedule(date),b=energyModel(),n=dailyNutrition(d),st=stats();
+ const km=totalDistance(d),won=!!d.runQuestAwarded||gpsRecords(d).some(r=>r.goalCompleted);
+ const resting=!!d.recovery||!s.active,hasGoal=s.active&&s.targetKm>0;
+ const aim=hasGoal?s.targetKm:0,remaining=Math.max(0,aim-km);
+ const rows=RECIPES.map(m=>({id:m.id,name:m.name,time:m.time,done:(d.meals||[]).includes(m.id)}));
+ const mealDone=rows.filter(x=>x.done).length;
+ const slots=waterSlots(),waterDone=slots.filter(x=>!!d.waterSlots?.[x.key]).length;
+ const waterNext=slots.find(x=>!d.waterSlots?.[x.key]);
+ const slept=d.sleep!==null&&d.sleep!==undefined;
+ const trainingDone=hasGoal?won:false;
+ const total=rows.length+slots.length+1+(hasGoal?1:0);
+ const done=mealDone+waterDone+(slept?1:0)+(trainingDone?1:0);
+ const percentage=percent(done,total);
+ const left=Math.round(b.calories-n.calories);
+ const foodPct=Math.min(100,Math.max(0,n.calories/Math.max(1,b.calories)*100));
+ const proteinPct=Math.min(100,Math.max(0,n.protein/Math.max(1,b.protein)*100));
+ const distancePct=hasGoal?Math.min(100,km/aim*100):0;
+ const questLabel=hasGoal?(won?'✓ ภารกิจวิ่งสำเร็จ':'พร้อมวิ่งได้ตลอดวัน'):'วันพัก · วิ่งอิสระได้';
+ const todayHint=hasGoal?`เหลืออีก ${fmtNum(remaining,2)} กม. · ${esc(s.label)} · ไม่บังคับเพซ`:'วันนี้ไม่มีระยะบังคับ · เริ่มบันทึกวิ่ง GPS ได้ตามต้องการ';
+ return `<div class="v384-home">
+  <section class="v384-panel v384-primarypanel" aria-label="ภารกิจวิ่งประจำวัน">
+   <span class="v384-kicker">✦ ASCENT / DAILY QUEST</span>
+   <div class="v384-titleline"><h2>ภารกิจของวันนี้</h2><span class="v384-pill">${done}/${total} งานย่อยสำเร็จ</span></div>
+   <div class="v384-caption">${questLabel}</div>
+   <div class="v384-main-num">${fmtNum(km,2)} <small>${hasGoal?'/ '+fmtNum(aim,1)+' กม.':'กม. วิ่งสะสมวันนี้'}</small></div>
+   ${hasGoal?`<div class="v384-progress" role="progressbar" aria-label="ความคืบหน้าระยะวิ่ง" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(distancePct)}"><span style="width:${distancePct}%"></span></div>`:''}
+   <div class="v384-caption">${todayHint}</div>
+   <div class="v384-actions"><button type="button" class="v384-mainbtn" data-run-open>↗ ${gps.active?'กลับไปยังการวิ่ง':'เริ่มวิ่ง GPS'}</button><button type="button" class="v384-softbtn" data-v384-jump="missions">☑ ดูภารกิจทั้งหมด</button></div>
+  </section>
+  <div class="v384-sectionhead" id="v384-mission-heading"><h3>☑ สิ่งที่ต้องทำวันนี้</h3><span>${percentage}% สำเร็จ</span></div>
+  <section class="v384-panel v384-missions" id="v384-missions" aria-labelledby="v384-mission-heading">
+   <div class="v384-mission"><div class="v384-symbol food">🍽</div><div class="v384-missionbody"><strong>บันทึกมื้ออาหาร</strong><small>${mealDone}/${rows.length} มื้อ · ${rows.filter(m=>!m.done).map(m=>m.name).join(', ')||'ครบแล้ววันนี้'}</small></div><button type="button" class="v384-rowaction" data-tab="food">${mealDone===rows.length?'ดูอาหาร':'บันทึกอาหาร'}</button></div>
+   <div class="v384-mission"><div class="v384-symbol water">💧</div><div class="v384-missionbody"><strong>ดื่มน้ำ</strong><small>${waterDone}/${slots.length} ช่วง · ${fmtNum(Number(d.water)||0)} แก้วที่บันทึก</small></div>${waterNext?`<button type="button" class="v384-rowaction" data-water-slot="${esc(waterNext.key)}">+ ดื่มแล้ว</button>`:'<span class="v384-checked">✓ ครบแล้ว</span>'}</div>
+   <div class="v384-mission"><div class="v384-symbol sleep">☾</div><div class="v384-missionbody"><strong>บันทึกการนอน</strong><small>${slept?fmtNum(d.sleep,1)+' ชั่วโมงที่บันทึก':'ยังไม่ได้บันทึกชั่วโมงการนอน'}</small></div><button type="button" class="v384-rowaction" data-v384-sleep>${slept?'แก้ไข':'บันทึก'}</button></div>
+  </section>
+  <div class="v384-sectionhead"><h3>โภชนาการวันนี้</h3><span>ข้อมูลจากอาหารที่บันทึก</span></div>
+  <div class="v384-summarygrid">
+   <section class="v384-panel"><div class="v384-metrictop">⚡ พลังงาน</div><div class="v384-metricnum">${fmtNum(n.calories)} <small>/ ${fmtNum(b.calories)} kcal</small></div><div class="v384-progress"><span style="width:${foodPct}%;background:linear-gradient(90deg,#4da7cf,#a4d2ee)"></span></div><div class="v384-caption">${left<0?'เกินเป้าหมาย '+fmtNum(-left)+' kcal':'เหลือ '+fmtNum(left)+' kcal'}</div><button type="button" class="v384-cardlink" data-v380-snack>＋ เพิ่มขนมหรืออาหารนอกแผน</button></section>
+   <section class="v384-panel"><div class="v384-metrictop">🥚 โปรตีน</div><div class="v384-metricnum">${fmtNum(n.protein)} <small>/ ${fmtNum(b.protein)} กรัม</small></div><div class="v384-progress"><span style="width:${proteinPct}%;background:linear-gradient(90deg,#56ae8a,#b5e5a8)"></span></div><div class="v384-caption">${Math.max(0,Math.round(b.protein-n.protein))} กรัม ก่อนถึงเป้าหมาย</div><button type="button" class="v384-cardlink" data-tab="food">ดูรายการอาหาร ↗</button></section>
+  </div>
+  <section class="v384-shortcuts" aria-label="ทางลัด"><button type="button" data-v382-stock>▦ คลังอาหาร / รายการซื้อ<small>เลือกอาหารและดูของที่เหลือ</small></button><button type="button" data-tab="settings">⚙ ร่างกาย / เป้าหมาย<small>น้ำหนัก BMI และแคลอรี</small></button><button type="button" data-v37="open-health">⌚ Health Connect<small>ข้อมูลจากสมาร์ทวอช</small></button></section>
+  <details class="v384-extra" id="v384-more"><summary>รายละเอียดเพิ่มเติม · การนอน น้ำหนัก ตารางภารกิจ และ EXP</summary><div class="v384-extrabody"><div class="v384-rpg"><span>LEVEL <b>${st.lv.level} · ${st.lv.rank}-RANK</b></span><span>EXP <b>${fmtNum(st.x)}</b></span><span>ระยะสะสม <b>${fmtNum(st.all.km,1)} กม.</b></span><button type="button" class="v384-cardlink" data-tab="stats">ดูสถิติทั้งหมด ↗</button></div>${v34DailyHub()}<details class="v384-extra" style="margin-top:12px"><summary>เควส RPG ตามเวลา · เตรียมวัตถุดิบ เลื่อน หรือข้ามเควส</summary><div class="v384-extrabody">${v33Board(activeQuestList()[0]||null)}</div></details></div></details>
+  <p class="v384-statusnote">เควสวิ่ง GPS เปิดได้ตลอดวัน · เวลาที่ตั้งไว้ยังใช้แจ้งเตือนตามปกติ · วันพักไม่มีเป้าระยะทางบังคับ</p>
+ </div>`;
+}
+dashboard=v384DailyHome;
+// Returning to Today always uses today, even after browsing historical statistics.
+document.addEventListener('click',e=>{if(e.target.closest('[data-tab="dashboard"]'))selected=localDate()},true);
+// Sleep log lives in the optional detail section; opening from a visible action must reveal both accordions.
+document.addEventListener('click',e=>{
+ const jump=e.target.closest('[data-v384-jump],[data-v384-sleep]');if(!jump)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ const isSleep=jump.hasAttribute('data-v384-sleep');
+ const outer=document.getElementById('v384-more');
+ if(isSleep&&outer)outer.open=true;
+ const inner=document.querySelector('#v384-more .v34-details');
+ if(isSleep&&inner)inner.open=true;
+ const dest=isSleep?(document.getElementById('sleep-form')||inner):document.getElementById('v384-missions');
+ dest?.scrollIntoView({behavior:'smooth',block:'center'});
+ if(isSleep)document.querySelector('#sleep-form input')?.focus({preventScroll:true});
+},true);
+
+
+// v3.8.5: A single, original-style RPG quest card is the homepage hero.
+// Quest actions/handlers still come from v33QuestDetail and the original event delegation.
+function v385QuestHero(){
+ const today=localDate(),d=day(today),s=schedule(today),st=stats(),q=activeQuestList()[0]||null;
+ const km=totalDistance(d),aim=s.active?Math.max(0,Number(s.targetKm)||0):0;
+ const pct=aim>0?Math.min(100,Math.round(km/aim*100)):0;
+ const complete=!!d.runQuestAwarded||gpsRecords(d).some(r=>r.goalCompleted)||aim>0&&km>=aim;
+ const notice=nextQuest();
+ const questActions=q?.kind==='meal'?`<button type="button" data-meal="${esc(q.id)}" ${q.shortage?.length?'disabled':''}>✓ กินแล้ว</button>`:
+ q?.kind==='water'?`<button type="button" data-water-slot="${esc(q.id)}">✓ ดื่มแล้ว</button>`:
+ q?.kind==='exercise'?`<button type="button" data-run-open="1">↗ เปิด GPS</button>`:
+ q?.kind==='sleep'?`<button type="button" data-action="v34-open-daily">บันทึกการนอน</button>`:'';
+ return `<section class="v385-hero" aria-label="DAILY QUEST ภารกิจหลักวันนี้">
+  <div class="v33-title-frame"><button class="v33-info-button" data-action="v33-help" aria-label="ข้อมูลเควส">ⓘ</button><div class="v33-title-box">DAILY QUEST</div></div>
+  <p class="v33-flavor">[Your tailored training<br>to become a great warrior.]</p>
+  <div class="v385-run"><h2 class="v385-headline">${complete?'QUEST COMPLETE':'ภารกิจวิ่งวันนี้'}</h2>
+  <div class="v385-runstat">${fmtNum(km,2)} <small>${aim>0?'/ '+fmtNum(aim,1)+' กม.':'กม. วันนี้'}</small></div>
+  ${aim>0?`<div class="v385-track" role="progressbar" aria-label="ระยะวิ่งวันนี้" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>`:''}
+  <div class="v385-message">${aim>0?(complete?'✓ วิ่งครบเป้าหมายวันนี้แล้ว':`เหลือ ${fmtNum(Math.max(0,aim-km),2)} กม. · ${esc(s.label)} · ไม่บังคับเพซ`):'วันพัก · วิ่งอิสระได้ ไม่มีระยะบังคับ'}</div>
+  <div class="v385-hero-actions"><button type="button" class="v385-runbutton" data-run-open="1">↗ ${gps.active?'กลับไปหน้าวิ่ง':'เริ่มวิ่ง GPS'}</button><button type="button" class="v385-minor" data-tab="stats">ดูสถิติ ↗</button></div></div>
+  ${q?`<div class="v385-questline"><strong>◈ เควสตามเวลา · ${esc(q.time)} น. · ${esc(q.title)}</strong>${v33QuestDetail(q)}${q.shortage?.length?`<div class="v33-shortage">⚠ วัตถุดิบไม่พอ: ${esc(q.shortage.join(', '))}</div>`:''}${questActions?`<div class="v33-actions">${questActions}<button type="button" class="secondary" data-action="quest-snooze" data-qkey="${esc(q.key)}" data-delay="15">เลื่อน 15 นาที</button><button type="button" class="secondary" data-action="quest-cancel" data-qkey="${esc(q.key)}">ข้าม</button></div>`:''}</div>`:''}
+  <div class="v385-rank"><span>LV <b>${st.lv.level} · ${st.lv.rank}-RANK</b></span><span>EXP <b>${fmtNum(st.x)}</b></span><span>สะสม <b>${fmtNum(st.all.km,1)} กม.</b></span></div>
+  <div class="v385-next">${notice?'✧ ภารกิจถัดไป: '+esc(notice.title)+' · '+esc(notice.time)+' น.':'✧ ภารกิจที่กำหนดวันนี้ครบแล้ว'}</div>
+ </section>`;
+}
+function v385Home(){
+ const date=localDate(),d=day(date),b=energyModel(),n=dailyNutrition(d);
+ const meals=(d.meals||[]).length,mealCount=RECIPES.length,water=waterSlots(),waterDone=water.filter(w=>d.waterSlots?.[w.key]).length,nextWater=water.find(w=>!d.waterSlots?.[w.key]);
+ const slept=d.sleep!==null&&d.sleep!==undefined;
+ return `<div class="v385-home">
+  ${v385QuestHero()}
+  <div class="v385-actions" aria-label="ภารกิจเสริมวันนี้">
+   <div class="v385-task food"><span>🍽</span><div class="v385-task-copy"><b>อาหาร ${meals}/${mealCount}</b><small>บันทึกมื้อที่กินวันนี้</small></div><button type="button" data-v386-open="food">บันทึก</button></div>
+   <div class="v385-task water"><span>💧</span><div class="v385-task-copy"><b>น้ำ ${waterDone}/${water.length}</b><small>ดื่มตามความกระหาย</small></div><button type="button" data-v386-open="water">${nextWater?'+ ดื่มแล้ว':'ดู / แก้ไข'}</button></div>
+   <div class="v385-task sleep"><span>☾</span><div class="v385-task-copy"><b>การนอน ${slept?'✓':'ยังไม่บันทึก'}</b><small>${slept?fmtNum(d.sleep,1)+' ชั่วโมง':'บันทึกเวลานอน'}</small></div><button type="button" data-v386-open="sleep">บันทึก</button></div>
+  </div>
+  <div class="v385-bottom" aria-label="โภชนาการวันนี้"><div class="v385-foodline"><span>⚡ <b>${fmtNum(n.calories)}</b> / ${fmtNum(b.calories)} kcal</span><span>🥚 <b>${fmtNum(n.protein)}</b> / ${fmtNum(b.protein)} กรัม</span><span>${n.calories>b.calories?'เกินเป้า '+fmtNum(n.calories-b.calories)+' kcal':'เหลือ '+fmtNum(Math.max(0,b.calories-n.calories))+' kcal'}</span></div><button type="button" data-v380-snack>＋ กินขนม / อาหารนอกแผน</button></div>
+  <nav class="v385-links" aria-label="เมนูเสริม"><button type="button" data-v386-open="stock">▦ คลังอาหาร / ซื้อของ</button><button type="button" data-v386-open="settings">⚙ ร่างกาย / เป้าหมาย</button><button type="button" data-v386-open="health">⌚ Health Connect</button></nav>
+  <button type="button" class="v386-detail-trigger" data-v386-open="details">☷ รายละเอียดเพิ่มเติม · ตารางภารกิจและ EXP <span>เปิด ↗</span></button>
+ </div>`;
+}
+dashboard=v385Home;
+
+
+// ASCENT v3.8.6 — One consistent modal for the Home quick actions.
+// Reuse the original meal, pantry, water, sleep, settings and Health Connect handlers.
+let v386Panel=null,v386ReturnFocus=null;
+const V386_NAMES={food:['🍽','บันทึกอาหาร'],stock:['▦','คลังอาหารและซื้อของ'],water:['💧','ดื่มน้ำวันนี้'],sleep:['☾','บันทึกการนอน'],settings:['⚙','ร่างกายและเป้าหมาย'],health:['⌚','Health Connect'],details:['✦','รายละเอียดภารกิจและ EXP']};
+function v386Node(){let node=document.getElementById('v386-overlay');if(!node){node=document.createElement('div');node.id='v386-overlay';node.hidden=true;node.innerHTML='<section class="v386-dialog" role="dialog" aria-modal="true" aria-labelledby="v386-title"><header class="v386-head"><div><small>ASCENT / QUICK ACTION</small><h2 id="v386-title"></h2></div><button type="button" class="v386-close" data-v386-close aria-label="ปิดหน้าต่าง">✕</button></header><div class="v386-scroll"></div></section>';document.body.append(node)}return node}
+function v386Content(){
+ const d=day(localDate()),p=data.profile;
+ if(v386Panel==='food'||v386Panel==='stock'){
+   const content=v34NutritionHub();
+   return content.replace(/data-tab="pantry"/g,'data-v386-open="stock"').replace(/data-tab="food"/g,'data-v386-open="food"').replace(/href="#pantry"/g,'href="#"');
+ }
+ if(v386Panel==='water'){
+   const count=Number(d.water)||0,goal=Math.max(1,Number(p.waterTarget)||6),slots=waterSlots(),done=slots.filter(x=>d.waterSlots?.[x.key]).length;
+   return `<section class="v386-simple"><div class="v386-statline"><div><small>ดื่มไปแล้ววันนี้</small><strong>${count} / ${goal} แก้ว</strong></div><div><small>ช่วงที่บันทึก</small><strong>${done} / ${slots.length}</strong></div></div><div class="v386-rowbuttons"><button class="ghostbutton" data-action="water-minus">− 1 แก้ว</button><button class="primary" data-action="water-plus">＋ ดื่มแล้ว</button></div><p class="v386-note">ดื่มตามความกระหายและสภาพอากาศ ไม่จำเป็นต้องฝืนดื่มให้ถึงเป้าทันที การบันทึกจะอัปเดตหน้า Home และ EXP อัตโนมัติ</p></section>`;
+ }
+ if(v386Panel==='sleep'){
+   const sleep=d.sleep;
+   return `<section class="v386-simple"><div class="v386-statline"><div><small>บันทึกเมื่อคืน</small><strong>${sleep==null?'ยังไม่ได้บันทึก':fmtNum(sleep,1)+' ชม.'}</strong></div><div><small>เป้าหมาย</small><strong>${p.sleepTarget} ชม.</strong></div></div><form id="sleep-form"><label class="field">ชั่วโมงที่นอนเมื่อคืน<input name="hours" type="number" min="0" max="24" step="0.25" value="${sleep??''}" placeholder="เช่น 7.5" required></label><button type="submit" class="primary">✓ บันทึกการนอน</button></form><p class="v386-note">บันทึกหรือแก้ไขเวลานอนได้โดยไม่ออกจากหน้าแรก ข้อมูลนำไปใช้คำนวณความคืบหน้าภารกิจเดิม</p></section>`;
+ }
+ if(v386Panel==='settings'){
+   const tmp=document.createElement('div');tmp.innerHTML=settings();const form=tmp.querySelector('#settings-form');
+   return `<section class="v386-simple v386-form-wrap"><p class="v386-note">เปลี่ยนน้ำหนัก อายุ ส่วนสูง หรือกิจกรรมได้ตรงนี้ ตัวเลข BMI แคลอรี และโปรตีนจะคำนวณใหม่ก่อนกดบันทึก</p>${form?form.outerHTML:'<p>ไม่พบฟอร์มข้อมูลร่างกาย</p>'}</section>`;
+ }
+ if(v386Panel==='health')return `<section class="v386-simple">${v37HealthCard()}</section>`;
+ if(v386Panel==='details'){
+   const st=stats();return `<section class="v386-simple"><div class="v386-statline"><div><small>เลเวล / แรงก์</small><strong>LV.${st.lv.level} · ${st.lv.rank}</strong></div><div><small>EXP สะสม</small><strong>${fmtNum(st.x)}</strong></div></div>${v34DailyHub()}<div class="v386-rowbuttons"><button class="v386-shortcut" data-v386-open="food">🍽 บันทึกอาหาร</button><button class="v386-shortcut" data-v386-open="settings">⚙ เป้าหมาย</button></div></section>`;
+ }
+ return '<p>ไม่พบเมนู</p>';
+}
+function v386Mount(){if(!v386Panel)return;const node=v386Node(),scroller=node.querySelector('.v386-scroll'),y=scroller.scrollTop,icon=V386_NAMES[v386Panel]?.[0]||'✦',title=V386_NAMES[v386Panel]?.[1]||'เมนู';node.querySelector('#v386-title').textContent=icon+' '+title;scroller.innerHTML=v386Content();node.hidden=false;document.body.classList.add('v386-overlay-open');scroller.scrollTop=y;if(v386Panel==='stock')v383UpdateView();if(v386Panel==='settings')v382PreviewProfile()}
+function v386Close(force=false){if(!v386Panel)return true;if(v383Dirty&&v34FoodView==='stock'&&!force&&!confirm('มีการแก้ไขคลังที่ยังไม่ได้บันทึก ต้องการทิ้งการแก้ไขหรือไม่?'))return false;if(v34FoodView==='stock'&&v383Dirty){v383Draft=null;v383Touched.clear();v383Dirty=false}v386Panel=null;const root=document.getElementById('v386-overlay');if(root)root.hidden=true;document.body.classList.remove('v386-overlay-open');if(v386ReturnFocus?.isConnected)v386ReturnFocus.focus({preventScroll:true});v386ReturnFocus=null;return true}
+function v386Open(name){if(name==='snack'){if(!v386Close())return;v380OpenSnack();return}if(!V386_NAMES[name])return;if(v386Panel&&v386Panel!==name&&!v386Close())return;if(!v386ReturnFocus)v386ReturnFocus=document.activeElement;v386Node().querySelector('.v386-scroll').scrollTop=0;if(v34RunModalOpen)v34CloseRun();v386Panel=name;if(name==='food'){v34FoodView='meals';selected=localDate()}if(name==='stock'){v34FoodView='stock';selected=localDate()}v386Mount();v386Node().querySelector('.v386-close').focus({preventScroll:true})}
+// Render after each successful data commit, keeping the dialog open and its numbers fresh.
+const v386EarlierRender=render;render=function(){v386EarlierRender();if(v386Panel)v386Mount();document.title=document.title.replace('3.8.5','3.8.6')};
+// Native GPS and snack popups take priority; never stack two different dialog surfaces.
+const v386EarlierRun=v34OpenRun;v34OpenRun=function(){if(!v386Close())return;document.getElementById('v380-snack-modal')?.classList.remove('open');v386EarlierRun()};
+const v386EarlierSnack=v380OpenSnack;v380OpenSnack=function(){if(!v386Close())return;v386EarlierSnack()};
+document.addEventListener('click',e=>{const el=e.target.closest('[data-v386-open],[data-v386-close]');if(el){e.preventDefault();e.stopImmediatePropagation();if(el.hasAttribute('data-v386-close'))v386Close();else v386Open(el.dataset.v386Open);return}if(e.target?.id==='v386-overlay')v386Close()},true);
+document.addEventListener('keydown',e=>{if(!v386Panel)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();v386Close();return}if(e.key!=='Tab')return;const node=v386Node();const focusables=[...node.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(!focusables.length)return;const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}},true);
 
 render();rescheduleNative();document.addEventListener('visibilitychange',()=>{if(!document.hidden){nativeGPSReadIfPresent();window.ascentWidgetSync?.();lastCheck=Date.now()-60000;render();rescheduleNative()}});
 if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));

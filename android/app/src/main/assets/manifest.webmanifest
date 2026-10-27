@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "ASCENT Fitness Quest RPG 3.8.3",
+  "name": "ASCENT Fitness Quest RPG 3.8.6",
   "short_name": "ASCENT",
-  "description": "ASCENT v3.8.3 Black Flame — Pantry Redesign, GPS Quests, Food Logging and Health Connect",
+  "description": "ASCENT v3.8.6 Black Flame — Daily Quest First UI, Smart Pantry and GPS",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
