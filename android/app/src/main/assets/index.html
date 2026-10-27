@@ -163,11 +163,16 @@ input[readonly]{opacity:.85;cursor:default}
 @media(max-width:600px){.v37-card{padding:12px}.v37-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.v37-homebar{flex-wrap:wrap}.v37-homebar button{width:100%}.v37-geargrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 
-/* v3.7.1 Health Connect discoverability: isolated from legacy layout rules */
+/* v3.7.2 Nutrition Safety + Health Connect: isolated from legacy layout rules */
 .v371-health-shortcut{display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(120deg,#101e40,#173f66);border:1px solid #377bb4;border-radius:13px;padding:9px 13px;margin:0 0 12px;color:#e1f4ff;font-size:12px}
 .v371-health-shortcut button{border:1px solid #69b9e9;border-radius:9px;background:#1f638b;color:#fff;padding:8px 13px;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer}
 .v371-health-card{margin-top:0;scroll-margin-top:14px;border-color:#62b7df}
 @media(max-width:420px){.v371-health-shortcut{padding:8px 10px;font-size:11px;gap:6px}.v371-health-shortcut button{padding:8px}}
+/* v3.7.2: independent and compact nutrition audit styling */
+.v372-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 15px;padding:12px;border:1px solid #285c76;border-radius:13px;background:linear-gradient(105deg,rgba(20,42,73,.94),rgba(14,29,50,.92))}
+.v372-metrics>div{display:flex;flex-direction:column;gap:3px;min-width:0}.v372-metrics b{font-size:18px;color:#c6f7ff}.v372-metrics small{font-size:10px;color:#9db4cc}.v372-metrics p{grid-column:1/-1;margin:0;font-size:10px;color:#b0bfcf}
+.v372-quality{margin:0 0 12px;padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.7}.v372-pass{border-color:#316d61;background:#102b30;color:#b1f4d7}.v372-warn{border-color:#99672e;background:#32251c;color:#ffe1b2}
+@media(max-width:590px){.v372-metrics{gap:6px;padding:9px}.v372-metrics b{font-size:14px}.v372-metrics small{font-size:9px}.v372-metrics p{font-size:9px}}
 </style>
 </head>
 <body><div id="app"></div><div id="toasts" class="toastbox" aria-live="polite"></div>
@@ -214,9 +219,16 @@ function completedGpsSessions(beforeDate=selected){let n=0;for(const [date,d] of
 function currentBodyWeight(){const entries=Object.entries(data.days||{}).filter(([dt,d])=>dt<=localDate()&&Number(d.weight)>0).sort((a,b)=>b[0].localeCompare(a[0]));return entries.length?Number(entries[0][1].weight):Number(data.profile.startingWeight)||95}
 function energyModel(w=currentBodyWeight()){const p=data.profile;const weight=cap(Number(w)||95,30,300),height=cap(Number(p.height)||173,120,230),age=cap(Number(p.age)||25,18,100);
  const bmr=10*weight+6.25*height-5*age+(p.gender==='female'?-161:5);const basalDaily=bmr*1.3;
- const target=Math.round(cap(basalDaily-440+cap(Number(p.calorieBias)||0,-400,400),p.gender==='female'?1400:1600,3200)/10)*10;
+ // GPS-verified sessions from last 14 days affect maintenance once; watch steps and
+ // scheduled future runs are NOT counted here (prevents double-counting activity).
+ let gpsKcal=0;for(const [date,entry] of Object.entries(data.days||{})){
+  const ageDays=delta(localDate(),date);if(ageDays<0||ageDays>=14)continue;
+  for(const session of gpsRecords(entry))gpsKcal+=runCalories(session.km,session.type==='walk'?'walk':'run',weight);
+ }
+ const activityKcal=Math.min(600,gpsKcal/14),maintenance=basalDaily+activityKcal;
+ const target=Math.round(cap(maintenance-440+cap(Number(p.calorieBias)||0,-400,400),p.gender==='female'?1400:1600,3200)/10)*10;
  const protein=Math.round(cap(weight*1.5,75,180)/5)*5;
- return{weight,height,age,bmr,baseline:basalDaily,calories:target,protein}}
+ return{weight,height,age,bmr,baseline:basalDaily,maintenance,activityKcal,calories:target,protein}}
 function runCalories(km,kind='run',weight=latestWeight()){return Math.round(Math.max(0,Number(km)||0)*Math.max(30,Number(weight)||95)*(kind==='walk'?.55:.85))}
 function adaptDifficulty(){return ['easy','normal','hard'].includes(data.profile.runDifficulty)?data.profile.runDifficulty:'normal'}
 const DIFFICULTY={easy:{label:'ง่าย',factor:.85,pace:'11:00–13:30'},normal:{label:'กลาง',factor:1,pace:'9:30–12:00'},hard:{label:'ยาก',factor:1.15,pace:'8:30–10:30'}};
@@ -250,7 +262,7 @@ function percent(a,b){return cap(Math.round(a/Math.max(1,b)*100),0,100)}
 function progress(a,b,kind=''){return `<div class="progress ${kind}"><i style="width:${percent(a,b)}%"></i></div>`}
 function stats(){const all=totals(),x=score(),lv=lvl(x),d=day(),st=dailyStatus();return{all,x,lv,d,st,nu:dailyNutrition(d)}}
 const navs=[['dashboard','⌂','ภาพรวม'],['quests','☑','ภารกิจ'],['pantry','▣','คลังอาหาร'],['food','◈','อาหาร'],['run','♢','วิ่ง'],['stats','▥','สถิติ'],['settings','⚙','ตั้งค่า']];
-function layout(content){const st=stats(),titles={dashboard:['SYSTEM ONLINE','ภารกิจของคุณวันนี้'],quests:['QUEST BOARD','ภารกิจรายวัน'],food:['NUTRITION LOG','บันทึกอาหาร'],run:['TRAINING GATE','บันทึกการวิ่ง'],stats:['PROGRESSION','สถิติและรางวัล'],settings:['CONTROL PANEL','ตั้งค่าระบบ'],pantry:['PANTRY ENGINE','คลังอาหารและจัดมื้อ']},title=titles[tab];return `<div class="app"><aside class="sidebar"><div class="brand"><div class="brand-symbol">⌁</div><div><div class="name">ASCENT</div><div class="sub">FITNESS QUEST RPG</div></div></div><div class="sect">MAIN MENU</div>${navs.map(n=>`<button class="nav ${n[0]===tab?'active':''}" data-tab="${n[0]}"><span class="sym">${n[1]}</span><span>${n[2]}</span></button>`).join('')}<div class="sideline"></div><div class="sect">CHARACTER DATA</div><div class="side-foot"><span class="tiny">CURRENT RANK</span><strong><span class="green">${st.lv.rank}-RANK</span> · LV.${st.lv.level}</strong><p>สะสม ${fmtNum(st.x)} EXP<br>วิ่ง/เดินรวม ${fmtNum(st.all.km,1)} กม.<br>ข้อมูลเก็บบนอุปกรณ์นี้</p></div></aside><main class="content"><header class="topbar"><div><div class="eyebrow">${title[0]}</div><h1>${title[1]}</h1></div><div class="toptools"><span class="pill"><span class="dot"></span> LOCAL SAVE</span><button class="iconbtn" data-tab="settings" title="ตั้งค่า">⚙</button></div></header>${content}</main><nav class="mobile-nav">${navs.filter(n=>n[0]!=='settings').map(n=>`<button data-tab="${n[0]}" class="${n[0]===tab?'active':''}"><span class="sym">${n[1]}</span><span>${n[2]}</span></button>`).join('')}</nav></div>`}
+function layout(content){const st=stats(),titles={dashboard:['SYSTEM ONLINE','ภารกิจของคุณวันนี้'],quests:['QUEST BOARD','ภารกิจรายวัน'],food:['NUTRITION LOG','บันทึกอาหาร'],run:['TRAINING GATE','บันทึกการวิ่ง'],stats:['PROGRESSION','สถิติและรางวัล'],settings:['CONTROL PANEL','ตั้งค่าระบบ'],pantry:['PANTRY ENGINE','คลังอาหารและจัดมื้อ']},title=titles[tab];return `<div class="app"><aside class="sidebar"><div class="brand"><div class="brand-symbol">⌁</div><div><div class="name">ASCENT</div><div class="sub">FITNESS QUEST RPG</div></div></div><div class="sect">MAIN MENU</div>${navs.map(n=>`<button class="nav ${n[0]===tab?'active':''}" data-tab="${n[0]}"><span class="sym">${n[1]}</span><span>${n[2]}</span></button>`).join('')}<div class="sideline"></div><div class="sect">CHARACTER DATA</div><div class="side-foot"><span class="tiny">CURRENT RANK</span><strong><span class="green">${st.lv.rank}-RANK</span> · LV.${st.lv.level}</strong><p>สะสม ${fmtNum(st.x)} EXP<br>วิ่ง/เดินรวม ${fmtNum(st.all.km,1)} กม.<br>ข้อมูลเก็บบนอุปกรณ์นี้</p></div></aside><main class="content"><header class="topbar"><div><div class="eyebrow">${title[0]}</div><h1>${title[1]}</h1></div><div class="toptools"><span class="pill"><span class="dot"></span> LOCAL SAVE</span><button class="iconbtn" data-tab="settings" title="ตั้งค่า">⚙</button></div></header>${(tab==='dashboard'||tab==='settings')?bodyMetricsBar():''}${content}</main><nav class="mobile-nav">${navs.filter(n=>n[0]!=='settings').map(n=>`<button data-tab="${n[0]}" class="${n[0]===tab?'active':''}"><span class="sym">${n[1]}</span><span>${n[2]}</span></button>`).join('')}</nav></div>`}
 function selectedDatePicker(){return `<input class="date-input" type="date" id="selected-date" value="${esc(selected)}" max="${localDate()}" aria-label="เลือกวันที่">`}
 function weeklyCalendar(){return `<div class="seven-days">${weekDays().map(dt=>{const s=dailyStatus(dt),isToday=dt===selected,progressDone=dayMeals(day(dt)).length>0||(day(dt).runs||[]).length>0;return `<button class="daybox ${isToday?'active':''}" data-date="${dt}" title="${fmtDay(dt)}" ${dt>localDate()?'disabled':''}><div class="dow">${weekdays[parseDate(dt).getDay()]}</div><div class="num">${parseDate(dt).getDate()}</div><div class="status ${s.complete?'active':progressDone?'some':''}"></div></button>`}).join('')}</div>`}
 function hero(st){let p=percent(st.lv.remaining,st.lv.needed);return `<section class="hero"><div style="position:relative;z-index:1"><span class="eyebrow">✦ PLAYER STATUS · ${st.lv.rank}-RANK</span><h2>ยินดีต้อนรับ, ${esc(data.profile.name)}</h2><p class="desc">ทุกมื้อที่ดูแลตัวเอง ทุกกิโลที่วิ่ง และทุกคืนที่พักผ่อน<br>คือ EXP ของการพัฒนาตัวคุณ</p><div class="xp-track"><div class="bar" style="width:${p}%"></div></div><div class="xptext"><span>EXP ${fmtNum(st.lv.remaining)} / ${fmtNum(st.lv.needed)}</span><span>LEVEL ${st.lv.level+1} →</span></div></div><div class="level-disc" aria-label="เลเวล ${st.lv.level}"><span class="levlabel">LEVEL</span><span class="lev">${st.lv.level}</span><span class="rank-tag">${st.lv.rank}-RANK</span></div></section>`}
@@ -344,29 +356,34 @@ function craftMeal(recipe,store){const used={},shortage=[];for(const [key,requir
    if(left>Math.max(30,missing*ING[key].kcal*.3))shortage.push(ING[key].name);
  }
  } const v=foodValue(used);return{id:recipe.id,name:recipe.name,time:recipe.time,emoji:recipe.emoji,items:used,desc:quantities(used)||'ไม่มีอาหารในคลัง',shortage,kcal:Math.round(v.kcal),protein:pctNum(v.protein),carb:pctNum(v.carb),fat:pctNum(v.fat)} }
-function plansFor(date=selected,stock=data.inventory){let available={...stock},results=[];const d=day(date);for(const recipe of RECIPES){let existing=d.mealEntries?.[recipe.id];if(existing&&d.meals?.includes(recipe.id)){results.push(existing);continue}results.push(craftMeal(diverseRecipe(recipe,date,available),available))}return{meals:results,remaining:available}}
+function plansFor(date=selected,stock=data.inventory){const available={...stock},results=[],d=day(date);for(const recipe of RECIPES){const existing=d.mealEntries?.[recipe.id]&&d.meals?.includes(recipe.id)?d.mealEntries[recipe.id]:null;results.push(existing||craftMeal(diverseRecipe(recipe,date,available),available))}rebalanceDailyMeals(results,available,date);return{meals:results,remaining:available,quality:assessMealPlan(results,date)}}
 function toggleMeal(id){const d=dayWrite();d.mealEntries??={};const ix=d.meals.indexOf(id);if(ix>=0){d.meals.splice(ix,1);if(d.mealEntries[id]){for(const [k,v] of Object.entries(d.mealEntries[id].items||{}))data.inventory[k]=pctNum((data.inventory[k]||0)+v);delete d.mealEntries[id]}return}
  const recipe=foodPlan.find(x=>x.id===id);if(!recipe||recipe.shortage?.length||!Object.keys(recipe.items||{}).length){toast('วัตถุดิบไม่พอ โปรดเติมคลังก่อนบันทึก');return}
  for(const [k,v] of Object.entries(recipe.items)){if((data.inventory[k]||0)<v-.01){toast('อาหารในคลังเปลี่ยนแล้ว กรุณาตรวจสอบ');return}}
  for(const [k,v] of Object.entries(recipe.items))data.inventory[k]=pctNum(Math.max(0,(data.inventory[k]||0)-v));d.mealEntries[id]=structuredClone(recipe);d.meals.push(id);
 }
 function seedInventory(){for(const r of RECIPES)for(const [k,v] of Object.entries(r.items))data.inventory[k]=pctNum((data.inventory[k]||0)+v*7)}
-function weeklyForecast(){const stock={...data.inventory},days=[],warnings=[];
- for(let i=0;i<7;i++){const dt=shift(localDate(),i),d=day(dt);let cal=0,protein=0;const meals=[];
-  for(const recipe of RECIPES){const meal=d.mealEntries?.[recipe.id]&&d.meals?.includes(recipe.id)?d.mealEntries[recipe.id]:craftMeal(diverseRecipe(recipe,dt,stock),stock);
-   cal+=meal.kcal;protein+=meal.protein;meals.push(meal);if(meal.shortage?.length)warnings.push(`${fmtDay(dt)} ${recipe.name}`)}
-  days.push({date:dt,cal:Math.round(cal),protein:Math.round(protein),meals});}
+function weeklyForecast(){
+ const stock={...data.inventory},days=[],warnings=[];
+ for(let i=0;i<7;i++){
+  const dt=shift(localDate(),i),result=plansFor(dt,stock),meals=result.meals;
+  Object.assign(stock,result.remaining);
+  const quality=result.quality;
+  days.push({date:dt,cal:quality.calories,protein:quality.protein,meals,quality});
+  if(!quality.ok)warnings.push(`${fmtDay(dt)}: ${quality.issues.join(' / ')}`);
+ }
  const avg=days.reduce((s,d)=>s+d.cal,0)/7,model=energyModel();
  const weeklyBurn=Array.from({length:7},(_,i)=>schedule(shift(localDate(),i))).reduce((a,s)=>a+(s.active?s.kcal:0),0);
  const maintenance=Math.round(model.baseline+weeklyBurn/7);
- const stockEnough=warnings.length===0&&days.every(d=>d.cal>=model.calories*.8);
+ const stockEnough=warnings.length===0;
  const deficit=Math.max(0,maintenance-avg),low=Math.max(0,deficit*.8),high=deficit*1.2;
- return{days,avg,stockEnough,warnings,maintenance,weeklyBurn,range7:[pctNum(low*7/7700),pctNum(high*7/7700)],range30:[pctNum(low*30/7700),pctNum(high*30/7700)]}}
+ return{days,avg,stockEnough,warnings,maintenance,weeklyBurn,range7:[pctNum(low*7/7700),pctNum(high*7/7700)],range30:[pctNum(low*30/7700),pctNum(high*30/7700)]};
+}
 
-function shortageWeek(){const need={},inventory={...data.inventory};for(let i=0;i<7;i++){const dt=shift(localDate(),i);for(const rec of RECIPES){const choice=diverseRecipe(rec,dt,inventory);for(const[k,v] of Object.entries(choice.items))need[k]=(need[k]||0)+v;for(const[k,v] of Object.entries(choice.items))inventory[k]=Math.max(0,(inventory[k]||0)-v)}}return Object.entries(need).map(([k,v])=>({key:k,need:v,have:data.inventory[k]||0,missing:Math.max(0,v-(data.inventory[k]||0))}))}
+function shortageWeek(){if(weeklyForecast().stockEnough)return [];const need={},inventory={...data.inventory};for(let i=0;i<7;i++){const dt=shift(localDate(),i);for(const rec of RECIPES){const choice=diverseRecipe(rec,dt,inventory);for(const[k,v] of Object.entries(choice.items))need[k]=(need[k]||0)+v;for(const[k,v] of Object.entries(choice.items))inventory[k]=Math.max(0,(inventory[k]||0)-v)}}return Object.entries(need).map(([k,v])=>({key:k,need:v,have:data.inventory[k]||0,missing:Math.max(0,v-(data.inventory[k]||0))}))}
 function pantryView(){const forecast=weeklyForecast(),s=shortageWeek();return `<div class="grid"><div class="two stack"><div class="panel"><div class="p-title"><h3>▣ คลังอาหารที่มีจริง</h3><span class="chip">ปรับได้ทุกเมื่อ</span></div><p class="subtle">ระบุจำนวนที่มีอยู่จริงในบ้าน · เมื่อกดว่ากินแล้ว ระบบจะหักวัตถุดิบจากคลังอัตโนมัติ และจัดมื้อถัดไปจากของที่เหลือ</p><div class="pantry-grid">${Object.entries(ING).map(([k,v])=>`<label class="stock-item"><span class="row"><input type="checkbox" data-have="${k}" ${data.inventory[k]>0?'checked':''}> ${v.name}</span><div class="row"><input type="number" data-stock="${k}" min="0" max="99999" step="${['egg','soy','banana','apple'].includes(k)?1:10}" value="${data.inventory[k]||0}" aria-label="จำนวน ${v.name}"><small>${v.unit}</small></div></label>`).join('')}</div><div class="controls mt16"><button class="primary" data-action="stock-save">บันทึกคลังและจัดอาหารใหม่</button><button class="ghostbutton" data-action="stock-seed">+ เติมของตามรายการ 7 วัน</button></div><p class="hint">อกไก่ชั่งดิบ · มันฝรั่ง ฟักทอง และข้าว ชั่งสุก · KCM 1 สกูป = 35 กรัม · ข้อมูลคงอยู่ในเครื่องนี้</p></div><div class="panel"><h3>🛒 เทียบของในคลังกับอาหาร 7 วัน</h3><div class="stack">${s.map(x=>`<div class="row between"><span class="subtle">${ING[x.key].name}</span><b>${fmtNum(x.have)} / ${fmtNum(x.need)} ${ING[x.key].unit} ${x.missing>0?`<span class="orange">(ขาด ${fmtNum(x.missing)})</span>`:'<span class="green">✓</span>'}</b></div>`).join('')}</div></div></div><div class="four stack"><section class="panel"><h3>🧮 ประเมินแนวโน้มลดไขมัน</h3>${forecastPanel(forecast)}</section><div class="panel"><h3>📅 พลังงานตามคลัง 7 วันถัดไป</h3>${forecast.days.map(d=>`<details class="day-plan"><summary><span>${fmtDay(d.date)}</span><b>${d.cal} kcal · ${d.protein}g</b></summary>${d.meals.map(m=>`<div class="subtle" style="padding:6px 0"><b>${m.name}</b> · ${esc(m.desc)} ${m.shortage?.length?'<span class="orange">(วัตถุดิบไม่พอ)</span>':''}</div>`).join('')}</details>`).join('')}<p class="hint">แอปจำลองการใช้วัตถุดิบจากของในคลังปัจจุบัน แม้ยังไม่กดกินจริง</p></div></div></div>`}
-function forecastPanel(f){if(!f.stockEnough)return `<div class="warn">⚠️ อาหารในคลังยังไม่เพียงพอสำหรับการวางแผน 7 วัน ห้ามใช้ตัวเลขที่ขาดอาหารไปทำนายการลดน้ำหนัก เติมคลังก่อนหรือปรับมื้อให้ครบ</div><p class="hint">มื้อที่ขาด: ${esc(f.warnings.slice(0,5).join(', '))}${f.warnings.length>5?' และอื่น ๆ':''}</p>`;
-if(f.avg>f.maintenance*1.05)return `<div class="warn">จากรายการอาหารประมาณ ${Math.round(f.avg)} kcal/วัน อาจไม่เกิดการขาดดุลพลังงานเมื่อเทียบกับค่าที่ใช้ประมาณ ${f.maintenance} kcal/วัน จึงยังไม่ควรคาดการณ์การลดไขมัน</div>`;const range=x=>x[0]+'–'+x[1]+' กก.';return `<div class="forecast-number">${range(f.range7)}</div><span class="subtle">การเปลี่ยนแปลงไขมันโดยประมาณใน 7 วัน</span><div class="muteline"></div><div class="forecast-number">${range(f.range30)}</div><span class="subtle">ประมาณ 30 วัน หากเติมอาหารตามแผนซ้ำ</span><p class="hint">ประมาณจากพลังงานอาหารเฉลี่ย ${Math.round(f.avg)} kcal/วัน และพลังงานที่ใช้โดยประมาณ ${f.maintenance} kcal/วัน (ช่วงความไม่แน่นอน ±10%) · ประมาณจากเพศ อายุ และส่วนสูงในตั้งค่า ไม่ใช่คำรับรองผลจริง น้ำหนักน้ำและการปรับตัวของร่างกายทำให้ผลต่างออกไปได้ · หากไม่ลดให้ดูน้ำหนักเฉลี่ยจริง 2–3 สัปดาห์</p>`}
+function forecastPanel(f){if(!f.stockEnough)return `<div class="warn">⚠️ แผน 7 วันยังไม่สมดุลหรือวัตถุดิบไม่พอ แอปจะไม่คาดการณ์การลดไขมันจากเมนูที่ยังไม่ครบ โปรดเติมคลังหรือปรับแผน</div><p class="hint">ปัญหาที่ตรวจพบ: ${esc(f.warnings.slice(0,5).join(', '))}${f.warnings.length>5?' และอื่น ๆ':''}</p>`;
+if(f.avg>f.maintenance*1.05)return `<div class="warn">จากรายการอาหารประมาณ ${Math.round(f.avg)} kcal/วัน อาจไม่เกิดการขาดดุลพลังงานเมื่อเทียบกับค่าที่ใช้ประมาณ ${f.maintenance} kcal/วัน จึงยังไม่ควรคาดการณ์การลดไขมัน</div>`;const range=x=>x[0]+'–'+x[1]+' กก.';return `<div class="forecast-number">${range(f.range7)}</div><span class="subtle">การเปลี่ยนแปลงไขมันโดยประมาณใน 7 วัน</span><div class="muteline"></div><div class="forecast-number">${range(f.range30)}</div><span class="subtle">ประมาณ 30 วัน หากเติมอาหารตามแผนซ้ำ</span><p class="hint">ประมาณจากพลังงานอาหารเฉลี่ย ${Math.round(f.avg)} kcal/วัน และพลังงานที่ใช้โดยประมาณ ${f.maintenance} kcal/วัน (กรอบการคำนวณพลังงาน ±20% (ยังไม่ครอบคลุมความผันผวนทั้งหมด)) · ประมาณจากเพศ อายุ และส่วนสูงในตั้งค่า ไม่ใช่คำรับรองผลจริง น้ำหนักน้ำและการปรับตัวของร่างกายทำให้ผลต่างออกไปได้ · หากไม่ลดให้ดูน้ำหนักเฉลี่ยจริง 2–3 สัปดาห์</p>`}
 function dueNotifications(){const entries=[];for(let i=0;i<7;i++){const date=shift(localDate(),i),d=day(date);for(const rec of RECIPES){if(i===0&&(d.meals?.includes(rec.id)||d.canceled?.['meal:'+rec.id]))continue;entries.push({key:date+'-'+rec.id,time:date+'T'+(d.snoozed?.['meal:'+rec.id]||rec.time)+':00',title:'🍽 เควส '+rec.name,body:rec.name+' ถึงเวลาแล้ว เปิดดูเมนูจากคลังอาหาร'})}for(const slot of waterSlots()){if(i===0&&(d.waterSlots?.[slot.key]||d.canceled?.['water:'+slot.key]))continue;entries.push({key:date+'-'+slot.key,time:date+'T'+(d.snoozed?.['water:'+slot.key]||slot.time)+':00',title:'💧 เควสดื่มน้ำ',body:'ดื่มน้ำประมาณ '+slot.ml+' มล. ตามความกระหาย'})}if(schedule(date).active&&!d.runQuestAwarded&&!d.canceled?.exercise&&!d.recovery)entries.push({key:date+'-run',time:date+'T'+(d.snoozed?.exercise||schedule(date).exerciseTime||'18:00')+':00',title:'🏃 เควสวิ่ง / เดิน',body:'เปิดแผนฝึกและ GPS ตามความพร้อม'});entries.push({key:date+'-sleep',time:date+'T22:15:00',title:'🌙 เตรียมเข้านอน',body:'พักจากหน้าจอและเตรียมตัวนอนตามเป้าหมาย'});}return entries}
 function rescheduleNative(){if(!window.AscentNative?.scheduleReminders)return;try{window.AscentNative.scheduleReminders(JSON.stringify(data.profile.notifications?dueNotifications():[]));window.AscentNative.updateWidget(JSON.stringify({level:lvl(score()).level,xp:score(),km:pctNum(totals().km),next:(nextQuest()?.title||'เควสครบแล้ว'),water:(day(localDate()).water||0),waterGoal:waterSlots().length}))}catch(e){console.warn('native sync',e)}}
 let lastCheck=Date.now();let noticed=new Set();const audioDbKey='ascent_audio_v2';let audioBytes=null;
@@ -755,7 +772,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('[data-action="
 document.addEventListener('click',e=>{if(e.target.closest('.receipt-drawer > summary'))receiptDrawerOpen=!receiptDrawerOpen});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&moreMenuOpen){moreMenuOpen=false;render()}});
 
-function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
+function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.7.2 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
 function commit(fn,msg){const oldScore=score(),oldLevel=lvl(oldScore).level;fn();save();render();rescheduleNative();const now=score(),newLevel=lvl(now).level;if(newLevel>oldLevel)toast('⚡ LEVEL UP! → LV.'+newLevel+' · '+fmtNum(now-oldScore)+' EXP');else if(msg)toast(msg+(now>oldScore?' · +'+fmtNum(now-oldScore)+' EXP':''))}
 let pendingInstall=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pendingInstall=e});
 document.addEventListener('click',async e=>{const target=e.target.closest('[data-tab],[data-date],[data-meal],[data-water-slot],[data-ready],[data-action],[data-remove-food],[data-remove-run]');if(!target)return;
@@ -830,7 +847,7 @@ layout=function(content){const st=stats(),titles={dashboard:['ASCENT / DAILY QUE
  const nav=v33Nav.map(n=>`<button class="v33-link ${tab===n[0]?'active':''}" ${n[0]==='run'?'data-run-open="1"':`data-tab="${n[0]}"`} ${n[0]==='run'?'':`aria-current="${tab===n[0]?'page':'false'}"`}><span>${n[1]}</span>${n[2]}</button>`).join('');
  const mNav=[v33Nav[0],v33Nav[1],v33Nav[2],v33Nav[3]].map(n=>`<button class="${tab===n[0]?'active':''}" ${n[0]==='run'?'data-run-open="1"':`data-tab="${n[0]}"`}><span>${n[1]}</span>${n[2]}</button>`).join('')+`<button data-action="more-menu" class="${tab==='settings'?'active':''}"><span>☷</span>เพิ่มเติม</button>`;
  const overlay=moreMenuOpen?`<div class="menu-shade v32-sheet" id="more-modal"><div class="menu-card" role="dialog" aria-modal="true" aria-label="เมนูเพิ่มเติม"><div class="menu-head"><strong>เลือกหน้าที่ต้องการ</strong><button class="ghostbutton" data-action="more-close">✕ ปิด</button></div><div class="menu-options">${[v33Nav[3],v33Nav[4],v33Nav[0]].map(n=>`<button data-tab="${n[0]}"><span>${n[1]}</span>${n[2]}</button>`).join('')}</div></div></div>`:'';
- return `<div class="app v33-shell v34-shell"><aside class="v33-rail"><div class="v33-logo"><span class="v33-mark">✦</span><div><b>ASCENT</b><small>FITNESS QUEST RPG</small></div></div><div class="navlabel">NAVIGATION</div>${nav}<div class="v33-rail-foot">SYSTEM STATUS<strong>LV.${st.lv.level} · ${st.lv.rank}-RANK</strong>⚡ ${fmtNum(st.x)} EXP<br>↗ ${fmtNum(st.all.km,1)} กม. สะสม</div></aside><main class="content v33-main"><header class="v33-header"><div class="v33-heading"><b>${t[0]}</b><h1>${t[1]}</h1></div><div class="v33-mini-logo">✦ ASCENT</div><div class="v33-tools"><button class="v33-round" data-tab="dashboard" title="ภารกิจวันนี้" aria-label="ภารกิจวันนี้">☑</button><button class="v33-round v33-mobile-menu" data-action="more-menu" aria-label="เปิดเมนู">☰</button><button class="v33-round" data-tab="settings" aria-label="ตั้งค่าเสียงและการแจ้งเตือน">⚙</button></div></header><div class="v32-subcontent v33-subcontent">${content}</div></main><nav class="v33-mobile-nav" aria-label="เมนูมือถือ">${mNav}</nav>${overlay}</div>`};
+ return `<div class="app v33-shell v34-shell"><aside class="v33-rail"><div class="v33-logo"><span class="v33-mark">✦</span><div><b>ASCENT</b><small>FITNESS QUEST RPG</small></div></div><div class="navlabel">NAVIGATION</div>${nav}<div class="v33-rail-foot">SYSTEM STATUS<strong>LV.${st.lv.level} · ${st.lv.rank}-RANK</strong>⚡ ${fmtNum(st.x)} EXP<br>↗ ${fmtNum(st.all.km,1)} กม. สะสม</div></aside><main class="content v33-main"><header class="v33-header"><div class="v33-heading"><b>${t[0]}</b><h1>${t[1]}</h1></div><div class="v33-mini-logo">✦ ASCENT</div><div class="v33-tools"><button class="v33-round" data-tab="dashboard" title="ภารกิจวันนี้" aria-label="ภารกิจวันนี้">☑</button><button class="v33-round v33-mobile-menu" data-action="more-menu" aria-label="เปิดเมนู">☰</button><button class="v33-round" data-tab="settings" aria-label="ตั้งค่าเสียงและการแจ้งเตือน">⚙</button></div></header><div class="v32-subcontent v33-subcontent">${(tab==='dashboard'||tab==='settings')?bodyMetricsBar():''}${content}</div></main><nav class="v33-mobile-nav" aria-label="เมนูมือถือ">${mNav}</nav>${overlay}</div>`};
 dashboard=v33Dashboard;
 const v33OldQuests=quests;
 quests=function(){const q=activeQuestList()[0]||null,p=v33QuestPct();return `<div class="v33-quest-overview"><section class="v33-summary"><div class="v33-summary-label"><span class="v33-stars">✦<br>✦<br>✦<br>✦</span><div><h2>Daily Quest</h2><p>${p.remaining} quests remaining</p></div></div><div class="v33-progress-ring" style="--p:${p.pct}%"><span>${p.pct}%</span></div></section>${v33Board(q,true)}<div class="v33-quest-secondary">${v33OldQuests()}</div></div>`};
@@ -978,6 +995,7 @@ function v36Restore(obj){if(!obj||obj.version!==1||!obj.days||!obj.profile||!con
  ensureV2();ensureV3();data.expiry??={};data.bossClaimed??={};data.profile.calorieBias??=0;
  autoProfileTargets();save();render();rescheduleNative();toast('กู้คืนข้อมูลสำเร็จ');}
 function v36SuggestedShopping(){
+ if(weeklyForecast().stockEnough)return [];
  const need={},inStock={...data.inventory};
  for(let i=0;i<7;i++)for(const rec of RECIPES){const dt=shift(localDate(),i),planned=diverseRecipe(rec,dt,inStock);
   for(const [key,qty] of Object.entries(planned.items)){
@@ -1086,6 +1104,97 @@ document.addEventListener('click',async e=>{const el=e.target.closest('[data-v37
 },true);
 // Stop camera whenever navigation unmounts its view; never leak capture to another page.
 document.addEventListener('click',e=>{if(e.target.closest('[data-tab],[data-v34-food]'))v37BarcodeStop()},true);
+
+
+// ASCENT v3.7.2: Nutrition calculations share one deterministic daily plan.
+// Logged meals are immutable; all edits act only on unconsumed meal proposals.
+const V372_WHOLE=new Set(['egg','soy','banana','apple','orange','bread']);
+const V372_STARCH=['rice','potato','sweetpotato','oats','bread','pumpkin'];
+const V372_LEAN=['chicken','tuna','whitefish','pork','beef','yogurt','tofu','soy','egg','salmon'];
+const V372_FILL=['potato','rice','sweetpotato','oats','pumpkin','bread','banana','apple','oil','nuts'];
+const V372_MAX={chicken:280,pork:260,salmon:250,tofu:400,tuna:220,whitefish:280,beef:260,yogurt:300,soy:1,egg:2,rice:250,potato:400,sweetpotato:350,pumpkin:350,oats:80,bread:3,banana:2,apple:2,nuts:30,oil:15};
+function v372Nutrition(ms){const z={calories:0,protein:0,carb:0,fat:0};for(const m of ms){z.calories+=Number(m.kcal)||0;z.protein+=Number(m.protein)||0;z.carb+=Number(m.carb)||0;z.fat+=Number(m.fat)||0;}return z}
+function v372Refresh(m){const v=foodValue(m.items||{});m.desc=quantities(m.items)||'ไม่มีอาหารในคลัง';m.kcal=Math.round(v.kcal);m.protein=pctNum(v.protein);m.carb=pctNum(v.carb);m.fat=pctNum(v.fat)}
+function v372MealFloor(m){return {breakfast:310,lunch:380,snack:75,dinner:380}[m.id]||200}
+function assessMealPlan(meals,date=selected){
+ const t=energyModel(),x=v372Nutrition(meals),issues=[];
+ for(const m of meals){if(m.kcal<v372MealFloor(m))issues.push(`${m.name} พลังงานไม่พอ`);else if(['lunch','dinner'].includes(m.id)&&m.protein<23)issues.push(`${m.name} โปรตีนต่ำ`)}
+ if(x.calories<t.calories*.93)issues.push(`พลังงานต่ำกว่าเป้า ${Math.round(t.calories-x.calories)} kcal`);
+ if(x.calories>t.calories*1.06)issues.push(`พลังงานเกินเป้า ${Math.round(x.calories-t.calories)} kcal`);
+ if(x.protein<t.protein-1)issues.push(`โปรตีนต่ำกว่าเป้า ${Math.round(t.protein-x.protein)} กรัม`);
+ if(x.carb<110)issues.push('คาร์โบไฮเดรตไม่พอในแผน');
+ if(x.fat<30)issues.push('ไขมันในอาหารต่ำเกินไป');
+ // No calorie forecast from an incomplete, nutrient-poor or grossly excessive plan.
+ return{ok:issues.length===0,issues,calories:Math.round(x.calories),protein:Math.round(x.protein),carb:Math.round(x.carb),fat:Math.round(x.fat),targetKcal:t.calories,targetProtein:t.protein,date};
+}
+function rebalanceDailyMeals(meals,available,date){
+ const t=energyModel(); const d=day(date);
+ const editable=m=>!(d.meals||[]).includes(m.id);
+ // Ensure the available stock is never negative; earlier consumed meals were already subtracted.
+ for(const k of Object.keys(available))available[k]=Math.max(0,Number(available[k])||0);
+ const total=()=>v372Nutrition(meals);
+ const add=(m,k,amount)=>{const v=ING[k];if(!v||!editable(m))return 0;let q=Math.min(Math.max(0,Number(available[k])||0),Math.max(0,amount),(V372_MAX[k]||500)-(m.items[k]||0));if(V372_WHOLE.has(k))q=Math.floor(q);else q=Math.floor(q/5)*5;if(q<=0)return 0;m.items[k]=pctNum((m.items[k]||0)+q);available[k]=pctNum(Math.max(0,available[k]-q));v372Refresh(m);return q};
+ const drop=(m,k,amount)=>{if(!editable(m))return 0;let q=Math.min(m.items[k]||0,Math.max(0,amount));if(V372_WHOLE.has(k))q=Math.floor(q);else q=Math.floor(q/5)*5;if(q<=0)return 0;m.items[k]=pctNum((m.items[k]||0)-q);if(m.items[k]<=0)delete m.items[k];available[k]=pctNum((available[k]||0)+q);v372Refresh(m);return q};
+ // Rebalance energy while protecting daily protein, carbs and fat from overly aggressive cuts.
+ for(let i=0;i<150&&total().calories>t.calories*1.025;i++){
+  const x=total();let changed=false;
+  const candidates=['oil','nuts','avocado','rice','potato','sweetpotato','oats','bread','pumpkin','salmon','beef','pork','chicken'];
+  for(const k of candidates){if(changed)break;for(const m of [...meals].reverse()){
+    if(!editable(m)||!m.items[k])continue;
+    const unit=ING[k],step=V372_WHOLE.has(k)?1:5;
+    if(m.kcal-step*unit.kcal<v372MealFloor(m))continue;
+    if(x.protein-step*unit.p<t.protein*.96||x.carb-step*unit.carb<120||x.fat-step*unit.fat<32)continue;
+    if(drop(m,k,step)>0){changed=true;break}
+  }}
+  if(!changed)break;
+ }
+ // Add protein from stock without inventing food; prefer lean protein over fatty fish.
+ for(let i=0;i<150&&total().protein<t.protein-.5;i++){
+  let changed=false;
+  for(const k of V372_LEAN){if(changed)break;const ing=ING[k];if(!ing)continue;
+   for(const id of ['lunch','dinner','breakfast','snack']){
+    const m=meals.find(z=>z.id===id);if(!m||!editable(m))continue;
+    const x=total(),step=V372_WHOLE.has(k)?1:10;
+    if(x.calories+step*ing.kcal>t.calories*1.08)continue;
+    if(add(m,k,step)>0){changed=true;break}
+   }
+  }
+  if(!changed)break;
+ }
+ // A protein substitution can add energy; trim starches/fats again while preserving protein.
+ for(let i=0;i<160&&total().calories>t.calories*1.035;i++){
+  const x=total();let changed=false;
+  for(const k of ['oil','nuts','rice','potato','sweetpotato','oats','bread','pumpkin','salmon','beef']){
+   if(changed)break;for(const m of [...meals].reverse()){
+    if(!editable(m)||!m.items[k])continue;
+    const unit=ING[k],step=V372_WHOLE.has(k)?1:5;
+    if(m.kcal-step*unit.kcal<v372MealFloor(m))continue;
+    if(x.protein-step*unit.p<t.protein-.6||x.carb-step*unit.carb<120||x.fat-step*unit.fat<32)continue;
+    if(drop(m,k,step)>0){changed=true;break}
+   }
+  }
+  if(!changed)break;
+ }
+ // If energy is still low, supply starch/fruit/oils rather than forcing more protein powder.
+ for(let i=0;i<170&&total().calories<t.calories*.985;i++){
+  let changed=false;
+  for(const k of V372_FILL){if(changed)break;const ing=ING[k];if(!ing)continue;
+   for(const id of ['lunch','dinner','breakfast','snack']){
+    const m=meals.find(z=>z.id===id);if(!m||!editable(m))continue;
+    const x=total(),step=V372_WHOLE.has(k)?1:5;
+    if(x.calories+step*ing.kcal>t.calories*1.035)continue;
+    if(k==='oil'&&x.fat>t.calories*.33/9)continue;
+    if(add(m,k,step)>0){changed=true;break}
+   }
+  }
+  if(!changed)break;
+ }
+ // A meal is a viable suggestion only when it contains a realistic minimum amount.
+ for(const m of meals){if(!editable(m))continue;m.shortage=m.kcal<v372MealFloor(m)||(['lunch','dinner'].includes(m.id)&&m.protein<23)?['อาหารในคลังไม่ครบตามมื้อ']:[]}
+}
+function bodyMetricsBar(){const b=energyModel(),bmi=b.weight/Math.pow(b.height/100,2);const group=bmi<18.5?'น้ำหนักต่ำกว่าเกณฑ์':bmi<25?'ช่วงเกณฑ์ทั่วไป':bmi<30?'น้ำหนักเกิน':'BMI สูง';return `<section class="v372-metrics" aria-label="ค่าที่ใช้คำนวณอาหาร"><div><small>BMI · ตัวชี้วัดคัดกรอง</small><b>${fmtNum(bmi,1)}</b><small>${group}</small></div><div><small>พลังงานที่แนะนำ</small><b>${fmtNum(b.calories)} kcal</b><small>BMR ${fmtNum(b.bmr)} · ใช้พลังงาน ≈ ${fmtNum(b.maintenance)} kcal</small></div><div><small>โปรตีนที่แนะนำ</small><b>${fmtNum(b.protein)} g</b><small>≈ 1.5 กรัม/กก. ต่อวัน</small></div><p>BMI ไม่ได้ใช้คูณหาแคลอรีโดยตรง • พลังงานอิงน้ำหนัก ส่วนสูง อายุ เพศ กิจกรรมพื้นฐานและ GPS ย้อนหลัง 14 วัน (เพิ่มเฉลี่ย ${fmtNum(b.activityKcal)} kcal/วัน) • ค่าประมาณ ไม่ใช่คำสั่งการแพทย์</p></section>`}
+const v372FoodBase=v34NutritionHub;
+v34NutritionHub=function(){const html=v372FoodBase();if(v34FoodView!=='meals')return html;const q=assessMealPlan(foodPlan);const msg=q.ok?`✓ แผนจากคลังที่มี: ${fmtNum(q.calories)} kcal · โปรตีน ${fmtNum(q.protein)} กรัม (เป้า ${q.targetKcal} kcal / ${q.targetProtein} กรัม)`:`⚠ แผนวันนี้ยังไม่ครบ: ${q.issues.join(' · ')} กรุณาเติมวัตถุดิบหรือปรับมื้อก่อน`;return `<section class="v372-quality ${q.ok?'v372-pass':'v372-warn'}">${esc(msg)}</section>`+html};
 
 render();rescheduleNative();document.addEventListener('visibilitychange',()=>{if(!document.hidden){nativeGPSReadIfPresent();window.ascentWidgetSync?.();lastCheck=Date.now()-60000;render();rescheduleNative()}});
 if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
