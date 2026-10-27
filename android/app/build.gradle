@@ -3,9 +3,35 @@ plugins { id 'com.android.application' }
 android {
     namespace 'com.ascent.quest'
     compileSdk 35
-    defaultConfig { applicationId 'com.ascent.quest'; minSdk 26; targetSdk 34; versionCode 5; versionName '3.4.0' }
-    buildTypes { release { minifyEnabled false } }
-    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    defaultConfig {
+        applicationId 'com.ascent.quest'
+        minSdk 26
+        targetSdk 34
+        versionCode 8
+        versionName '3.7.0'
+    }
+    signingConfigs {
+        ascentRelease {
+            def keystore = System.getenv('ASCENT_KEYSTORE_FILE')
+            if (keystore && System.getenv('ASCENT_STORE_PASSWORD') && System.getenv('ASCENT_KEY_ALIAS') && System.getenv('ASCENT_KEY_PASSWORD')) {
+                storeFile file(keystore)
+                storePassword System.getenv('ASCENT_STORE_PASSWORD')
+                keyAlias System.getenv('ASCENT_KEY_ALIAS')
+                keyPassword System.getenv('ASCENT_KEY_PASSWORD')
+            }
+        }
+    }
+    buildTypes {
+        debug { minifyEnabled false }
+        release {
+            minifyEnabled false
+            if (System.getenv('ASCENT_KEYSTORE_FILE')) signingConfig signingConfigs.ascentRelease
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
 }
 
 dependencies { implementation 'androidx.webkit:webkit:1.12.1' }

@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "ASCENT Fitness Quest RPG 3.4",
+  "name": "ASCENT Fitness Quest RPG 3.7",
   "short_name": "ASCENT",
-  "description": "Fitness RPG: คลังอาหาร 24 ชนิด สแกนใบเสร็จ OCR ตารางงาน เควสตามเวลา สเตตัส RPG และวิ่ง GPS",
+  "description": "ASCENT v3.7: Post-Run Analysis, Barcode Scanner, Character Equipment, Weekly Report, Health Connect Android",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
