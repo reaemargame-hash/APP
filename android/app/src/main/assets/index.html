@@ -174,7 +174,9 @@ input[readonly]{opacity:.85;cursor:default}
 .v372-quality{margin:0 0 12px;padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.7}.v372-pass{border-color:#316d61;background:#102b30;color:#b1f4d7}.v372-warn{border-color:#99672e;background:#32251c;color:#ffe1b2}
 @media(max-width:590px){.v372-metrics{gap:6px;padding:9px}.v372-metrics b{font-size:14px}.v372-metrics small{font-size:9px}.v372-metrics p{font-size:9px}}
 </style>
-</head>
+<style id="v380-black-flame">
+:root{--v380-violet:#8567c7}body{background:#090b16!important}body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:0;width:65vw;height:85vh;bottom:-30vh;border-radius:48% 52% 35% 65%;background:radial-gradient(ellipse at 50% 65%,#020207 10%,#090613 34%,#281942bb 55%,transparent 75%);filter:blur(24px);opacity:.72;animation:v380flame 3.1s ease-in-out infinite alternate}body:before{left:-23vw}body:after{right:-23vw;animation-delay:-1.6s;animation-duration:3.8s}.app,.v34-run-backdrop{position:relative;z-index:1}.panel,.v36-card{border-color:#71609450!important;box-shadow:0 0 22px #25134220}.v380-snack{margin-bottom:16px;border:1px solid #b27c5b66!important}.v380-food-intro{margin-bottom:15px}.v380-quick{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:10px 0}.v380-modal{position:fixed;inset:0;background:#03040bcf;z-index:100000;display:none;align-items:center;justify-content:center;padding:14px;overflow:auto}.v380-modal.open{display:flex}.v380-dialog{width:min(550px,100%);max-height:95vh;overflow:auto;background:#101427;border:1px solid #7b68a4;border-radius:18px;padding:18px;box-shadow:0 0 55px #1c123a}.v380-dialog h3{margin:0 0 14px}.v380-risk{padding:12px;background:#242038;border:1px solid #795d8a;border-radius:10px;font-size:13px;line-height:1.6}@keyframes v380flame{0%{transform:translate3d(-12px,35px,0) skewX(-9deg) scale(.9)}50%{transform:translate3d(28px,-20px,0) skewX(8deg) scale(1.12)}100%{transform:translate3d(-15px,-65px,0) skewX(-5deg) scale(.95)}}@media(prefers-reduced-motion:reduce){body:before,body:after{animation:none!important}}@media(max-width:600px){body:before,body:after{width:90vw;opacity:.5}.v380-dialog{padding:12px}}
+</style></head>
 <body><div id="app"></div><div id="toasts" class="toastbox" aria-live="polite"></div>
 <script>
 (()=>{'use strict';
@@ -1195,6 +1197,41 @@ function rebalanceDailyMeals(meals,available,date){
 function bodyMetricsBar(){const b=energyModel(),bmi=b.weight/Math.pow(b.height/100,2);const group=bmi<18.5?'น้ำหนักต่ำกว่าเกณฑ์':bmi<25?'ช่วงเกณฑ์ทั่วไป':bmi<30?'น้ำหนักเกิน':'BMI สูง';return `<section class="v372-metrics" aria-label="ค่าที่ใช้คำนวณอาหาร"><div><small>BMI · ตัวชี้วัดคัดกรอง</small><b>${fmtNum(bmi,1)}</b><small>${group}</small></div><div><small>พลังงานที่แนะนำ</small><b>${fmtNum(b.calories)} kcal</b><small>BMR ${fmtNum(b.bmr)} · ใช้พลังงาน ≈ ${fmtNum(b.maintenance)} kcal</small></div><div><small>โปรตีนที่แนะนำ</small><b>${fmtNum(b.protein)} g</b><small>≈ 1.5 กรัม/กก. ต่อวัน</small></div><p>BMI ไม่ได้ใช้คูณหาแคลอรีโดยตรง • พลังงานอิงน้ำหนัก ส่วนสูง อายุ เพศ กิจกรรมพื้นฐานและ GPS ย้อนหลัง 14 วัน (เพิ่มเฉลี่ย ${fmtNum(b.activityKcal)} kcal/วัน) • ค่าประมาณ ไม่ใช่คำสั่งการแพทย์</p></section>`}
 const v372FoodBase=v34NutritionHub;
 v34NutritionHub=function(){const html=v372FoodBase();if(v34FoodView!=='meals')return html;const q=assessMealPlan(foodPlan);const msg=q.ok?`✓ แผนจากคลังที่มี: ${fmtNum(q.calories)} kcal · โปรตีน ${fmtNum(q.protein)} กรัม (เป้า ${q.targetKcal} kcal / ${q.targetProtein} กรัม)`:`⚠ แผนวันนี้ยังไม่ครบ: ${q.issues.join(' · ')} กรุณาเติมวัตถุดิบหรือปรับมื้อก่อน`;return `<section class="v372-quality ${q.ok?'v372-pass':'v372-warn'}">${esc(msg)}</section>`+html};
+
+
+// v3.8.0 Black Flame: enhancement layer; preserve native GPS, existing food data and saves.
+const v380ScheduleBase=schedule;
+schedule=function(date=selected){const s=v380ScheduleBase(date);const factor={easy:.65,normal:1,hard:1.5}[adaptDifficulty()]||1;
+ const base=[2,2.4,2.8,3.2,3.7,4.3,4.8,5.4][s.stage]||2;
+ const km=Math.round(base*factor*10)/10;
+ return {...s,active:true,targetKm:km,minutes:Math.round(km*11),pace:'ตามความสบาย ไม่บังคับ',label:'เควสวิ่งประจำวัน · '+DIFFICULTY[adaptDifficulty()].label,desc:'พร้อมให้เริ่มเมื่อไรก็ได้ตลอดวัน · วันพักฟื้นเลือกได้ในหน้าแรก',kcal:runCalories(km,s.kind==='เดิน'?'walk':'run')};
+};
+const v380RunBase=v34RunView;
+v34RunView=function(){return v380RunBase().replace('เควสสำเร็จเมื่อ GPS ถึงเป้า ได้รางวัลครั้งเดียว','เควสเปิดให้วิ่งได้ตลอดวัน · เควสสำเร็จเมื่อ GPS ถึงเป้า ได้รางวัลครั้งเดียว').replace('เพซแนะนำ','เพซ (ไม่บังคับ)')};
+function v380SnackPanel(){const d=day(),n=dailyNutrition(d),p=data.profile,cal=p.calorieTarget||2100;
+ const remaining=Math.round(cal-n.calories),over=remaining<0;
+ return `<section class="v380-snack panel"><div class="p-title"><h3>🍪 กินขนม / อาหารนอกแผน</h3><span class="chip">QUICK LOG</span></div>
+ <p class="hint">ถ่ายรูปฉลากเพื่อดูประกอบ แล้วกรอกตัวเลขจากฉลากก่อนบันทึกจริง · ยังไม่มีระบบอ่าน OCR อัตโนมัติ</p>
+ <div class="v380-quick"><b>${fmtNum(n.calories)} / ${fmtNum(cal)} kcal</b><span class="${over?'orange':'green'}">${over?'เกินเป้า '+fmtNum(-remaining):'เหลือ '+fmtNum(remaining)} kcal</span></div>
+ <button class="primary" type="button" data-v380-snack>＋ เพิ่มขนมหรืออาหารนอกแผน</button></section>`;
+}
+const v380DashboardBase=dashboard;
+dashboard=function(){return v380SnackPanel()+v380DashboardBase()};
+const v380FoodBase=v34NutritionHub;
+v34NutritionHub=function(){return `<section class="v380-food-intro panel"><h3>🍽 อาหารของฉัน</h3><p class="hint">เริ่มที่บันทึกมื้อ → ดูของที่มี → เช็กของที่ต้องซื้อ ทั้งหมดอยู่ในหน้านี้</p><button class="ghostbutton" type="button" data-v380-snack>＋ เพิ่มขนมหรืออาหารนอกแผน</button></section>`+v380FoodBase()};
+function v380OpenSnack(){let root=document.getElementById('v380-snack-modal');if(!root){root=document.createElement('div');root.id='v380-snack-modal';root.className='v380-modal';root.innerHTML=`<section class="v380-dialog" role="dialog" aria-modal="true" aria-label="บันทึกอาหารนอกแผน"><div class="row between"><h3>🍪 บันทึกขนม / อาหารนอกแผน</h3><button type="button" class="ghostbutton" data-v380-close>✕</button></div><form id="v380-snack-form" class="form-grid"><div class="field fullspan"><label>รูปฉลากโภชนาการ (ใช้ดูประกอบ)</label><input id="v380-photo" type="file" accept="image/*" capture="environment"><img id="v380-preview" alt="ภาพฉลากที่เลือก" hidden style="max-height:150px;max-width:100%;object-fit:contain"></div><div class="field fullspan"><label>ชื่อขนมหรืออาหาร</label><input name="name" required maxlength="75" placeholder="เช่น ขนม 1 ซอง"></div><div class="field"><label>จำนวนหน่วยบริโภคที่กิน</label><input name="servings" type="number" min="0.1" max="20" step="0.1" value="1" required></div><div class="field"><label>แคลอรีต่อหน่วย (kcal)</label><input name="kcal" type="number" min="0" max="3000" step="1" required></div><div class="field"><label>โปรตีนต่อหน่วย (g)</label><input name="protein" type="number" min="0" max="250" step="0.1" value="0" required></div><div class="field"><label>คาร์บต่อหน่วย (g)</label><input name="carb" type="number" min="0" max="600" step="0.1" value="0" required></div><div class="field"><label>ไขมันต่อหน่วย (g)</label><input name="fat" type="number" min="0" max="300" step="0.1" value="0" required></div><div class="field"><label>น้ำตาลต่อหน่วย (g)</label><input name="sugar" type="number" min="0" max="200" step="0.1" value="0" required></div><div class="field fullspan"><div id="v380-risk" class="v380-risk" aria-live="polite">กรอกค่าจากฉลากเพื่อประเมินก่อนกิน</div></div><button class="primary fullspan" type="submit">✓ ยืนยันบันทึกอาหาร</button></form></section>`;document.body.append(root)}root.classList.add('open');v380Risk();}
+function v380Risk(){const form=document.getElementById('v380-snack-form'),el=document.getElementById('v380-risk');if(!form||!el)return;const f=new FormData(form),q=Number(f.get('servings'))||0,k=Number(f.get('kcal'))||0,s=Number(f.get('sugar'))||0,fat=Number(f.get('fat'))||0,n=dailyNutrition(day()),cal=data.profile.calorieTarget||2100;
+ const projected=n.calories+q*k,remain=cal-projected;const warnings=[];if(remain<0)warnings.push('พลังงานจะเกินเป้าประมาณ '+Math.round(-remain)+' kcal');
+ if(q*s>=25)warnings.push('รายการนี้มีน้ำตาล '+(q*s).toFixed(1)+' ก. ควรดูน้ำตาลรวมทั้งวัน');
+ if(q*fat>=20)warnings.push('รายการนี้มีไขมัน '+(q*fat).toFixed(1)+' ก. ควรดูไขมันรวมทั้งวัน');
+ el.textContent='หลังบันทึก: '+Math.round(projected)+' / '+cal+' kcal · '+(warnings.join(' · ')||'ยังไม่เกินเป้าพลังงานจากรายการที่บันทึก');
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-v380-snack],[data-v380-close]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.hasAttribute('data-v380-snack'))v380OpenSnack();else document.getElementById('v380-snack-modal')?.classList.remove('open')},true);
+document.addEventListener('input',e=>{if(e.target.closest('#v380-snack-form'))v380Risk()});
+document.addEventListener('change',e=>{if(e.target.id!=='v380-photo')return;const img=document.getElementById('v380-preview'),file=e.target.files?.[0];if(!img)return;if(img.dataset.url)URL.revokeObjectURL(img.dataset.url);img.hidden=!file;if(file){img.dataset.url=URL.createObjectURL(file);img.src=img.dataset.url}});
+document.addEventListener('submit',e=>{if(e.target.id!=='v380-snack-form')return;e.preventDefault();e.stopImmediatePropagation();const f=new FormData(e.target),q=Number(f.get('servings')),name=String(f.get('name')||'').trim().slice(0,75);const v={};for(const k of ['kcal','protein','carb','fat','sugar'])v[k]=Number(f.get(k))*q;
+ if(!name||!(q>0&&q<=20)||Object.values(v).some(x=>!Number.isFinite(x)||x<0)||v.kcal>3000||v.protein>250||v.carb>600||v.fat>300){toast('กรุณาตรวจสอบตัวเลขโภชนาการ');return}
+ commit(()=>{dayWrite().custom.push({id:globalThis.crypto?.randomUUID?.()||String(Date.now())+Math.random(),name,kcal:v.kcal,protein:v.protein,carb:v.carb,fat:v.fat,sugar:v.sugar,source:'snack'})},'บันทึกอาหารนอกแผนแล้ว');document.getElementById('v380-snack-modal')?.classList.remove('open')},true);
 
 render();rescheduleNative();document.addEventListener('visibilitychange',()=>{if(!document.hidden){nativeGPSReadIfPresent();window.ascentWidgetSync?.();lastCheck=Date.now()-60000;render();rescheduleNative()}});
 if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
