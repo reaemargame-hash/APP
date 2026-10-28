@@ -397,6 +397,21 @@ body.v386-overlay-open{overflow:hidden!important}
 @media(max-width:390px){.v385-home .v388-status{grid-template-columns:minmax(0,1fr) 95px;padding:17px 12px;gap:7px}.v388-status h2{font-size:21px}.v388-status p{font-size:10px;line-height:1.5}.v388-level-disc{height:89px;width:89px}.v388-level-disc strong{font-size:34px}.v388-level-disc>span{font-size:8px}.v388-rank-badge{font-size:8px}.v388-xp-meta{font-size:10px}.v388-desktop-break{display:none}}
 @media(prefers-reduced-motion:reduce){.v388-status:before,.v388-status:after{animation:none!important}.v388-xp-track span{transition:none}}
 </style>
+<style>
+/* ASCENT v3.9.0 SHADOW WORLD: all effects behind controls; no flashes. */
+.v390-home-entry{width:100%;margin:12px 0;display:flex;gap:14px;align-items:center;min-height:80px;padding:15px 18px;border-radius:17px;border:1px solid #7456c4;color:#e9dfff;text-align:left;background:linear-gradient(110deg,#151329,#271a45 55%,#101b30);box-shadow:inset 0 0 25px #3b26742e,0 5px 25px #0005;cursor:pointer}.v390-home-entry>span:first-child{font-size:31px;color:#b08aff;text-shadow:0 0 16px #9e61f7}.v390-home-entry>span:nth-child(2){flex:1}.v390-home-entry strong{display:block;font-size:15px;letter-spacing:.05em}.v390-home-entry small{display:block;font-size:11px;color:#afaac8;margin-top:5px}.v390-home-entry:hover{border-color:#aa8ef5}
+.v390-world{max-width:1170px;margin:auto}.v390-world-banner{text-align:center;border:1px solid #584c82;padding:23px;border-radius:19px;margin-bottom:17px;background:radial-gradient(ellipse at 50% 0%,#36235b,#0b1325 77%)}.v390-world-banner>span,.v390-dialog-kicker{font-size:10px;font-weight:900;letter-spacing:.21em;color:#b7a1f2}.v390-world-banner h2{font-size:clamp(23px,4vw,35px);letter-spacing:.09em;margin:7px 0;color:#efe9ff}.v390-world-banner p{font-size:12px;color:#b2aac6}.v390-rank-summary{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:16px;flex-wrap:wrap}.v390-rank-summary strong{background:#4b367c;border:1px solid #8369c8;border-radius:9px;padding:8px 17px}.v390-rank-summary span{color:#acb5da;font-size:12px}.v390-map{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;border:1px solid #413b66;padding:12px;border-radius:19px;background:#070d1a;box-shadow:inset 0 0 40px #000d}.v390-region{position:relative;min-width:0;height:250px;overflow:hidden;border:1px solid #344258;border-radius:14px;background:linear-gradient(140deg,#14283a,#0b1221);isolation:isolate}.v390-region.unlocked{border-color:#8773d7;box-shadow:inset 0 0 20px #6247a73d,0 0 14px #5d47b12e}.v390-terrain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.v390-region-name{position:absolute;top:12px;left:12px;z-index:3;font-weight:900;font-size:11px;letter-spacing:.07em;color:#cee0f6;background:#050a15cc;border:1px solid #4c6376;padding:6px 8px;border-radius:8px}.v390-fog{position:absolute;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 40%,#03050bcf,#000000ef),repeating-linear-gradient(30deg,#060815bd,#101324ba 8px,#0a0b17 15px);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;animation:v390Fog 7s ease-in-out infinite alternate}.v390-fog span{font-size:29px;color:#564b79}.v390-fog strong{letter-spacing:.15em;font-size:11px;color:#665b79}.v390-fog small{color:#645e7c;font-size:10px}.v390-you{position:absolute;bottom:10px;left:10px;color:#9adadb;background:#031323c7;border-radius:7px;padding:5px 8px;font-size:11px;z-index:3}.v390-gate{position:absolute;z-index:4;transform:translate(-50%,-50%);border:0;background:none;padding:0;color:#f3eaff;cursor:pointer;width:150px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}.v390-gate-symbol{display:grid;place-items:center;width:36px;height:45px;border:2px solid #a77cff;border-radius:45% 45% 15% 15%;background:radial-gradient(ellipse,#24103f,#05040a 78%);box-shadow:0 0 12px #7c4ff2aa,inset 0 0 13px #8c4dfa77;animation:v390GatePulse 2.7s ease-in-out infinite alternate;font-size:17px}.v390-gate-label{display:block;font-size:11px;line-height:1.2;font-weight:850;text-shadow:0 1px 4px #000,0 1px 4px #000;background:#050816d9;border-radius:6px;padding:3px 6px}.v390-gate-label small{display:block;font-size:9px;font-weight:550;color:#c4b1f4;margin-top:3px}.v390-gate:disabled{opacity:.45;cursor:default}.v390-gate:disabled .v390-gate-symbol{animation:none}.v390-note{font-size:11px!important;line-height:1.65!important;color:#aaa8c2!important;margin:10px 0}.v390-loot{padding:18px;margin:14px 0;border-radius:17px;border:1px solid #4c406b;background:#101527}.v390-loot h3{margin:0 0 14px;font-size:16px;color:#e5d9ff}.v390-materials{display:flex;flex-wrap:wrap;gap:8px}.v390-mat{border:1px solid #544674;background:#1f1938;border-radius:8px;padding:9px;color:#c8bbef;font-size:11px}.v390-mat b{color:white;margin-left:5px}.v390-crafts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:13px}.v390-craft{border:1px solid #383251;background:#171a2e;border-radius:10px;padding:11px;display:flex;flex-direction:column;gap:9px}.v390-craft strong{font-size:12px;color:#e1d2ff}.v390-craft small{display:block;color:#a99cc4;font-size:10px;margin-top:5px}.v390-craft button{margin-top:auto}.v390-history{font-size:12px;color:#cbc1e1}.v390-active{border:1px solid #a17cd6;background:#291949;border-radius:12px;padding:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px;color:#f3e7ff}.v390-overlay{position:fixed;inset:0;z-index:32000;background:#03050edb;display:grid;place-items:center;padding:15px;overflow:auto;backdrop-filter:blur(7px)}.v390-overlay[hidden]{display:none!important}.v390-dialog{width:min(100%,510px);max-height:min(92dvh,900px);overflow:auto;border:1px solid #8c69d3;background:radial-gradient(ellipse at top,#2a2252,#0a1021 80%);box-shadow:0 0 85px #31157887;border-radius:18px;padding:24px;color:#f4eaff}.v390-dialog h2{font-size:25px;margin:10px 0}.v390-dialog p{font-size:12px;line-height:1.6;color:#bbb1ce}.v390-dialog-km{font-size:44px;font-weight:950;color:#d0b8ff}.v390-dialog-km small{font-size:14px}.v390-dialog-actions{display:flex;gap:10px}.v390-dialog-actions>*{flex:1}.v390-count{text-align:center;font-size:100px;font-weight:1000;color:#e5d0ff;text-shadow:0 0 40px #6f42c8;animation:v390Count 1s ease-in-out infinite}.v390-running-banner{border:1px solid #7952cc;background:#1e1838;padding:13px;border-radius:12px;margin-bottom:10px}.v390-running-banner strong,.v390-running-banner b,.v390-running-banner small{display:block}.v390-running-banner strong{font-size:15px;color:#dfc9ff}.v390-running-banner b{font-size:22px;color:#eee8ff;margin:5px 0}.v390-running-banner small{font-size:11px;color:#bbabd9;margin-top:5px}.v390-meter{height:8px;background:#0c0823;border-radius:40px;overflow:hidden;margin:10px 0}.v390-meter>span{display:block;height:100%;border-radius:40px;background:linear-gradient(90deg,#4e3386,#a287ff);box-shadow:0 0 14px #aa86ff}.v390-customfoods{border:1px solid #6e568e;background:#1c1b34;border-radius:13px;padding:13px;display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0 14px}.v390-customfoods strong{font-size:12px;display:block}.v390-customfoods small{font-size:11px;color:#a99fc6;display:block;margin-top:5px}.v390-customfoods button{flex-shrink:0}.v390-photo-button{cursor:pointer;display:block;padding:16px;text-align:center;border:1px dashed #a589ee;background:#1d1c38;color:#dbcaff;border-radius:12px;margin-bottom:12px;font-weight:850}.v390-ocr-state{padding:9px;background:#241e39;color:#d3bfee;border-radius:10px;font-size:12px}.v390-values{padding:10px;border:1px solid #446b6f;border-radius:9px;margin:12px 0}.v390-values b,.v390-values span,.v390-values small{display:block;font-size:12px}.v390-manual{margin-top:15px;border-top:1px solid #514768;padding-top:12px}.v390-manual summary{cursor:pointer;font-size:12px}.v390-manual .form-grid{margin:13px 0}.v390-food-dialog{max-width:530px}.v390-food-dialog .field input{width:100%}
+@keyframes v390Fog{from{opacity:.86;transform:translateX(-6px) scale(1.03)}to{opacity:1;transform:translateX(7px) scale(1.05)}}@keyframes v390GatePulse{to{box-shadow:0 0 18px #8457ed,inset 0 0 18px #aa79ff;transform:translateY(-2px)}}@keyframes v390Count{50%{opacity:.7;transform:scale(.95)}}
+@media(max-width:700px){.v390-map{grid-template-columns:1fr}.v390-region{height:245px}.v390-crafts{grid-template-columns:1fr}.v390-dialog{padding:17px}.v390-customfoods{flex-wrap:wrap}.v390-customfoods button{width:100%}}
+@media(prefers-reduced-motion:reduce){.v390-fog,.v390-gate-symbol,.v390-count{animation:none!important}}
+
+.v390-chest{margin:6px;display:inline-flex;flex-direction:column;gap:4px;text-align:center;min-width:155px;padding:12px;background:linear-gradient(145deg,#3b2663,#15152b);border:1px solid #9b78ee;border-radius:12px;color:#f7dfff;cursor:pointer;animation:v390GatePulse 3s ease-in-out infinite alternate}.v390-chest span{font-size:29px}.v390-chest small{font-size:10px;color:#bbabde}@media(prefers-reduced-motion:reduce){.v390-chest{animation:none}}
+
+.v390-scan-snack{display:block;width:100%;margin:12px 0;padding:13px;border-radius:12px;border:1px solid #8b69d9;background:linear-gradient(100deg,#312159,#19162c);color:#e5d5ff;font-size:13px;font-weight:800;cursor:pointer}.v390-meter{position:relative;overflow:visible}.v390-meter i{position:absolute;bottom:1px;transform:translateX(-50%);font-style:normal;font-size:17px;filter:drop-shadow(0 0 6px #bd9aff);transition:left .8s linear}.v390-world .v390-region.unlocked{background-image:radial-gradient(circle at 50% 55%,#24426955,transparent)}
+.v390-chest{animation:none;transition:box-shadow .22s,border-color .22s}.v390-chest:hover{border-color:#ceb6ff;box-shadow:0 0 19px #7f58d477}
+
+.v390-back{float:left;color:#d0c1f4;background:#1a1830;border:1px solid #67588b;border-radius:8px;padding:6px 9px;font-size:11px;cursor:pointer}.v33-mobile-nav [data-v390-page]{font-size:10px}.v33-mobile-nav [data-v390-page] span{font-size:17px}
+</style>
 </head>
 <body><div id="app"></div><div id="toasts" class="toastbox" aria-live="polite"></div>
 <script>
@@ -996,7 +1011,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('[data-action="
 document.addEventListener('click',e=>{if(e.target.closest('.receipt-drawer > summary'))receiptDrawerOpen=!receiptDrawerOpen});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&moreMenuOpen){moreMenuOpen=false;render()}});
 
-function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.8.8 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
+function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.9.0 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
 function commit(fn,msg){const oldScore=score(),oldLevel=lvl(oldScore).level;fn();save();render();rescheduleNative();const now=score(),newLevel=lvl(now).level;if(newLevel>oldLevel)toast('⚡ LEVEL UP! → LV.'+newLevel+' · '+fmtNum(now-oldScore)+' EXP');else if(msg)toast(msg+(now>oldScore?' · +'+fmtNum(now-oldScore)+' EXP':''))}
 let pendingInstall=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pendingInstall=e});
 document.addEventListener('click',async e=>{const target=e.target.closest('[data-tab],[data-date],[data-meal],[data-water-slot],[data-ready],[data-action],[data-remove-food],[data-remove-run]');if(!target)return;
@@ -1690,9 +1705,12 @@ function v386Content(){
    let status=null;
    try{status=JSON.parse(window.AscentNative?.widgetStatus?.()||'null')}catch(e){}
    const isNative=!!status?.native;
-   const label=isNative?`APK ที่ติดตั้ง: ${esc(status.version||'?')} (build ${Number(status.versionCode)||0})`:'ยังไม่ใช่แอป Android Native หรือเป็น APK รุ่นที่ไม่มีตัวตรวจวิดเจ็ต';
-   const detail=!isNative?'เปิดแอปจาก APK ที่ Build ใหม่ ไม่ใช่เว็บหรือทางลัด PWA':!status.registered?'⚠ Android ยังไม่ลงทะเบียนวิดเจ็ตจาก APK ที่ติดตั้งอยู่':`✓ Android ลงทะเบียนวิดเจ็ตแล้ว · เพิ่มบนหน้า Home ${Number(status.pinned)||0} อัน · Launcher ${status.pinSupported?'รองรับ':'ไม่รองรับ'}คำขอเพิ่มอัตโนมัติ`;
-   return `<section class="v386-simple v387-widget-panel"><div class="v386-statline"><div><small>ASCENT DAILY QUEST WIDGET</small><strong>▣ วิดเจ็ตหน้าจอ</strong><small>${label}</small></div></div><p class="v386-note">${detail}</p><button type="button" class="primary" data-v387-pin>＋ เพิ่มวิดเจ็ตบนหน้าจอหลัก</button><p class="v386-note">ถ้าใช้ Xiaomi/HyperOS ให้ไปที่หน้าจอหลัก → กดค้างพื้นที่ว่าง → วิดเจ็ต → เลื่อนหา “Android widgets / วิดเจ็ตจากแอป” → ASCENT Fitness RPG (หน้าค้นหาอาจแสดงเฉพาะวิดเจ็ตแนะนำ ไม่แสดงแอปทั้งหมด) หากยังไม่พบ ให้ตรวจ APK ที่ติดตั้งและรีสตาร์ต Launcher</p><p class="v386-note">วิดเจ็ตแสดง LV, Rank, EXP, ระยะวิ่งและเป้าหมายวันนี้ พร้อมปุ่มบันทึกน้ำ</p><button type="button" class="ghostbutton" data-v387-refresh>↻ ตรวจสถานะอีกครั้ง</button></section>`;
+   const pinned=Number(status?.pinned)||0;
+   const isNew=isNative&&Number(status.versionCode)>=19;
+   const label=isNative?`APK ที่ติดตั้ง: ${esc(status.version||'?')} (build ${Number(status.versionCode)||0})`:'ไม่พบ Android Native Bridge (อาจกำลังเปิดเวอร์ชันเว็บ)';
+   const diag=!isNative?'ไม่สามารถตรวจการลงทะเบียนวิดเจ็ตได้จากหน้าเว็บ ต้องติดตั้ง APK Android จริง':!isNew?'⚠ APK นี้ยังเป็นรุ่นเก่า ต้องติดตั้ง v3.9.0 build 19 ก่อน':!status.registered?'⚠ Android ยังไม่พบ Widget Provider ของ ASCENT ใน APK นี้':pinned>0?`✓ ติดตั้งวิดเจ็ตบน Launcher แล้ว ${pinned} อัน (ถ้าไม่เห็น ให้ตรวจหน้า Home อื่นหรือหน้าจอที่ซ่อนอยู่)`:status.pinState==='confirmed'?'✓ Android ส่งผลยืนยันการเพิ่มแล้ว แต่ยังไม่พบวิดเจ็ตที่ผูกกับ Launcher นี้ ให้ลองกลับหน้า Home แล้วเข้ามาตรวจใหม่':status.pinState==='requested'?`⌛ ส่งคำขอแล้วแต่ Android ยังไม่ส่งผลยืนยัน (${Math.floor((Number(status.pinAgeSeconds)||0)/60)} นาทีที่ผ่านมา) · การกดอนุญาตไม่ใช่หลักฐานว่าเพิ่มสำเร็จ`:status.pinState==='unsupported'?'⚠ Launcher ไม่รองรับคำขอเพิ่มอัตโนมัติ ต้องเลือกผ่านเมนู Android widgets':status.pinState==='error'?`⚠ มีข้อผิดพลาด: ${esc(status.pinError||'ไม่ทราบสาเหตุ')}`:'วิดเจ็ตลงทะเบียนแล้ว แต่ยังไม่ได้ติดตั้งลงบนหน้าจอหลัก';
+   const launcher=isNative?`Launcher: ${esc(status.launcher||'unknown')} · Provider: ${status.registered?'พบ':'ไม่พบ'} · ติดตั้งแล้ว: ${pinned}`:'';
+   return `<section class="v386-simple v387-widget-panel"><div class="v386-statline"><div><small>ASCENT DAILY QUEST WIDGET</small><strong>▣ วิดเจ็ตหน้าจอ</strong><small>${label}</small></div></div><p class="v386-note" style="font-weight:700">${diag}</p><p class="v386-note">${launcher}</p><button type="button" class="primary" data-v387-pin ${!isNative?'disabled':''}>＋ ขอเพิ่มวิดเจ็ตบนหน้าจอหลัก</button><p class="v386-note">Xiaomi / HyperOS: แตะค้างบนหน้า Home → วิดเจ็ต → มองหา <strong>Android widgets / วิดเจ็ต Android</strong> หรือหมวดแอปภายนอก → ASCENT Fitness RPG (อย่าใช้ช่องค้นหาวิดเจ็ตแนะนำอย่างเดียว) จากนั้นเว้นพื้นที่บน Home อย่างน้อย 4×2 ช่อง</p><p class="v386-note">ถ้ากดยอมรับแล้วไม่ปรากฏ ให้กลับมาแตะ “ตรวจสถานะอีกครั้ง” ถ้าจำนวนวิดเจ็ตเป็น 0 แปลว่า Android ยังไม่พบการติดตั้งบน Launcher จริง</p><button type="button" class="ghostbutton" data-v387-refresh>↻ ตรวจสถานะอีกครั้ง</button></section>`;
  }
 
  if(v386Panel==='details'){
@@ -1704,7 +1722,7 @@ function v386Mount(){if(!v386Panel)return;const node=v386Node(),scroller=node.qu
 function v386Close(force=false){if(!v386Panel)return true;if(v383Dirty&&v34FoodView==='stock'&&!force&&!confirm('มีการแก้ไขคลังที่ยังไม่ได้บันทึก ต้องการทิ้งการแก้ไขหรือไม่?'))return false;if(v34FoodView==='stock'&&v383Dirty){v383Draft=null;v383Touched.clear();v383Dirty=false}v386Panel=null;const root=document.getElementById('v386-overlay');if(root)root.hidden=true;document.body.classList.remove('v386-overlay-open');if(v386ReturnFocus?.isConnected)v386ReturnFocus.focus({preventScroll:true});v386ReturnFocus=null;return true}
 function v386Open(name){if(name==='snack'){if(!v386Close())return;v380OpenSnack();return}if(!V386_NAMES[name])return;if(v386Panel&&v386Panel!==name&&!v386Close())return;if(!v386ReturnFocus)v386ReturnFocus=document.activeElement;v386Node().querySelector('.v386-scroll').scrollTop=0;if(v34RunModalOpen)v34CloseRun();v386Panel=name;if(name==='food'){v34FoodView='meals';selected=localDate()}if(name==='stock'){v34FoodView='stock';selected=localDate()}v386Mount();v386Node().querySelector('.v386-close').focus({preventScroll:true})}
 // Render after each successful data commit, keeping the dialog open and its numbers fresh.
-const v386EarlierRender=render;render=function(){v386EarlierRender();if(v386Panel)v386Mount();document.title=document.title.replace(/3\.8\.[0-7]/g,'3.8.8')};
+const v386EarlierRender=render;render=function(){v386EarlierRender();if(v386Panel)v386Mount();document.title=document.title.replace(/3\.8\.[0-8]/g,'3.8.9')};
 // Native GPS and snack popups take priority; never stack two different dialog surfaces.
 const v386EarlierRun=v34OpenRun;v34OpenRun=function(){if(!v386Close())return;document.getElementById('v380-snack-modal')?.classList.remove('open');v386EarlierRun()};
 const v386EarlierSnack=v380OpenSnack;v380OpenSnack=function(){if(!v386Close())return;v386EarlierSnack()};
@@ -1712,11 +1730,263 @@ const v386EarlierSnack=v380OpenSnack;v380OpenSnack=function(){if(!v386Close())re
  const btn=e.target.closest('[data-v387-pin],[data-v387-refresh]');if(!btn)return;
  e.preventDefault();e.stopImmediatePropagation();
  if(btn.hasAttribute('data-v387-refresh')){v386Mount();return}
- if(typeof window.AscentNative?.pinWidget==='function'){window.AscentNative.pinWidget();return}
- toast('ต้องใช้ APK ASCENT v3.8.8 รุ่น Android Native จึงจะเพิ่มวิดเจ็ตได้');
+ if(typeof window.AscentNative?.pinWidget==='function'){window.AscentNative.pinWidget();[1200,3500,8500].forEach(ms=>setTimeout(()=>window.ascentWidgetRefreshIfOpen?.(),ms));return}
+ toast('ต้องใช้ APK ASCENT v3.9.0 รุ่น Android Native จึงจะเพิ่มวิดเจ็ตได้');
  },true);
 document.addEventListener('click',e=>{const el=e.target.closest('[data-v386-open],[data-v386-close]');if(el){e.preventDefault();e.stopImmediatePropagation();if(el.hasAttribute('data-v386-close'))v386Close();else v386Open(el.dataset.v386Open);return}if(e.target?.id==='v386-overlay')v386Close()},true);
 document.addEventListener('keydown',e=>{if(!v386Panel)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();v386Close();return}if(e.key!=='Tab')return;const node=v386Node();const focusables=[...node.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(!focusables.length)return;const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}},true);
+
+window.ascentWidgetRefreshIfOpen=function(){if(v386Panel==='widget')v386Mount()};
+
+
+
+
+
+
+
+
+
+
+// v3.9.0 — SHADOW WORLD: rank-gated GPS dungeons, loot/crafting, custom pantry and on-device label OCR.
+// Keep the v3.8.9 storage key and old GPS APIs; new records use an explicit mode discriminator.
+const V390_RANKS=['E','D','C','B','A','S'];
+const V390_RANK_DATA={
+ E:{base:[2.5,4.5,7],factor:1,xp:[15,20,30],names:['ป่าหมอกดำ','ซากหอคอย','หุบเขาผู้หลงทาง','วิหารแห่งเงา']},
+ D:{base:[5,8,12],factor:1.5,xp:[23,30,45],names:['ป่าอสูร','ถ้ำผลึก','ที่ราบทมิฬ','ป้อมดาบดำ']},
+ C:{base:[8,13,19],factor:2.2,xp:[33,44,66],names:['นครจมน้ำ','หุบเหวมังกร','วิหารสนธยา','สุสานเวท']},
+ B:{base:[13,21,29],factor:3.1,xp:[47,62,93],names:['แดนสงคราม','ทะเลทรายคำสาป','ป้อมปราการลับ','ป่าจันทราสีเลือด']},
+ A:{base:[20,30,42],factor:4.5,xp:[68,90,135],names:['นครราชาเงา','เขาวงกตมรณะ','ทะเลไฟดำ','หุบเหวนิรันดร์']},
+ S:{base:[30,45,60],factor:6,xp:[90,120,180],names:['ปราสาทบัลลังก์','ผาสิ้นโลก','วิหารจักรพรรดิ','เหวอนันตกาล']}
+};
+const V390_LOOT=[{id:'shade',name:'เศษเงา',icon:'◈'},{id:'ore',name:'แร่รัตติกาล',icon:'◆'},{id:'rune',name:'รูนลึกลับ',icon:'✧'},{id:'ember',name:'แก่นไฟดำ',icon:'♨'}];
+const V390_CRAFT=[{id:'blade',name:'ดาบเงาเริ่มต้น',icon:'⚔',need:{shade:4,ore:2}},{id:'cloak',name:'ผ้าคลุมรัตติกาล',icon:'◈',need:{shade:5,rune:2}},{id:'aura',name:'แกนไฟดำ',icon:'✦',need:{ember:3,ore:3,rune:2}},{id:'crown',name:'มงกุฎผู้พิชิต',icon:'♛',need:{shade:8,rune:5,ember:4}}];
+data.dungeonWorld??={cleared:{},materials:{},crafted:[],history:[],chests:[],active:null};
+data.dungeonWorld.chests??=[];
+data.customIngredients??={};
+for(const [key,food] of Object.entries(data.customIngredients))if(/^usr_[a-z0-9_]+$/.test(key)&&food&&food.name&&Number.isFinite(Number(food.kcal)))ING[key]={name:String(food.name).slice(0,70),unit:food.unit||'กรัม',kcal:+food.kcal||0,p:+food.p||0,carb:+food.carb||0,fat:+food.fat||0,category:food.category||'other',sugar:+food.sugar||0};
+// Wider ordinary-food database. All figures are planning estimates per gram; not exact package labels.
+Object.assign(ING,{
+ duck:{name:'เนื้อเป็ดไม่ติดหนัง',unit:'กรัม',kcal:1.4,p:.20,carb:0,fat:.06,category:'protein'},
+ turkey:{name:'อกไก่งวง',unit:'กรัม',kcal:1.14,p:.24,carb:0,fat:.015,category:'protein'},
+ shrimp:{name:'กุ้งสด',unit:'กรัม',kcal:.99,p:.24,carb:.002,fat:.003,category:'protein'},
+ squid:{name:'ปลาหมึกสด',unit:'กรัม',kcal:.92,p:.16,carb:.03,fat:.015,category:'protein'},
+ liver:{name:'ตับไก่ดิบ',unit:'กรัม',kcal:1.19,p:.17,carb:.007,fat:.05,category:'protein'},
+ blood:{name:'เลือดไก่ต้ม',unit:'กรัม',kcal:.75,p:.14,carb:0,fat:.01,category:'protein'},
+ chickpeas:{name:'ถั่วลูกไก่ต้ม',unit:'กรัม',kcal:1.64,p:.09,carb:.27,fat:.026,category:'protein'},
+ lentils:{name:'ถั่วเลนทิลต้ม',unit:'กรัม',kcal:1.16,p:.09,carb:.20,fat:.004,category:'protein'},
+ tempeh:{name:'เทมเป้',unit:'กรัม',kcal:1.93,p:.20,carb:.075,fat:.108,category:'protein'},
+ silkenTofu:{name:'เต้าหู้นิ่ม',unit:'กรัม',kcal:.61,p:.065,carb:.016,fat:.037,category:'protein'},
+ quinoa:{name:'ควินัวสุก',unit:'กรัม',kcal:1.20,p:.044,carb:.21,fat:.019,category:'carb'},
+ corn:{name:'ข้าวโพดต้ม',unit:'กรัม',kcal:.96,p:.034,carb:.21,fat:.015,category:'carb'},
+ barley:{name:'ข้าวบาร์เลย์สุก',unit:'กรัม',kcal:1.23,p:.023,carb:.28,fat:.004,category:'carb'},
+ pasta:{name:'พาสต้าต้ม',unit:'กรัม',kcal:1.31,p:.05,carb:.25,fat:.01,category:'carb'},
+ broccoli:{name:'บรอกโคลี',unit:'กรัม',kcal:.34,p:.028,carb:.066,fat:.004,category:'vegetable'},
+ cauliflower:{name:'กะหล่ำดอก',unit:'กรัม',kcal:.25,p:.019,carb:.05,fat:.003,category:'vegetable'},
+ spinach:{name:'ผักโขม',unit:'กรัม',kcal:.23,p:.029,carb:.036,fat:.004,category:'vegetable'},
+ kale:{name:'คะน้า',unit:'กรัม',kcal:.35,p:.03,carb:.05,fat:.004,category:'vegetable'},
+ waterSpinach:{name:'ผักบุ้ง',unit:'กรัม',kcal:.19,p:.026,carb:.031,fat:.002,category:'vegetable'},
+ bokChoy:{name:'ผักกวางตุ้ง',unit:'กรัม',kcal:.13,p:.015,carb:.022,fat:.002,category:'vegetable'},
+ cabbage:{name:'กะหล่ำปลี',unit:'กรัม',kcal:.25,p:.013,carb:.058,fat:.001,category:'vegetable'},
+ cucumber:{name:'แตงกวา',unit:'กรัม',kcal:.15,p:.0065,carb:.036,fat:.001,category:'vegetable'},
+ carrot:{name:'แครอต',unit:'กรัม',kcal:.41,p:.009,carb:.096,fat:.002,category:'vegetable'},
+ tomato:{name:'มะเขือเทศ',unit:'กรัม',kcal:.18,p:.009,carb:.039,fat:.002,category:'vegetable'},
+ mushroom:{name:'เห็ดนางรม',unit:'กรัม',kcal:.33,p:.033,carb:.061,fat:.004,category:'vegetable'},
+ enoki:{name:'เห็ดเข็มทอง',unit:'กรัม',kcal:.37,p:.027,carb:.078,fat:.003,category:'vegetable'},
+ zucchini:{name:'ซูกินี',unit:'กรัม',kcal:.17,p:.012,carb:.031,fat:.003,category:'vegetable'},
+ pear:{name:'ลูกแพร์',unit:'กรัม',kcal:.57,p:.004,carb:.15,fat:.001,category:'fruit'},
+ guava:{name:'ฝรั่งสด',unit:'กรัม',kcal:.68,p:.026,carb:.14,fat:.01,category:'fruit'},
+ papaya:{name:'มะละกอ',unit:'กรัม',kcal:.43,p:.005,carb:.11,fat:.003,category:'fruit'}
+});
+const v390OldRecords=gpsRecords;
+gpsRecords=function(d){return v390OldRecords(d).filter(r=>r.mode!=='dungeon'&&!r.dungeonId)};
+const v390PreviousScore=score;
+score=function(){return v390PreviousScore()+(data.dungeonWorld?.history||[]).reduce((sum,x)=>sum+(Number(x.xp)||0),0)};
+const v390OldDiverse=diverseRecipe;
+diverseRecipe=function(recipe,date,stock){const r=v390OldDiverse(recipe,date,stock),items={...r.items};const cats=['protein','carb','vegetable','fruit'];
+ const userItems=Object.entries(data.customIngredients||{}).filter(([k,v])=>ING[k]&&Number(stock[k])>0&&cats.includes(v.category));
+ if(!userItems.length)return r;
+ // Rotate across dates and meals, choosing a suitable category for the replaced ingredient.
+ const position=Math.abs(delta(date,'2025-01-01'))+(recipe.id==='dinner'?1:recipe.id==='lunch'?2:recipe.id==='snack'?3:0);
+ const preferred=userItems[position%userItems.length];const [k,meta]=preferred;
+ const replaceBy={protein:['chicken','egg','tofu','pork','salmon','tuna','soy'],carb:['rice','potato','pumpkin','oats','bread'],vegetable:['veg','pumpkin'],fruit:['apple','banana','orange']};
+ const candidates=replaceBy[meta.category]||[];const old=candidates.find(key=>items[key]>0);
+ const qty=meta.unit==='ชิ้น'||meta.unit==='ซอง'?1:Math.round(Math.min(200,Math.max(50,(items[old]||100)))/10)*10;
+ if(old&&stock[k]>=qty&&ING[k].kcal>0){delete items[old];items[k]=qty}
+ return {...r,items};
+};
+function v390GateWindow(){return Math.floor((Date.now()-new Date().getTimezoneOffset()*60000)/14400000)}
+function v390Seed(n){let z=(n|0)^0x6c8e9cf5;z=Math.imul(z^(z>>>16),0x7feb352d);z=Math.imul(z^(z>>>15),0x846ca68b);return (z^(z>>>16))>>>0}
+function v390Rank(){return lvl(score()).rank}
+function v390Gates(rank=v390Rank(),windowNum=v390GateWindow()){
+ const conf=V390_RANK_DATA[rank]||V390_RANK_DATA.E,seed=v390Seed(windowNum*19+V390_RANKS.indexOf(rank)*919),count=2+(seed%3),level=V390_RANKS.indexOf(rank);
+ const spots=[[22,30],[73,24],[27,73],[75,76]];
+ return Array.from({length:count},(_,i)=>{const n=v390Seed(seed+i*37+122);const difficulty=count>=3?(i+(seed%3))%3:(i===0?0:1+(seed%2));return {id:`${rank}_${windowNum}_${i}`,name:conf.names[((seed>>>6)+i)%conf.names.length],rank,window:windowNum,level,km:conf.base[difficulty],difficulty,description:['ง่าย','ปานกลาง','ยาก'][difficulty],xp:conf.xp[difficulty],x:spots[i][0],y:spots[i][1]};});
+}
+function v390NextReset(){const t=14400000-(Date.now()-new Date().getTimezoneOffset()*60000)%14400000;const h=Math.floor(t/3600000),m=Math.floor((t%3600000)/60000);return `${h} ชม. ${m} นาที`}
+function v390Clear(){const keepFrom=v390GateWindow()-9;for(const id of Object.keys(data.dungeonWorld.cleared||{})){const parts=id.split('_');if(Number(parts[1])<keepFrom)delete data.dungeonWorld.cleared[id]}}
+function v390WorldView(){v390Clear();const rank=v390Rank(),gates=v390Gates(),world=data.dungeonWorld,active=world.active;
+ const zones=V390_RANKS.map((r,i)=>{const locked=r!==rank,region=gates.length&&r===rank?gates:[];return `<section class="v390-region ${locked?'locked':'unlocked'}" aria-label="เขตแรงก์ ${r}${locked?' ยังไม่ปลดล็อก':''}" style="--zone:${i}">
+ <svg class="v390-terrain" viewBox="0 0 340 250" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="v390g${i}" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${i%2?'#174d55':'#26365f'}"/><stop offset="1" stop-color="#07111f"/></linearGradient></defs><path d="M0 65 Q55 14 95 55 T210 36 T340 60 V250 H0Z" fill="url(#v390g${i})"/><path d="M0 175 Q35 110 95 180 T200 125 T340 159" fill="none" stroke="#447c95" stroke-width="3" stroke-dasharray="8 6" opacity=".38"/><path d="M5 228L80 168L128 215L204 120L270 169L335 80" fill="none" stroke="#557e9d" stroke-width="2" opacity=".24"/><path d="M50 93L82 35L116 92Z M193 109L242 30L289 108Z" fill="#142b42" stroke="#52708b" stroke-opacity=".35"/></svg>
+ <span class="v390-region-name">${r}-RANK ${locked?'· ยังไม่ปลดล็อก':'· เขตปัจจุบัน'}</span>
+ ${locked?'<div class="v390-fog"><span>◈</span><strong>FOG OF WAR</strong><small>ไม่แสดงประตูแรงก์นี้</small></div>':`<span class="v390-you">✦ คุณอยู่ที่นี่</span>${region.map(g=>`<button class="v390-gate" style="left:${g.x}%;top:${g.y}%" data-v390-gate="${g.id}" ${world.cleared[g.id]||active?'disabled':''} aria-label="${esc(g.name)} ${g.description} ${g.km} กิโลเมตร"><span class="v390-gate-symbol">${world.cleared[g.id]?'✓':'◉'}</span><span class="v390-gate-label">${esc(g.name)}<small>${g.description} · ${g.km} กม. · +${g.xp} EXP</small></span></button>`).join('')}`}
+ </section>`}).join('');
+ const chestView=(world.chests||[]).map((ch,i)=>`<button class="v390-chest" data-v390-openchest="${esc(ch.id)}" aria-label="เปิดหีบรางวัลดันเจี้ยน"><span>▣</span> หีบสมบัติจาก ${esc(ch.name)} <small>แตะเปิดรับวัตถุดิบสำหรับคราฟต์</small></button>`).join('');
+ const mats=V390_LOOT.map(x=>`<span class="v390-mat">${x.icon} ${x.name} <b>${world.materials[x.id]||0}</b></span>`).join('');
+ const crafts=V390_CRAFT.map(x=>{const ready=Object.entries(x.need).every(([k,v])=>(world.materials[k]||0)>=v),owned=world.crafted.includes(x.id);return `<div class="v390-craft"><div><strong>${x.icon} ${x.name}</strong><small>${Object.entries(x.need).map(([k,v])=>`${V390_LOOT.find(m=>m.id===k).name} ${v}`).join(' · ')}</small></div><button data-v390-craft="${x.id}" class="ghostbutton" ${ready?'':'disabled'}>${owned?'สร้างอีกชิ้น':ready?'คราฟต์':'วัตถุดิบไม่พอ'}</button></div>`}).join('');
+ return `<div class="v390-world"><div class="v390-world-banner"><button class="v390-back" data-tab="dashboard">⌂ กลับหน้า Home</button><span>ASCENT · SHADOW WORLD</span><h2>WORLD OF THE HUNTER</h2><p>แผนที่ดันเจี้ยน MMORPG · หมอกดำปิดเขตที่ยังไม่ถึงแรงก์ · เปิด 2–4 ประตูทุก 4 ชั่วโมง</p><div class="v390-rank-summary"><strong>◈ ${rank}-RANK</strong><span>เหลือก่อนรีเซ็ต ${v390NextReset()}</span></div></div>
+ ${active?`<div class="v390-active"><strong>⚔ ดันเจี้ยนที่กำลังพิชิต: ${esc(active.name)}</strong><button class="primary" data-v390-resume>กลับไปยัง GPS</button></div>`:''}
+ <div class="v390-map" aria-label="แผนที่โลกดันเจี้ยนแสดงพื้นที่แบ่งตามแรงก์">${zones}</div>
+ <p class="v390-note">ดันเจี้ยนเป็นโบนัสและไม่รวมเข้ากับระยะเควสวิ่งรายวัน · ไม่มีปุ่มยืนยันการวิ่งเอง · ต้องใช้ GPS จริง · ระยะสูงในแรงก์สูงควรทำเมื่อเตรียมร่างกายพร้อม</p>
+ <section class="v390-loot"><h3>▣ MYSTERY LOOT CHEST</h3>${chestView||'<p class="v390-note">พิชิตดันเจี้ยนเพื่อปลดล็อกหีบสมบัติ</p>'}</section><section class="v390-loot"><h3>✦ คลังไอเทม & BLACKSMITH</h3><div class="v390-materials">${mats}</div><div class="v390-crafts">${crafts}</div><p class="v390-note">ไอเทมจากดันเจี้ยนเป็นของตกแต่งและความก้าวหน้าในเกม ไม่ใช่ตัวเพิ่มสมรรถภาพจริง</p></section>
+ <section class="v390-loot"><h3>◈ กล่องรางวัลที่ผ่านมา</h3>${world.history.length?world.history.slice(-5).reverse().map(x=>`<p class="v390-history">${esc(x.name)} · ${x.km} กม. · +${x.xp} EXP · ${esc(x.rewardName||'')}</p>`).join(''):'<p class="v390-note">ยังไม่เคยพิชิตดันเจี้ยน</p>'}</section></div>`;
+}
+const v390OldLayout=layout;
+layout=function(content){const markup=v390OldLayout(content);if(tab!=='dungeon')return markup;
+ // Reuse the native app shell and its existing nav handlers; replace only main content.
+ return markup.replace(/<header class="topbar">[\s\S]*?<\/header>/,`<header class="topbar"><div><div class="eyebrow">ASCENT / SHADOW WORLD</div><h1>ดันเจี้ยนโลกแห่งเงา</h1></div><div class="toptools"><button class="iconbtn" data-tab="dashboard" title="กลับหน้าแรก">⌂</button></div></header>`);
+};
+function v390EnsureNavigation(active){
+ const rail=document.querySelector('.v33-rail'),mob=document.querySelector('.v33-mobile-nav');
+ if(rail&&!rail.querySelector('[data-v390-page]')){const b=document.createElement('button');b.type='button';b.className='v33-link';b.dataset.v390Page='1';b.innerHTML='<span>◈</span>ดันเจี้ยน';(rail.querySelector('.v33-rail-foot')||rail.lastElementChild).before(b)}
+ const more=document.querySelector('.menu-options');if(more&&!more.querySelector('[data-v390-page]')){const b=document.createElement('button');b.type='button';b.dataset.v390Page='1';b.innerHTML='<span>◈</span>ดันเจี้ยน';more.append(b)}
+ if(active)document.querySelectorAll('.v33-link,.v33-mobile-nav button').forEach(el=>el.classList.toggle('active',el.hasAttribute('data-v390-page')));
+}
+const v390OldRender=render;
+render=function(){if(tab==='dungeon'){
+ if(runningGPS)return;
+ // Render a normal shell once, but inject the dedicated world screen into its content.
+ const prev=tab;tab='stats';v390OldRender();tab=prev;
+ const main=document.querySelector('main.content');if(main){const hdr=main.querySelector('.topbar');main.innerHTML=(hdr?hdr.outerHTML:'')+v390WorldView();const label=main.querySelector('.topbar h1');if(label)label.textContent='ดันเจี้ยนโลกแห่งเงา'}
+ v390EnsureNavigation(true);
+ document.title='ASCENT v3.9.0 · Shadow World';
+ return;
+ }
+ v390OldRender();
+ const shortcuts=document.querySelector('.v385-home')||document.querySelector('.v388-status')||document.querySelector('.v385-hero');
+ if(shortcuts&&!document.querySelector('#v390-home-gate')){const b=document.createElement('button');b.id='v390-home-gate';b.type='button';b.className='v390-home-entry';b.dataset.tab='dungeon';b.innerHTML='<span>◈</span><span><strong>SHADOW WORLD · DUNGEON</strong><small>สำรวจแผนที่ เปิดประตู และพิชิตด้วย GPS</small></span><span>↗</span>';shortcuts.insertAdjacentElement('afterend',b)}
+ v390EnsureNavigation(false);
+ document.title=document.title.replace(/3\.8\.\d/g,'3.9.0');
+};
+let v390GatePending=null,v390CountdownTimer=null;
+function v390Dialog(){let node=document.querySelector('#v390-overlay');if(!node){node=document.createElement('div');node.id='v390-overlay';node.className='v390-overlay';node.hidden=true;node.innerHTML='<div class="v390-dialog" role="dialog" aria-modal="true" aria-label="ยืนยันเข้าดันเจี้ยน"></div>';document.body.append(node)}return node}
+function v390OpenGate(id){if(gps.active||gps.elapsed>0||data.dungeonWorld.active){toast('กรุณาจบการวิ่งปัจจุบันก่อนรับดันเจี้ยนใหม่');return}const gate=v390Gates().find(g=>g.id===id);if(!gate||data.dungeonWorld.cleared[id]){toast('ประตูนี้ไม่พร้อมแล้ว กรุณารีเฟรชแผนที่');render();return}v390GatePending=gate;if(v386Panel&&!v386Close())return;const node=v390Dialog();node.hidden=false;node.querySelector('.v390-dialog').innerHTML=`<div class="v390-dialog-kicker">SHADOW GATE · ${gate.rank}-RANK</div><h2>${esc(gate.name)}</h2><div class="v390-dialog-km">${gate.km} <small>กม. GPS จริง</small></div><p>${gate.description} · พิชิตครั้งเดียวต่อประตู · +${gate.xp} EXP</p><p class="v390-note">หลังยืนยันจะนับถอยหลัง 5 วินาทีแล้วเริ่มจับ GPS · ระยะนี้ไม่รวมกับ Daily Quest · กดจบก่อนถึงระยะจะไม่ได้รางวัล</p><div class="v390-dialog-actions"><button class="ghostbutton" data-v390-cancel>ยกเลิก</button><button class="primary" data-v390-confirm>ยืนยันเข้าดันเจี้ยน</button></div>`}
+function v390CloseDialog(){if(v390CountdownTimer){clearInterval(v390CountdownTimer);v390CountdownTimer=null}v390GatePending=null;const node=v390Dialog();node.hidden=true}
+function v390ConfirmGate(){const gate=v390GatePending;if(!gate||gate.window!==v390GateWindow()||gate.rank!==v390Rank()){v390CloseDialog();toast('ประตูหมดเวลาแล้ว กรุณาเลือกประตูใหม่');return}const node=v390Dialog();let remaining=5;const box=node.querySelector('.v390-dialog');box.innerHTML=`<div class="v390-dialog-kicker">ENTERING DUNGEON</div><div class="v390-count" id="v390-count">5</div><p>เตรียมเปิด GPS เพื่อวิ่งพิชิต ${esc(gate.name)}</p><button class="ghostbutton" data-v390-cancel>ยกเลิก</button>`;v390CountdownTimer=setInterval(()=>{remaining--;const label=node.querySelector('#v390-count');if(label)label.textContent=String(remaining);if(remaining>0)return;clearInterval(v390CountdownTimer);v390CountdownTimer=null;node.hidden=true;v390GatePending=null;
+ if(gps.active||gps.elapsed>0){toast('มีการวิ่งอื่นที่ยังไม่จบ');return}
+ data.dungeonWorld.active={...gate,startedAt:Date.now(),date:localDate()};save();
+ gpsBegin(); // Native ForegroundService or secure browser geolocation; NEVER accept manual distance.
+ if(!gps.active&&!nativeStartWaiting){data.dungeonWorld.active=null;save();toast('ไม่สามารถเริ่ม GPS กรุณาตรวจสิทธิ์ตำแหน่ง');return}
+ gps.goal={...gate,kind:'วิ่ง',type:'run',sessionDate:localDate(),active:false,targetKm:gate.km,dungeon:true,dungeonId:gate.id};
+ try{localStorage.setItem(KEY+'_gps_goal',JSON.stringify(gps.goal))}catch{}
+ v34OpenRun();gpsUpdate();
+ },1000)}
+const v390OldCheck=gpsCheckGoal;
+gpsCheckGoal=function(){if(data.dungeonWorld?.active)return;v390OldCheck()};
+const v390OldGpsUI=gpsUI;
+gpsUI=function(){const current=data.dungeonWorld?.active;if(!current)return v390OldGpsUI();const elapsed=(gps.elapsed+(gps.active?Date.now()-gps.started:0))/60000,km=Math.max(0,Number(gps.km)||0),pct=Math.min(100,100*km/current.km);
+ return `<div class="v390-running-banner"><strong>⚔ ${esc(current.name)} · ${current.rank}-RANK</strong><small>${current.description} · รางวัล ${current.xp} EXP</small><div class="v390-meter"><span style="width:${pct}%"></span><i style="left:${Math.min(97,Math.max(0,pct))}%">🏃</i></div><b>${fmtNum(km,2)} / ${current.km} กม.</b><small>ระยะดันเจี้ยนนี้ไม่นับรวมภารกิจวิ่งรายวัน</small></div><div class="timer" id="gps-clock">${clockGPS()}</div><div class="timermetrics"><div><b>${fmtNum(km,2)}</b><small>กม. GPS</small></div><div><b>${km>.05?pace(km,elapsed):'—'}</b><small>เพซ</small></div><div><b>${gps.points}</b><small>GPS POINTS</small></div></div>${gps.autoPaused?'<p class="hint orange">GPS หยุดชั่วคราว</p>':''}<div class="controls" id="gps-controls">${gps.active?'<button class="ghostbutton" data-action="gps-pause">⏸ พัก</button><button class="primary" data-action="gps-finish">■ จบการพิชิต</button>':gps.elapsed>0?'<button class="ghostbutton" data-action="gps-resume">▶ วิ่งต่อ</button><button class="primary" data-action="gps-finish">■ จบการพิชิต</button>':'<button class="primary" data-action="gps-start">◎ เริ่ม GPS อีกครั้ง</button>'}</div>${gps.error?`<p class="hint orange">${esc(gps.error)}</p>`:''}`;
+};
+const v390OldGpsBegin=gpsBegin;
+gpsBegin=function(){const session=data.dungeonWorld?.active;v390OldGpsBegin();if(session){gps.goal={...session,kind:'วิ่ง',type:'run',sessionDate:session.date,active:false,targetKm:session.km,dungeon:true,dungeonId:session.id};try{localStorage.setItem(KEY+'_gps_goal',JSON.stringify(gps.goal))}catch{}}};
+const v390OldGpsFinish=gpsFinish;
+gpsFinish=function(){const active=data.dungeonWorld?.active;if(!active)return v390OldGpsFinish();
+ if(window.AscentNative?.getRunState)nativeGPSRead();
+ const snapshot={km:Math.round((Number(gps.km)||0)*100)/100,minutes:Math.round((gps.elapsed+(gps.active?Date.now()-gps.started:0))/6000)/10,points:gps.points,route:(gps.route||[]).slice(-2400)};
+ if(window.AscentNative?.finishRun){nativeFinishPendingUntil=Date.now()+1800;window.AscentNative.finishRun();gps.active=false;gps.started=0}else gpsPause();
+ const proof=snapshot.km>=.05&&snapshot.minutes>=1&&snapshot.points>=3;
+ const success=proof&&snapshot.km>=active.km&&snapshot.minutes>=snapshot.km/18*60&&active.rank===v390Rank()&&!data.dungeonWorld.cleared[active.id];
+ const reward=V390_LOOT[v390Seed(active.window*7+active.level*11+active.difficulty*3+Number(active.id.split('_').at(-1)))%V390_LOOT.length],count=success?1+active.difficulty:0;
+ const date=active.date||localDate();
+ if(proof){commit(()=>{const d=dayWrite(date);d.runs.push({id:globalThis.crypto?.randomUUID?.()||String(Date.now()),source:'gps',mode:'dungeon',dungeonId:active.id,type:'run',km:snapshot.km,minutes:snapshot.minutes,points:snapshot.points,goalKm:active.km,goalCompleted:false,calories:runCalories(snapshot.km,'run'),route:snapshot.route});
+ if(success){data.dungeonWorld.cleared[active.id]=Date.now();data.dungeonWorld.chests.push({id:active.id,name:active.name,rank:active.rank,seed:v390Seed(active.window*7+active.difficulty*3+active.level*11+Number(active.id.split('_').at(-1))),createdAt:Date.now()});data.dungeonWorld.history.push({id:active.id,name:active.name,km:snapshot.km,xp:active.xp,rank:active.rank,claimedAt:Date.now(),rewardName:'หีบรางวัล ×1 (ยังไม่เปิด)'});}
+ data.dungeonWorld.active=null},success?`พิชิตดันเจี้ยน! +${active.xp} EXP · ได้รับหีบรางวัล ×1`:`บันทึก GPS ดันเจี้ยน ${snapshot.km} กม. · ยังไม่ผ่านเป้าหมาย`)}
+ else{data.dungeonWorld.active=null;save();toast('ไม่พบ GPS ที่ตรวจสอบได้เพียงพอ ไม่ได้รับรางวัล')}
+ gpsReset();if(v34RunModalOpen)v34OpenRun();if(tab==='dungeon')render();
+};
+// Data fields are reloaded automatically after JavaScript restarts; never fabricate GPS proof.
+// Any session start with no valid GPS data is not rewarded.
+document.addEventListener('click',e=>{const t=e.target.closest('[data-v390-page],[data-v390-gate],[data-v390-confirm],[data-v390-cancel],[data-v390-resume],[data-v390-craft],[data-v390-openchest]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();
+ if(t.hasAttribute('data-v390-page')){if(!v386Close())return;tab='dungeon';render();window.scrollTo(0,0);return}
+ if(t.hasAttribute('data-v390-gate'))return v390OpenGate(t.dataset.v390Gate);
+ if(t.hasAttribute('data-v390-cancel'))return v390CloseDialog();
+ if(t.hasAttribute('data-v390-confirm'))return v390ConfirmGate();
+ if(t.hasAttribute('data-v390-resume'))return v34OpenRun();
+ if(t.hasAttribute('data-v390-openchest')){const idx=data.dungeonWorld.chests.findIndex(x=>x.id===t.dataset.v390Openchest);if(idx<0)return;const chest=data.dungeonWorld.chests[idx];const rare=V390_LOOT[chest.seed%V390_LOOT.length],count=1+chest.seed%3+(V390_RANKS.indexOf(chest.rank)||0);commit(()=>{data.dungeonWorld.chests.splice(idx,1);data.dungeonWorld.materials[rare.id]=(data.dungeonWorld.materials[rare.id]||0)+count;const h=data.dungeonWorld.history.find(x=>x.id===chest.id);if(h)h.rewardName=rare.name+' ×'+count},'เปิดหีบได้ '+rare.name+' ×'+count);return}
+ if(t.hasAttribute('data-v390-craft')){const recipe=V390_CRAFT.find(x=>x.id===t.dataset.v390Craft);if(!recipe||!Object.entries(recipe.need).every(([k,q])=>(data.dungeonWorld.materials[k]||0)>=q))return toast('วัตถุดิบไม่เพียงพอ');commit(()=>{for(const [k,q] of Object.entries(recipe.need))data.dungeonWorld.materials[k]-=q;data.dungeonWorld.crafted.push(recipe.id)},'คราฟต์ '+recipe.name+' สำเร็จ');return}
+},true);
+document.addEventListener('click',e=>{if(e.target?.id==='v390-overlay')v390CloseDialog()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!v390Dialog().hidden){e.stopImmediatePropagation();v390CloseDialog()}},true);
+
+// Custom food library: user-owned entries are normal ING members, available to stock & meal planning.
+function v390FoodCategory(food){if(food.category)return food.category;if(Number(food.sugar)*100>12)return'snack';if(Number(food.p)*100>=12)return'protein';if(Number(food.carb)*100>=18)return'carb';return'vegetable'}
+function v390AddIngredient(name,{unit='กรัม',kcal,p,carb,fat,sugar=0,category=''}={}){
+ const clean=String(name||'').trim().slice(0,70);const nums=[kcal,p,carb,fat,sugar].map(Number);
+ if(!clean||nums.some(n=>!Number.isFinite(n)||n<0)||nums[0]<=0||nums[0]>950||nums.slice(1).some(n=>n>100))throw Error('ข้อมูลโภชนาการต่อหน่วยไม่สมบูรณ์');
+ const key='usr_'+Date.now().toString(36)+'_'+Math.floor(Math.random()*100000).toString(36);
+ const f={name:clean,unit,kcal:nums[0],p:nums[1],carb:nums[2],fat:nums[3],sugar:nums[4],category:v390FoodCategory({p:nums[1],carb:nums[2],sugar:nums[4],category})};
+ data.customIngredients[key]=f;ING[key]=f;data.inventory[key]=0; // Unknown purchase amount must not be invented; user can set stock later.
+ v383Draft=null;v383Touched.clear();v383Dirty=false;save();rescheduleNative();return key;
+}
+let v390FoodMode='stock';
+const v390OldPantry=pantryView;
+pantryView=function(){return `<section class="v390-customfoods"><div><strong>＋ เพิ่มวัตถุดิบเอง / อ่านฉลากโภชนาการ</strong><small>อาหารที่เพิ่มจะเข้าคลัง และสามารถนำไปคละในแผนอาหารได้</small></div><button class="primary" data-v390-food-open>＋ เพิ่มอาหาร</button></section>`+v390OldPantry()};
+function v390FoodModal(){let root=document.querySelector('#v390-food-modal');if(!root){root=document.createElement('div');root.id='v390-food-modal';root.className='v390-overlay';root.hidden=true;root.innerHTML=`<section class="v390-dialog v390-food-dialog" role="dialog" aria-modal="true" aria-label="เพิ่มวัตถุดิบและสแกนฉลาก"><div class="row between"><h3>＋ เพิ่มอาหารเข้าคลัง</h3><button class="ghostbutton" data-v390-food-close>✕</button></div><p>ถ่ายภาพฉลากโภชนาการให้เห็นตัวเลขชัด ๆ ระบบอ่านอัตโนมัติ จากนั้นตั้งชื่ออาหารแล้วบันทึก</p><label class="v390-photo-button">📷 ถ่ายฉลาก / เลือกรูป<input type="file" accept="image/*" capture="environment" id="v390-label-file" hidden></label><div class="v390-ocr-state" id="v390-ocr-state">ยังไม่ได้เลือกภาพ · Android APK รองรับ OCR บนอุปกรณ์</div><form id="v390-food-save"><label class="field">ชื่ออาหาร (กรอกเพียงช่องเดียวเมื่ออ่านภาพสำเร็จ)<input name="name" id="v390-food-name" required maxlength="70" placeholder="เช่น ฟองเต้าหู้ม้วน"></label><div id="v390-ocr-values"></div><button class="primary full" type="submit" disabled id="v390-food-submit">บันทึกอาหารอัตโนมัติ</button></form><details class="v390-manual"><summary>ไม่มีฉลาก? เพิ่มวัตถุดิบด้วยตัวเอง</summary><div class="form-grid"><label class="field">kcal ต่อ 100 กรัม<input id="v390-manual-kcal" type="number" min="1" max="950" step="0.1"></label><label class="field">โปรตีน (กรัม)<input id="v390-manual-p" type="number" min="0" max="100" step="0.1"></label><label class="field">คาร์บ (กรัม)<input id="v390-manual-c" type="number" min="0" max="100" step="0.1"></label><label class="field">ไขมัน (กรัม)<input id="v390-manual-f" type="number" min="0" max="100" step="0.1"></label><label class="field">ประเภทเพื่อจัดเมนู<select id="v390-manual-category"><option value="protein">โปรตีน</option><option value="carb">ข้าว / แป้ง</option><option value="vegetable">ผัก</option><option value="fruit">ผลไม้</option><option value="snack">ขนม / อื่น ๆ</option></select></label></div><button class="ghostbutton" data-v390-manual-save type="button">บันทึกวัตถุดิบที่กรอก</button></details><p class="v390-note">อ่านด้วย OCR บนอุปกรณ์ ไม่ส่งรูปไปเซิร์ฟเวอร์ · อ่านฉลากไม่ครบหรือไม่แน่ใจจะไม่เดาค่าสารอาหาร · ภาพฉลากต่อ 100 กรัมจะถูกใช้โดยตรง (ต่อหนึ่งหน่วยบริโภคจะไม่แปลงเป็น 100 กรัมหากไม่รู้ขนาดหน่วย)</p></section>`;document.body.append(root)}return root}
+let v390OcrResult=null;
+function v390OpenFood(mode='stock'){if(v386Panel&&!v386Close())return;v390FoodMode=mode;document.getElementById('v380-snack-modal')?.classList.remove('open');v390OcrResult=null;const node=v390FoodModal();node.hidden=false;node.querySelector('#v390-ocr-state').textContent='ถ่ายฉลากโภชนาการให้ตัวหนังสือชัดเจน';node.querySelector('#v390-food-submit').disabled=true;node.querySelector('#v390-ocr-values').innerHTML='';}
+function v390OcrValue(text,re){const m=text.match(re);if(!m)return null;const v=Number((m[1]||'').replace(',','.'));return Number.isFinite(v)&&v>=0?v:null}
+function v390ParseLabel(raw){const text=String(raw||'').replace(/[\u00a0\t]/g,' ').replace(/,/g,'.');
+ // Each line can put numeric values before or after labels. OCR formats differ; never invent missing values.
+ const lines=text.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);const find=(aliases)=>{for(let i=0;i<lines.length;i++){
+   const line=lines[i],hit=aliases.map(re=>re.exec(line)).find(Boolean);if(!hit)continue;
+   // Prefer the first number AFTER the nutrient label, not the number 100 in "per 100 g" header.
+   const after=line.slice(hit.index+hit[0].length);
+   const m=after.match(/(\d+(?:\.\d+)?)\s*(?:kcal|กิโลแคลอรี|ก\.?|กรัม|g)?/i);if(m)return Number(m[1]);
+   // OCR may put the value on the following row.
+   if(i+1<lines.length&&/^\s*\d+(?:\.\d+)?/.test(lines[i+1]))return Number(lines[i+1].match(/\d+(?:\.\d+)?/)[0]);
+ }return null};
+ const kcal=find([/\bcalories\b/i,/พลังงาน/,/energy/i]);let p=find([/โปรตีน/,/\bprotein\b/i]);let carb=find([/คาร์โบไฮเดรต/,/\bcarbohydrate/i,/\bcarbs\b/i]);let fat=find([/ไขมันทั้งหมด/,/\btotal fat\b/i,/^ไขมัน\s/i,/^fat\b/i]);let sugar=find([/น้ำตาล/,/\bsugars?\b/i]);
+ const per100=/(ต่อ\s*100\s*(?:กรัม|ก\.|g)|per\s*100\s*g|100\s*g(?:rams?)?\s*(?:serving|portion)?)/i.test(text);
+ const servingText=lines.find(x=>/(?:หนึ่งหน่วยบริโภค|ขนาดหน่วยบริโภค|serving size|portion size)/i.test(x))||'';
+ const sizeHits=[...servingText.matchAll(/(\d+(?:\.\d+)?)\s*(กรัม|g|ml|มล\.)/gi)];
+ const serving=sizeHits.length?sizeHits[sizeHits.length-1]:null;
+ // Per-serving OCR only converts when the printed mass is explicit and unambiguous.
+ const grams=per100?100:serving?Number(serving[1]):null;
+ const enough=[kcal,p,carb,fat].every(x=>Number.isFinite(x))&&grams>0&&grams<=1000&&kcal>=0&&kcal<=950*grams/100+50;
+ if(!enough)return {ok:false,reason:'อ่านค่าพลังงาน โปรตีน คาร์บ ไขมัน หรือขนาดหน่วยบริโภคไม่ครบ กรุณาถ่ายฉลากใหม่ให้ชัดขึ้น',preview:text.slice(0,500)};
+ const factor=100/grams;return {ok:true,values:{kcal:Math.round(kcal*factor*10)/10,p:Math.round(p*factor*10)/10,carb:Math.round(carb*factor*10)/10,fat:Math.round(fat*factor*10)/10,sugar:sugar==null?0:Math.round(sugar*factor*10)/10},sugarUnknown:sugar==null,base:grams,unit:serving&&/(?:ml|มล)/i.test(serving[2])?'มล.':'กรัม',preview:text.slice(0,240)};
+}
+window.ascentNutritionOcrResult=function(json){let payload;try{payload=JSON.parse(json)}catch{return};const panel=v390FoodModal(),status=panel.querySelector('#v390-ocr-state'),submit=panel.querySelector('#v390-food-submit'),out=panel.querySelector('#v390-ocr-values');
+ if(!payload.ok){v390OcrResult=null;status.textContent='อ่านฉลากไม่สำเร็จ: '+String(payload.error||'ภาพไม่ชัด');submit.disabled=true;return}
+ const parsed=v390ParseLabel(payload.text);v390OcrResult=parsed.ok?parsed:null;
+ if(!parsed.ok){status.textContent=parsed.reason;out.textContent='ข้อความบางส่วนจากภาพ: '+parsed.preview;submit.disabled=true;return}
+ status.textContent='✓ OCR อ่านฉลากสำเร็จ · ตรวจข้อมูลจากซองก่อนกิน';out.innerHTML=`<div class="v390-values"><b>${parsed.values.kcal} kcal / 100 กรัม</b><span>โปรตีน ${parsed.values.p} ก. · คาร์บ ${parsed.values.carb} ก. · ไขมัน ${parsed.values.fat} ก.</span>${parsed.sugarUnknown?'<small>ไม่พบน้ำตาลบนฉลาก จะไม่ใช้ค่า 0 เพื่อบอกว่าปลอดภัย</small>':''}</div>`;submit.disabled=false;
+};
+document.addEventListener('change',e=>{if(e.target?.id!=='v390-label-file')return;const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')||file.size>5_000_000){toast('เลือกภาพ JPG/PNG ขนาดไม่เกิน 5MB');return}const node=v390FoodModal();node.querySelector('#v390-ocr-state').textContent='กำลังอ่านฉลากจากภาพ...';const reader=new FileReader();reader.onload=()=>{
+ if(window.AscentNative?.recognizeNutritionImage){window.AscentNative.recognizeNutritionImage(String(reader.result))}
+ else window.ascentNutritionOcrResult(JSON.stringify({ok:false,error:'OCR ใช้ได้เมื่อ Build เป็น ASCENT Android APK v3.9.0 เท่านั้น'}));
+ };reader.readAsDataURL(file);
+},true);
+document.addEventListener('submit',e=>{if(e.target?.id!=='v390-food-save')return;e.preventDefault();e.stopImmediatePropagation();const name=String(new FormData(e.target).get('name')||'').trim();if(!v390OcrResult?.ok){toast('ต้องอ่านฉลากให้ครบก่อนบันทึก');return}try{const key=v390AddIngredient(name,{...v390OcrResult.values,unit:v390OcrResult.unit,category:v390FoodMode==='snack'?'snack':''});if(v390FoodMode==='snack'){const size=v390OcrResult.base;const f=ING[key];dayWrite(localDate()).custom.push({id:globalThis.crypto?.randomUUID?.()||String(Date.now()),name:f.name,kcal:Math.round(f.kcal*size),protein:pctNum(f.p*size),carb:pctNum(f.carb*size),fat:pctNum(f.fat*size),sugar:v390OcrResult.sugarUnknown?null:pctNum(f.sugar*size),sugarUnknown:!!v390OcrResult.sugarUnknown,source:'snack-scanned'});save()}v390FoodModal().hidden=true;render();toast(v390FoodMode==='snack'?'✓ บันทึกขนม 1 หน่วยบริโภคจากฉลากแล้ว (หากกินทั้งซองหลายหน่วย ให้บันทึกเพิ่มตามจริง)':'✓ เพิ่ม '+ING[key].name+' ในรายการอาหารแล้ว (ยังไม่ระบุจำนวนในคลัง)')}catch(err){toast(err.message)}},true);
+document.addEventListener('click',e=>{const el=e.target.closest('[data-v390-food-open],[data-v390-food-close],[data-v390-manual-save]');if(!el)return;e.preventDefault();e.stopImmediatePropagation();if(el.hasAttribute('data-v390-food-open'))return v390OpenFood(el.getAttribute('data-v390-food-open')||'stock');if(el.hasAttribute('data-v390-food-close')){v390FoodModal().hidden=true;return}
+ const modal=v390FoodModal(),get=id=>Number(modal.querySelector(id)?.value);const name=modal.querySelector('#v390-food-name')?.value;
+ try{const key=v390AddIngredient(name,{kcal:get('#v390-manual-kcal'),p:get('#v390-manual-p'),carb:get('#v390-manual-c'),fat:get('#v390-manual-f'),sugar:0,category:modal.querySelector('#v390-manual-category').value});modal.hidden=true;render();toast('เพิ่ม '+ING[key].name+' แล้ว · ระบุจำนวนในคลังเพื่อให้ระบบจัดเมนู')}
+ catch(err){toast(err.message)}
+},true);
+// Correct the manual entry range: stored custom ingredients are per gram; scanned values are per 100 grams.
+const v390OldAddIngredient=v390AddIngredient;
+v390AddIngredient=function(name,opts){const o={...opts};if(o.per100||['กรัม','มล.'].includes(o.unit)){for(const k of ['kcal','p','carb','fat','sugar'])o[k]=(Number(o[k])||0)/100;}return v390OldAddIngredient(name,o)};
+// One-tap scan from the snack quick log: user only names the product after OCR.
+const v390OldSnackOpen=v380OpenSnack;
+v380OpenSnack=function(){v390OldSnackOpen();const form=document.querySelector('#v380-snack-modal .v380-dialog');if(form&&!form.querySelector('[data-v390-food-open]')){const btn=document.createElement('button');btn.type='button';btn.className='v390-scan-snack';btn.dataset.v390FoodOpen='snack';btn.textContent='📷 ถ่ายฉลาก → อ่านและบันทึกขนมอัตโนมัติ';form.querySelector('form')?.before(btn)}};
+// Keep dungeon and food dialogs independent from the homepage modal hierarchy.
+const v390OldRunOpen=v34OpenRun;
+v34OpenRun=function(){v390FoodModal().hidden=true;v390Dialog().hidden=true;v390OldRunOpen()};
+// Start previously interrupted dungeon only when the GPS foreground service has session data.
+if(data.dungeonWorld.active){try{const native=window.AscentNative?.getRunState&&JSON.parse(window.AscentNative.getRunState());if(!native||!native.active&&!native.elapsed){data.dungeonWorld.active=null;save()}else{gps.goal={...data.dungeonWorld.active,kind:'วิ่ง',type:'run',sessionDate:data.dungeonWorld.active.date,active:false,targetKm:data.dungeonWorld.active.km,dungeon:true,dungeonId:data.dungeonWorld.active.id}}}catch{data.dungeonWorld.active=null;save()}}
+
+const v390OldCategoryOf=v383CategoryOf;
+v383CategoryOf=function(k){const cat=data.customIngredients?.[k]?.category||ING[k]?.category;if(cat)return cat==='vegetable'||cat==='fruit'?'produce':cat;return v390OldCategoryOf(k)};
+// Custom food recipe order must never include packaged sweets by default (category snack).
 
 render();rescheduleNative();document.addEventListener('visibilitychange',()=>{if(!document.hidden){nativeGPSReadIfPresent();window.ascentWidgetSync?.();lastCheck=Date.now()-60000;render();rescheduleNative()}});
 if('serviceWorker' in navigator && location.protocol!=='file:')window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));

@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
  public class Bridge {
   @JavascriptInterface public void scheduleReminders(String json){runOnUiThread(()->NativeScheduler.schedule(MainActivity.this,json));}
   @JavascriptInterface public void updateWidget(String json){runOnUiThread(()->{NativeScheduler.prefs(MainActivity.this).edit().putString("widget",json).apply();QuestWidget.refresh(MainActivity.this);});}
-  /** Diagnostic from the actual installed native APK, not the web UI version. */
+  /** Live native diagnostics: a request being accepted is NOT proof of placement. */
   @JavascriptInterface public String widgetStatus(){
     org.json.JSONObject result=new org.json.JSONObject();
     try{
@@ -66,19 +66,34 @@ public class MainActivity extends Activity {
       for(AppWidgetProviderInfo info:manager.getInstalledProviders()){
         if(component.equals(info.provider)){registered=true;break;}
       }
+      int[] installedIds=manager.getAppWidgetIds(component);
       android.content.pm.PackageInfo pkg=getPackageManager().getPackageInfo(getPackageName(),0);
       long version=Build.VERSION.SDK_INT>=28?pkg.getLongVersionCode():pkg.versionCode;
+      android.content.SharedPreferences prefs=NativeScheduler.prefs(MainActivity.this);
       result.put("native",true);
       result.put("version",pkg.versionName);
       result.put("versionCode",version);
       result.put("registered",registered);
-      result.put("pinned",manager.getAppWidgetIds(component).length);
-      result.put("pinSupported",manager.isRequestPinAppWidgetSupported());
-    }catch(Exception ex){try{result.put("error",ex.getClass().getSimpleName());}catch(Exception ignored){}}
+      result.put("pinned",installedIds.length);
+      result.put("pinSupported",Build.VERSION.SDK_INT>=26&&manager.isRequestPinAppWidgetSupported());
+      result.put("pinState",prefs.getString("widget_pin_state","never"));
+      result.put("pinResultId",prefs.getInt("widget_pin_result_id",-1));
+      result.put("pinError",prefs.getString("widget_pin_error",""));
+      long requestedAt=prefs.getLong("widget_pin_requested_at",0);
+      result.put("pinAgeSeconds",requestedAt>0?Math.max(0,(System.currentTimeMillis()-requestedAt)/1000):0);
+      try{
+        Intent home=new Intent(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_HOME);
+        android.content.pm.ResolveInfo launcher=getPackageManager().resolveActivity(home,PackageManager.MATCH_DEFAULT_ONLY);
+        result.put("launcher",launcher!=null&&launcher.activityInfo!=null?launcher.activityInfo.packageName:"unknown");
+      }catch(Exception ignored){result.put("launcher","unknown");}
+    }catch(Exception ex){
+      try{result.put("error",ex.getClass().getSimpleName()+": "+ex.getMessage());}catch(Exception ignored){}
+    }
     return result.toString();
   }
-  /** Request the system launcher to add our provider; a returned true is not proof it was pinned. */
+  /** Request Xiaomi/Android placement; report actual result via WidgetPinResultReceiver. */
   @JavascriptInterface public void pinWidget(){runOnUiThread(()->{
+    android.content.SharedPreferences prefs=NativeScheduler.prefs(MainActivity.this);
     try{
       AppWidgetManager manager=AppWidgetManager.getInstance(MainActivity.this);
       ComponentName provider=new ComponentName(MainActivity.this,QuestWidget.class);
@@ -87,24 +102,56 @@ public class MainActivity extends Activity {
         if(provider.equals(info.provider)){registered=true;break;}
       }
       if(!registered){
-        new AlertDialog.Builder(MainActivity.this).setTitle("ยังไม่พบวิดเจ็ต ASCENT ใน Android")
-          .setMessage("แอปที่ติดตั้งอาจเป็น APK รุ่นเก่า หรือ Launcher ยังไม่โหลดวิดเจ็ตใหม่ กรุณาติดตั้ง APK ที่ Build จาก v3.8.8 แล้วเปิดแอปหนึ่งครั้ง หากยังไม่พบให้รีสตาร์ตมือถือ")
+        prefs.edit().putString("widget_pin_state","unregistered").apply();
+        new AlertDialog.Builder(MainActivity.this).setTitle("Android ไม่พบวิดเจ็ต ASCENT")
+          .setMessage("APK ที่ติดตั้งยังไม่มีวิดเจ็ตที่ลงทะเบียนถูกต้อง กรุณาตรวจว่าเป็น APK v3.8.9 (build 18) ที่ Build จากโปรเจกต์นี้ ไม่ใช่เวอร์ชันเว็บ")
           .setPositiveButton("ตกลง",null).show();return;
       }
-      if(manager.isRequestPinAppWidgetSupported()){
-        if(manager.requestPinAppWidget(provider,null,null))return;
+      if(Build.VERSION.SDK_INT>=26&&manager.isRequestPinAppWidgetSupported()){
+        Intent callback=new Intent(MainActivity.this,WidgetPinResultReceiver.class).setAction("com.ascent.quest.WIDGET_PIN_CONFIRMED");
+        PendingIntent success=PendingIntent.getBroadcast(MainActivity.this,987,callback,
+          PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
+        prefs.edit().putString("widget_pin_state","requested")
+          .putLong("widget_pin_requested_at",System.currentTimeMillis())
+          .remove("widget_pin_error").remove("widget_pin_result_id").apply();
+        if(manager.requestPinAppWidget(provider,null,success)){
+          android.widget.Toast.makeText(MainActivity.this,"ส่งคำขอแล้ว โปรดยืนยันการเพิ่มวิดเจ็ต และกลับมาตรวจสถานะ",android.widget.Toast.LENGTH_LONG).show();
+          return;
+        }
       }
-      new AlertDialog.Builder(MainActivity.this).setTitle("เพิ่มวิดเจ็ตผ่านหน้าจอหลัก")
-        .setMessage("Launcher ไม่รองรับการเพิ่มวิดเจ็ตจากแอปโดยตรง\n\nXiaomi/HyperOS: แตะค้างพื้นที่ว่างหน้าจอหลัก → วิดเจ็ต → เลื่อนหา Android widgets / วิดเจ็ตจากแอป → ASCENT Fitness RPG\n\nหากไม่พบให้ลองปลด App Lock ของ ASCENT แล้วรีสตาร์ตเครื่อง")
+      prefs.edit().putString("widget_pin_state","unsupported").apply();
+      new AlertDialog.Builder(MainActivity.this).setTitle("Launcher ไม่รองรับการเพิ่มอัตโนมัติ")
+        .setMessage("ให้เพิ่มด้วยตนเอง: แตะค้างบนหน้าจอหลัก → วิดเจ็ต → เข้าเมนู Android widgets / วิดเจ็ต Android หรือหมวดวิดเจ็ตจากแอป → ASCENT Fitness RPG\n\nช่องค้นหาวิดเจ็ตแนะนำของ Xiaomi อาจไม่แสดงแอปภายนอก")
         .setPositiveButton("ตกลง",null).show();
     }catch(Exception ex){
+      prefs.edit().putString("widget_pin_state","error")
+        .putString("widget_pin_error",ex.getClass().getSimpleName()+": "+ex.getMessage()).apply();
       android.util.Log.e("ASCENT","pin widget failed",ex);
       new AlertDialog.Builder(MainActivity.this).setTitle("เพิ่มวิดเจ็ตไม่ได้")
-        .setMessage("เกิดข้อผิดพลาดจาก Android Launcher: "+ex.getClass().getSimpleName())
+        .setMessage("Android Launcher ตอบกลับข้อผิดพลาด: "+ex.getClass().getSimpleName())
         .setPositiveButton("ตกลง",null).show();
     }
   });}
 
+  /** Offline on-device ML Kit text recognition for nutrition labels. Never uploads the photo. */
+  @JavascriptInterface public void recognizeNutritionImage(String dataUri){
+    new Thread(()->{
+      try{
+        if(dataUri==null || dataUri.length()>7_500_000)throw new IOException("image too large");
+        int comma=dataUri.indexOf(',');if(comma<0||!dataUri.substring(0,comma).startsWith("data:image/"))throw new IOException("not an image");
+        byte[] content=android.util.Base64.decode(dataUri.substring(comma+1),android.util.Base64.DEFAULT);
+        if(content.length>5_000_000)throw new IOException("image too large");
+        android.graphics.Bitmap bitmap=android.graphics.BitmapFactory.decodeByteArray(content,0,content.length);
+        if(bitmap==null)throw new IOException("invalid image");
+        com.google.mlkit.vision.common.InputImage image=com.google.mlkit.vision.common.InputImage.fromBitmap(bitmap,0);
+        com.google.mlkit.vision.text.TextRecognizer recognizer=com.google.mlkit.vision.text.TextRecognition.getClient(com.google.mlkit.vision.text.latin.TextRecognizerOptions.DEFAULT_OPTIONS);
+        recognizer.process(image).addOnSuccessListener(result->{
+          try{org.json.JSONObject payload=new org.json.JSONObject();payload.put("ok",true);payload.put("text",result.getText());sendNutritionOcr(payload);}catch(Exception ignored){}
+          bitmap.recycle();recognizer.close();
+        }).addOnFailureListener(error->{sendNutritionOcrError(error.getMessage());bitmap.recycle();recognizer.close();});
+      }catch(Exception ex){sendNutritionOcrError(ex.getMessage());}
+    }).start();
+  }
   @JavascriptInterface public void openHealthPermissions(){runOnUiThread(()->HealthConnectBridge.permissions(MainActivity.this));}
   @JavascriptInterface public void readHealthConnect(){runOnUiThread(()->HealthConnectBridge.read(MainActivity.this));}
   @JavascriptInterface public void requestPermission(){runOnUiThread(()->{if(Build.VERSION.SDK_INT>=33&&checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED)requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},PERMISSION_NOTIFICATION);});}
@@ -147,10 +194,12 @@ public class MainActivity extends Activity {
    p.edit().putInt("pending_widget_water",0).apply();return amount;
   }
  }
+ void sendNutritionOcr(org.json.JSONObject payload){if(web!=null)web.post(()->web.evaluateJavascript("window.ascentNutritionOcrResult&&window.ascentNutritionOcrResult("+org.json.JSONObject.quote(payload.toString())+")",null));}
+ void sendNutritionOcrError(String message){try{org.json.JSONObject out=new org.json.JSONObject();out.put("ok",false);out.put("error",message==null?"OCR failed":message);sendNutritionOcr(out);}catch(Exception ignored){}}
  void runError(String message){if(web==null)return;web.post(()->web.evaluateJavascript("window.ascentNativeRunError&&window.ascentNativeRunError("+org.json.JSONObject.quote(message)+")",null));}
  void startRunService(){try{startForegroundService(new Intent(this,RunService.class).setAction("START"));}catch(Exception ex){android.util.Log.e("ASCENT","run start",ex);runError("ไม่สามารถเปิดบริการ GPS: "+ex.getMessage());}}
  @Override public void onRequestPermissionsResult(int request,String[] permissions,int[] grants){super.onRequestPermissionsResult(request,permissions,grants);if(request==PERMISSION_LOCATION){if(grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)startRunService();else runError("ยังไม่ได้อนุญาตตำแหน่ง GPS กรุณาให้สิทธิ์ตำแหน่งแบบแม่นยำ");}if(request==PERMISSION_CAMERA&&pendingCameraRequest!=null){PermissionRequest pr=pendingCameraRequest;pendingCameraRequest=null;if(grants.length>0&&grants[0]==PackageManager.PERMISSION_GRANTED)pr.grant(new String[]{PermissionRequest.RESOURCE_VIDEO_CAPTURE});else pr.deny();}}
- @Override protected void onResume(){super.onResume();if(web!=null)web.postDelayed(()->web.evaluateJavascript("window.ascentWidgetSync&&window.ascentWidgetSync()",null),400);}
+ @Override protected void onResume(){super.onResume();if(web!=null)web.postDelayed(()->web.evaluateJavascript("window.ascentWidgetSync&&window.ascentWidgetSync();window.ascentWidgetRefreshIfOpen&&window.ascentWidgetRefreshIfOpen()",null),400);}
  @Override protected void onActivityResult(int request,int result,Intent info){super.onActivityResult(request,result,info);
    if(request==BACKUP_CREATE){String json=pendingBackup;pendingBackup=null;
     if(result==RESULT_OK&&info!=null&&info.getData()!=null&&json!=null){

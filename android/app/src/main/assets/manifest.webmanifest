@@ -1,8 +1,8 @@
 {
   "id": "./",
-  "name": "ASCENT Fitness Quest RPG 3.8.8",
+  "name": "ASCENT Fitness Quest RPG 3.9.0",
   "short_name": "ASCENT",
-  "description": "ASCENT v3.8.8 Black Flame — Hunter Status, Daily Quest, Android Widget",
+  "description": "ASCENT v3.9.0 Black Flame — Hunter Status, Daily Quest, Shadow Dungeon, Loot and Food OCR",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

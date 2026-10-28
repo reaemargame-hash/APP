@@ -7,8 +7,8 @@ android {
         applicationId 'com.ascent.quest'
         minSdk 26
         targetSdk 34
-        versionCode 17
-        versionName '3.8.8'
+        versionCode 19
+        versionName '3.9.0'
     }
     signingConfigs {
         ascentRelease {
@@ -34,4 +34,6 @@ android {
     }
 }
 
-dependencies { implementation 'androidx.webkit:webkit:1.12.1' }
+dependencies { implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'com.google.mlkit:text-recognition:16.0.1'
+}
