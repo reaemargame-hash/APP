@@ -21,7 +21,7 @@ public class QuestWidget extends AppWidgetProvider {
   static void draw(Context context, AppWidgetManager manager, int[] ids) {
     int level = 1, exp = 0, water = 0, waterGoal = 6;
     double totalKm = 0, todayKm = 0, goalKm = 0;
-    String rank = "E", next = "เปิด ASCENT เพื่อดูเควส";
+    String rank = "E", next = "เปิด ASCENT เพื่อดูเควส", hunter = "HUNTER";
     boolean done = false;
     String widgetDay = "";
     String json = NativeScheduler.prefs(context).getString("widget", "{}");
@@ -31,6 +31,7 @@ public class QuestWidget extends AppWidgetProvider {
       level = Math.max(1,data.optInt("level",1));
       exp = Math.max(0,data.optInt("xp",0));
       rank = data.optString("rank","E");
+      hunter = data.optString("hunter","HUNTER");
       totalKm = Math.max(0,data.optDouble("km",0));
       todayKm = Math.max(0,data.optDouble("todayKm",0));
       goalKm = Math.max(0,data.optDouble("goalKm",0));
@@ -40,6 +41,8 @@ public class QuestWidget extends AppWidgetProvider {
       next = data.optString("next",next);
     } catch (Exception ignored) { }
     if (rank.isEmpty() || rank.length() > 2) rank = "E";
+    if(hunter.trim().isEmpty())hunter="HUNTER";
+    if(hunter.length()>18)hunter=hunter.substring(0,18);
     Intent open = new Intent(context, MainActivity.class);
     open.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     PendingIntent openApp = PendingIntent.getActivity(context,0,open,PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
@@ -51,6 +54,7 @@ public class QuestWidget extends AppWidgetProvider {
     int pending = today.equals(prefs.getString("pending_widget_day","")) ? prefs.getInt("pending_widget_water",0) : 0;
     for (int id : ids) {
       RemoteViews view = new RemoteViews(context.getPackageName(),R.layout.quest_widget);
+      view.setTextViewText(R.id.widget_title,"✦ "+hunter+" · DAILY QUEST");
       view.setTextViewText(R.id.widget_level,"LV."+level+"  ·  "+rank+"-RANK");
       view.setTextViewText(R.id.widget_exp,exp+" EXP");
       view.setTextViewText(R.id.widget_distance,goalKm>0

@@ -3,6 +3,8 @@ package com.ascent.quest;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.*;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProviderInfo;
 import android.content.*;
 import android.content.pm.PackageManager;
 import android.os.*;
@@ -54,6 +56,55 @@ public class MainActivity extends Activity {
  public class Bridge {
   @JavascriptInterface public void scheduleReminders(String json){runOnUiThread(()->NativeScheduler.schedule(MainActivity.this,json));}
   @JavascriptInterface public void updateWidget(String json){runOnUiThread(()->{NativeScheduler.prefs(MainActivity.this).edit().putString("widget",json).apply();QuestWidget.refresh(MainActivity.this);});}
+  /** Diagnostic from the actual installed native APK, not the web UI version. */
+  @JavascriptInterface public String widgetStatus(){
+    org.json.JSONObject result=new org.json.JSONObject();
+    try{
+      AppWidgetManager manager=AppWidgetManager.getInstance(MainActivity.this);
+      ComponentName component=new ComponentName(MainActivity.this,QuestWidget.class);
+      boolean registered=false;
+      for(AppWidgetProviderInfo info:manager.getInstalledProviders()){
+        if(component.equals(info.provider)){registered=true;break;}
+      }
+      android.content.pm.PackageInfo pkg=getPackageManager().getPackageInfo(getPackageName(),0);
+      long version=Build.VERSION.SDK_INT>=28?pkg.getLongVersionCode():pkg.versionCode;
+      result.put("native",true);
+      result.put("version",pkg.versionName);
+      result.put("versionCode",version);
+      result.put("registered",registered);
+      result.put("pinned",manager.getAppWidgetIds(component).length);
+      result.put("pinSupported",manager.isRequestPinAppWidgetSupported());
+    }catch(Exception ex){try{result.put("error",ex.getClass().getSimpleName());}catch(Exception ignored){}}
+    return result.toString();
+  }
+  /** Request the system launcher to add our provider; a returned true is not proof it was pinned. */
+  @JavascriptInterface public void pinWidget(){runOnUiThread(()->{
+    try{
+      AppWidgetManager manager=AppWidgetManager.getInstance(MainActivity.this);
+      ComponentName provider=new ComponentName(MainActivity.this,QuestWidget.class);
+      boolean registered=false;
+      for(AppWidgetProviderInfo info:manager.getInstalledProviders()){
+        if(provider.equals(info.provider)){registered=true;break;}
+      }
+      if(!registered){
+        new AlertDialog.Builder(MainActivity.this).setTitle("ยังไม่พบวิดเจ็ต ASCENT ใน Android")
+          .setMessage("แอปที่ติดตั้งอาจเป็น APK รุ่นเก่า หรือ Launcher ยังไม่โหลดวิดเจ็ตใหม่ กรุณาติดตั้ง APK ที่ Build จาก v3.8.8 แล้วเปิดแอปหนึ่งครั้ง หากยังไม่พบให้รีสตาร์ตมือถือ")
+          .setPositiveButton("ตกลง",null).show();return;
+      }
+      if(manager.isRequestPinAppWidgetSupported()){
+        if(manager.requestPinAppWidget(provider,null,null))return;
+      }
+      new AlertDialog.Builder(MainActivity.this).setTitle("เพิ่มวิดเจ็ตผ่านหน้าจอหลัก")
+        .setMessage("Launcher ไม่รองรับการเพิ่มวิดเจ็ตจากแอปโดยตรง\n\nXiaomi/HyperOS: แตะค้างพื้นที่ว่างหน้าจอหลัก → วิดเจ็ต → เลื่อนหา Android widgets / วิดเจ็ตจากแอป → ASCENT Fitness RPG\n\nหากไม่พบให้ลองปลด App Lock ของ ASCENT แล้วรีสตาร์ตเครื่อง")
+        .setPositiveButton("ตกลง",null).show();
+    }catch(Exception ex){
+      android.util.Log.e("ASCENT","pin widget failed",ex);
+      new AlertDialog.Builder(MainActivity.this).setTitle("เพิ่มวิดเจ็ตไม่ได้")
+        .setMessage("เกิดข้อผิดพลาดจาก Android Launcher: "+ex.getClass().getSimpleName())
+        .setPositiveButton("ตกลง",null).show();
+    }
+  });}
+
   @JavascriptInterface public void openHealthPermissions(){runOnUiThread(()->HealthConnectBridge.permissions(MainActivity.this));}
   @JavascriptInterface public void readHealthConnect(){runOnUiThread(()->HealthConnectBridge.read(MainActivity.this));}
   @JavascriptInterface public void requestPermission(){runOnUiThread(()->{if(Build.VERSION.SDK_INT>=33&&checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS)!=PackageManager.PERMISSION_GRANTED)requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS},PERMISSION_NOTIFICATION);});}

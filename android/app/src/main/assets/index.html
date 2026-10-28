@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#0a0f1e"><meta name="description" content="ASCENT — ภารกิจสุขภาพส่วนตัว สะสม EXP บันทึกอาหาร วิ่ง และการนอน">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
-<title>ASCENT — Black Flame 3.8.6</title>
+<title>ASCENT — Black Flame 3.8.7</title>
 <style>
 :root{--bg:#080d18;--panel:#111a2b;--panel2:#151f33;--panel3:#1c2940;--line:#27364b;--text:#ecf5ff;--muted:#90a0b7;--quiet:#65758e;--cyan:#55e5e6;--lime:#b3f16b;--violet:#a994ff;--orange:#ffc883;--red:#ff7f90;--shadow:0 24px 70px #0004;--radius:20px;font-family:system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;color-scheme:dark}
 *{box-sizing:border-box}html{background:var(--bg);scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 800px 480px at 75% -130px,#193e52a6,transparent),radial-gradient(ellipse 500px 380px at 20% 18%,#22234b42,transparent),var(--bg);color:var(--text);min-height:100vh}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}a{color:var(--cyan)}svg{display:block}input,select{outline:none}input:focus,select:focus,button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
@@ -174,6 +174,23 @@ input[readonly]{opacity:.85;cursor:default}
 .v372-quality{margin:0 0 12px;padding:12px;border:1px solid;border-radius:12px;font-size:12px;line-height:1.7}.v372-pass{border-color:#316d61;background:#102b30;color:#b1f4d7}.v372-warn{border-color:#99672e;background:#32251c;color:#ffe1b2}
 @media(max-width:590px){.v372-metrics{gap:6px;padding:9px}.v372-metrics b{font-size:14px}.v372-metrics small{font-size:9px}.v372-metrics p{font-size:9px}}
 
+
+
+/* ASCENT v3.8.7 Hunter Status — first element inside the one Daily Quest hero. */
+.v387-hunter{position:relative;display:flex;align-items:center;gap:13px;border:1px solid #775eb288;background:linear-gradient(110deg,#1e193ce8,#172a4bf0 57%,#11182ff0);box-shadow:inset 0 1px #cebeff22,0 0 25px #4b26982b;border-radius:16px;padding:13px 16px;margin:0 0 19px;min-width:0;overflow:hidden}
+.v387-hunter:before{content:"";position:absolute;pointer-events:none;width:190px;height:150px;right:-70px;top:-78px;border-radius:50%;filter:blur(24px);opacity:.4;background:radial-gradient(ellipse,#07050b 18%,#532f8b 49%,transparent 75%);animation:v385flame 3.8s ease-in-out infinite alternate}
+.v387-avatar{position:relative;z-index:1;display:grid;place-items:center;flex:none;width:55px;height:55px;border:1px solid #967bed;border-radius:13px;font-size:31px;color:#e4d4ff;background:linear-gradient(145deg,#281b53,#12294b);text-shadow:0 0 16px #af8aff;box-shadow:0 0 20px #65419b4a}
+.v387-hunter-data{position:relative;z-index:1;min-width:0;flex:1}
+.v387-hunter-eyebrow{font-size:10px;letter-spacing:.18em;color:#c3abfa;font-weight:800}
+.v387-hunter-name{font-size:clamp(17px,2.4vw,23px);font-weight:950;color:#fff;line-height:1.35;overflow-wrap:anywhere;margin:2px 0 6px}
+.v387-exptext{font-size:10px;color:#bfcce8;display:flex;justify-content:space-between;gap:8px}
+.v387-expbar{height:6px;border-radius:100px;background:#2a3050;overflow:hidden;margin-top:5px;max-width:520px}
+.v387-expbar>span{display:block;height:100%;border-radius:100px;background:linear-gradient(90deg,#977aff,#79bbff,#92e2ff);box-shadow:0 0 12px #a88bff;transition:width .3s}
+.v387-rankbox{position:relative;z-index:1;flex:none;text-align:right;min-width:90px}
+.v387-rankbox strong{display:block;font-size:clamp(17px,2.5vw,26px);font-weight:950;line-height:1.15;color:#faf4ff;text-shadow:0 0 14px #9e75ff7a}
+.v387-rankbox span{display:block;margin-top:4px;color:#bdbeea;font-size:11px;letter-spacing:.07em}
+@media(max-width:500px){.v387-hunter{padding:12px;gap:9px}.v387-avatar{width:43px;height:47px;font-size:25px}.v387-rankbox{min-width:60px}.v387-rankbox strong{font-size:18px}.v387-rankbox span{font-size:10px}.v387-hunter-eyebrow{font-size:9px}.v387-hunter-name{font-size:16px}.v387-exptext{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.v387-hunter:before{animation:none}.v387-expbar>span{transition:none}}
 
 /* ASCENT v3.8.4 — DAILY QUEST FIRST: isolated styles to avoid previous CSS collisions */
 .v384-home{max-width:1180px;margin:0 auto;display:grid;gap:17px;min-width:0}
@@ -359,6 +376,26 @@ body.v386-overlay-open{overflow:hidden!important}
 .v385-task button,.v385-links button{min-height:43px}
 @media(max-width:580px){#v386-overlay{padding:7px}#v386-overlay .v386-dialog{border-radius:16px;max-height:calc(100dvh - 14px)}#v386-overlay .v386-head{padding:12px}#v386-overlay .v386-head h2{font-size:18px}#v386-overlay .v386-scroll{padding:12px}#v386-overlay .v386-form-wrap #settings-form{grid-template-columns:minmax(0,1fr)}#v386-overlay .v386-form-wrap #settings-form .fullspan{grid-column:auto}#v386-overlay .v383-foodgrid{grid-template-columns:minmax(0,1fr)}#v386-overlay .v34-tabbar{position:sticky;top:0;z-index:5;background:#101b30f2}}
 @media(prefers-reduced-motion:reduce){#v386-overlay .v386-dialog:before{animation:none}}
+</style>
+
+<style id="v388-status-style">
+/* The only Home hunter status card. Black-flame visuals move behind text. */
+.v385-home .v388-status{position:relative;isolation:isolate;overflow:hidden;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 220px;align-items:center;gap:22px;padding:31px 38px;border:1px solid #31596b;border-radius:24px;background:linear-gradient(110deg,#152e41 0%,#121d33 44%,#171833 100%);box-shadow:0 12px 38px #01030c66,inset 0 1px #8ce7ff10}
+.v388-status::before,.v388-status::after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(36px);animation:v388BlackFlame 3.1s ease-in-out infinite alternate}
+.v388-status::before{width:310px;height:300px;right:0;top:-180px;background:radial-gradient(ellipse,#030208 17%,#23164f8a 46%,transparent 74%)}
+.v388-status::after{width:360px;height:220px;left:-150px;bottom:-130px;background:radial-gradient(ellipse,#06050b 13%,#24365b8a 53%,transparent 78%);animation-duration:3.8s;animation-direction:alternate-reverse}
+@keyframes v388BlackFlame{to{transform:translate3d(36px,29px,0) scale(1.17) skewX(-5deg)}}
+.v388-status-copy{position:relative;z-index:2;min-width:0}.v388-eyebrow{font-size:11px;font-weight:900;letter-spacing:.15em;color:#65e5e9}
+.v388-status h2{color:#eaf4ff;font-size:clamp(24px,3.3vw,43px);line-height:1.18;letter-spacing:-.045em;margin:20px 0 11px;overflow-wrap:anywhere}.v388-status h2 span{color:#f4f8ff}
+.v388-status p{font-size:13px;line-height:1.7;color:#a9c2d6;margin:0 0 24px;max-width:580px}
+.v388-xp-track{height:11px;max-width:650px;border:1px solid #32677b;background:#173545;border-radius:20px;overflow:hidden}.v388-xp-track span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#5ce1e7,#70e6b3,#b7f47e);box-shadow:0 0 13px #70f3d881;transition:width .4s ease}
+.v388-xp-meta{display:flex;justify-content:space-between;gap:10px;max-width:650px;color:#b7ccdd;font-size:11px;margin-top:10px}.v388-status-level{z-index:2;display:flex;align-items:center;justify-content:center;flex-direction:column;min-width:0}
+.v388-level-disc{width:188px;height:188px;border:2px solid #54cdd6;border-radius:50%;background:radial-gradient(circle,#17384b 2%,#13253a 72%);box-shadow:0 0 0 11px #4fc2e51c,0 0 46px #1aaacb40;display:flex;justify-content:center;align-items:center;flex-direction:column;position:relative}
+.v388-level-disc:before{content:"";position:absolute;inset:12px;border:1px dashed #54d2d26c;border-radius:50%;pointer-events:none}.v388-level-disc>span{font-size:11px;letter-spacing:.23em;font-weight:950;color:#71e5e4}.v388-level-disc strong{font-size:73px;line-height:1.05;font-weight:1000;color:#f1f7ff}
+.v388-rank-badge{background:#b5facb;color:#0c2f30;padding:6px 13px;border-radius:7px;font-size:12px;letter-spacing:.16em;font-weight:1000;margin-top:-13px;z-index:2}
+@media(max-width:760px){.v385-home .v388-status{grid-template-columns:minmax(0,1fr) 120px;gap:10px;padding:20px 18px;border-radius:19px}.v388-status h2{font-size:clamp(20px,4.2vw,29px);margin:12px 0 7px}.v388-status p{font-size:11px;margin-bottom:15px}.v388-level-disc{height:110px;width:110px}.v388-level-disc:before{inset:7px}.v388-level-disc strong{font-size:42px}.v388-level-disc>span{font-size:9px}.v388-rank-badge{font-size:9px;padding:5px 8px}.v388-eyebrow{font-size:9px;letter-spacing:.09em}}
+@media(max-width:390px){.v385-home .v388-status{grid-template-columns:minmax(0,1fr) 95px;padding:17px 12px;gap:7px}.v388-status h2{font-size:21px}.v388-status p{font-size:10px;line-height:1.5}.v388-level-disc{height:89px;width:89px}.v388-level-disc strong{font-size:34px}.v388-level-disc>span{font-size:8px}.v388-rank-badge{font-size:8px}.v388-xp-meta{font-size:10px}.v388-desktop-break{display:none}}
+@media(prefers-reduced-motion:reduce){.v388-status:before,.v388-status:after{animation:none!important}.v388-xp-track span{transition:none}}
 </style>
 </head>
 <body><div id="app"></div><div id="toasts" class="toastbox" aria-live="polite"></div>
@@ -572,7 +609,7 @@ function pantryView(){const forecast=weeklyForecast(),s=shortageWeek();return `<
 function forecastPanel(f){if(!f.stockEnough)return `<div class="warn">⚠️ แผน 7 วันยังไม่สมดุลหรือวัตถุดิบไม่พอ แอปจะไม่คาดการณ์การลดไขมันจากเมนูที่ยังไม่ครบ โปรดเติมคลังหรือปรับแผน</div><p class="hint">ปัญหาที่ตรวจพบ: ${esc(f.warnings.slice(0,5).join(', '))}${f.warnings.length>5?' และอื่น ๆ':''}</p>`;
 if(f.avg>f.maintenance*1.05)return `<div class="warn">จากรายการอาหารประมาณ ${Math.round(f.avg)} kcal/วัน อาจไม่เกิดการขาดดุลพลังงานเมื่อเทียบกับค่าที่ใช้ประมาณ ${f.maintenance} kcal/วัน จึงยังไม่ควรคาดการณ์การลดไขมัน</div>`;const range=x=>x[0]+'–'+x[1]+' กก.';return `<div class="forecast-number">${range(f.range7)}</div><span class="subtle">การเปลี่ยนแปลงไขมันโดยประมาณใน 7 วัน</span><div class="muteline"></div><div class="forecast-number">${range(f.range30)}</div><span class="subtle">ประมาณ 30 วัน หากเติมอาหารตามแผนซ้ำ</span><p class="hint">ประมาณจากพลังงานอาหารเฉลี่ย ${Math.round(f.avg)} kcal/วัน และพลังงานที่ใช้โดยประมาณ ${f.maintenance} kcal/วัน (กรอบการคำนวณพลังงาน ±20% (ยังไม่ครอบคลุมความผันผวนทั้งหมด)) · ประมาณจากเพศ อายุ และส่วนสูงในตั้งค่า ไม่ใช่คำรับรองผลจริง น้ำหนักน้ำและการปรับตัวของร่างกายทำให้ผลต่างออกไปได้ · หากไม่ลดให้ดูน้ำหนักเฉลี่ยจริง 2–3 สัปดาห์</p>`}
 function dueNotifications(){const entries=[];for(let i=0;i<7;i++){const date=shift(localDate(),i),d=day(date);for(const rec of RECIPES){if(i===0&&(d.meals?.includes(rec.id)||d.canceled?.['meal:'+rec.id]))continue;entries.push({key:date+'-'+rec.id,time:date+'T'+(d.snoozed?.['meal:'+rec.id]||rec.time)+':00',title:'🍽 เควส '+rec.name,body:rec.name+' ถึงเวลาแล้ว เปิดดูเมนูจากคลังอาหาร'})}for(const slot of waterSlots()){if(i===0&&(d.waterSlots?.[slot.key]||d.canceled?.['water:'+slot.key]))continue;entries.push({key:date+'-'+slot.key,time:date+'T'+(d.snoozed?.['water:'+slot.key]||slot.time)+':00',title:'💧 เควสดื่มน้ำ',body:'ดื่มน้ำประมาณ '+slot.ml+' มล. ตามความกระหาย'})}if(schedule(date).active&&!d.runQuestAwarded&&!d.canceled?.exercise&&!d.recovery)entries.push({key:date+'-run',time:date+'T'+(d.snoozed?.exercise||schedule(date).exerciseTime||'18:00')+':00',title:'🏃 เควสวิ่ง / เดิน',body:'เปิดแผนฝึกและ GPS ตามความพร้อม'});entries.push({key:date+'-sleep',time:date+'T22:15:00',title:'🌙 เตรียมเข้านอน',body:'พักจากหน้าจอและเตรียมตัวนอนตามเป้าหมาย'});}return entries}
-function rescheduleNative(){if(!window.AscentNative?.scheduleReminders)return;try{window.AscentNative.scheduleReminders(JSON.stringify(data.profile.notifications?dueNotifications():[]));window.AscentNative.updateWidget(JSON.stringify({level:lvl(score()).level,rank:lvl(score()).rank,xp:score(),day:localDate(),km:pctNum(totals().km),todayKm:pctNum(totalDistance(day(localDate()))),goalKm:schedule(localDate()).active?pctNum(schedule(localDate()).targetKm):0,done:!!day(localDate()).runQuestAwarded,next:(nextQuest()?.title||'ภารกิจวันนี้'),water:(day(localDate()).water||0),waterGoal:waterSlots().length}))}catch(e){console.warn('native sync',e)}}
+function rescheduleNative(){if(!window.AscentNative?.scheduleReminders)return;try{window.AscentNative.scheduleReminders(JSON.stringify(data.profile.notifications?dueNotifications():[]));window.AscentNative.updateWidget(JSON.stringify({hunter:String(data.profile.name||'HUNTER').slice(0,22),level:lvl(score()).level,rank:lvl(score()).rank,xp:score(),day:localDate(),km:pctNum(totals().km),todayKm:pctNum(totalDistance(day(localDate()))),goalKm:schedule(localDate()).active?pctNum(schedule(localDate()).targetKm):0,done:!!day(localDate()).runQuestAwarded,next:(nextQuest()?.title||'ภารกิจวันนี้'),water:(day(localDate()).water||0),waterGoal:waterSlots().length}))}catch(e){console.warn('native sync',e)}}
 let lastCheck=Date.now();let noticed=new Set();const audioDbKey='ascent_audio_v2';let audioBytes=null;
 function openAudioDB(){return new Promise((resolve,reject)=>{const r=indexedDB.open('ascent_settings',1);r.onupgradeneeded=()=>r.result.createObjectStore('files');r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}
 async function storeAudio(file){if(file.size>3e6)throw Error('ไฟล์เสียงเกิน 3 MB');const db=await openAudioDB();await new Promise((ok,no)=>{const tx=db.transaction('files','readwrite');tx.objectStore('files').put(file,audioDbKey);tx.oncomplete=ok;tx.onerror=()=>no(tx.error)});db.close();audioBytes=file}
@@ -959,7 +996,7 @@ document.addEventListener('click',e=>{const btn=e.target.closest('[data-action="
 document.addEventListener('click',e=>{if(e.target.closest('.receipt-drawer > summary'))receiptDrawerOpen=!receiptDrawerOpen});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&moreMenuOpen){moreMenuOpen=false;render()}});
 
-function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.8.6 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
+function render(){if(runningGPS)return;autoProfileTargets();foodPlan=plansFor(selected).meals;const body=tab==='dashboard'?dashboard():tab==='food'?v34NutritionHub():tab==='stats'?statsView():settings();$('#app').innerHTML=layout(body);document.title='ASCENT v3.8.8 · '+({dashboard:'ภาพรวม',quests:'ภารกิจ',food:'อาหาร',run:'วิ่ง',stats:'สถิติ',settings:'ตั้งค่า'}[tab]||'Fitness Quest')}
 function commit(fn,msg){const oldScore=score(),oldLevel=lvl(oldScore).level;fn();save();render();rescheduleNative();const now=score(),newLevel=lvl(now).level;if(newLevel>oldLevel)toast('⚡ LEVEL UP! → LV.'+newLevel+' · '+fmtNum(now-oldScore)+' EXP');else if(msg)toast(msg+(now>oldScore?' · +'+fmtNum(now-oldScore)+' EXP':''))}
 let pendingInstall=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();pendingInstall=e});
 document.addEventListener('click',async e=>{const target=e.target.closest('[data-tab],[data-date],[data-meal],[data-water-slot],[data-ready],[data-action],[data-remove-food],[data-remove-run]');if(!target)return;
@@ -1573,6 +1610,8 @@ function v385QuestHero(){
  q?.kind==='water'?`<button type="button" data-water-slot="${esc(q.id)}">✓ ดื่มแล้ว</button>`:
  q?.kind==='exercise'?`<button type="button" data-run-open="1">↗ เปิด GPS</button>`:
  q?.kind==='sleep'?`<button type="button" data-action="v34-open-daily">บันทึกการนอน</button>`:'';
+ const hunter=esc(String(data.profile?.name||'HUNTER').trim().slice(0,22)||'HUNTER');
+ const xpPct=st.lv.needed>0?Math.min(100,Math.max(0,Math.round(st.lv.remaining/st.lv.needed*100))):0;
  return `<section class="v385-hero" aria-label="DAILY QUEST ภารกิจหลักวันนี้">
   <div class="v33-title-frame"><button class="v33-info-button" data-action="v33-help" aria-label="ข้อมูลเควส">ⓘ</button><div class="v33-title-box">DAILY QUEST</div></div>
   <p class="v33-flavor">[Your tailored training<br>to become a great warrior.]</p>
@@ -1582,8 +1621,25 @@ function v385QuestHero(){
   <div class="v385-message">${aim>0?(complete?'✓ วิ่งครบเป้าหมายวันนี้แล้ว':`เหลือ ${fmtNum(Math.max(0,aim-km),2)} กม. · ${esc(s.label)} · ไม่บังคับเพซ`):'วันพัก · วิ่งอิสระได้ ไม่มีระยะบังคับ'}</div>
   <div class="v385-hero-actions"><button type="button" class="v385-runbutton" data-run-open="1">↗ ${gps.active?'กลับไปหน้าวิ่ง':'เริ่มวิ่ง GPS'}</button><button type="button" class="v385-minor" data-tab="stats">ดูสถิติ ↗</button></div></div>
   ${q?`<div class="v385-questline"><strong>◈ เควสตามเวลา · ${esc(q.time)} น. · ${esc(q.title)}</strong>${v33QuestDetail(q)}${q.shortage?.length?`<div class="v33-shortage">⚠ วัตถุดิบไม่พอ: ${esc(q.shortage.join(', '))}</div>`:''}${questActions?`<div class="v33-actions">${questActions}<button type="button" class="secondary" data-action="quest-snooze" data-qkey="${esc(q.key)}" data-delay="15">เลื่อน 15 นาที</button><button type="button" class="secondary" data-action="quest-cancel" data-qkey="${esc(q.key)}">ข้าม</button></div>`:''}</div>`:''}
-  <div class="v385-rank"><span>LV <b>${st.lv.level} · ${st.lv.rank}-RANK</b></span><span>EXP <b>${fmtNum(st.x)}</b></span><span>สะสม <b>${fmtNum(st.all.km,1)} กม.</b></span></div>
+  <div class="v385-next">✦ EXP สะสม ${fmtNum(st.x)} · ระยะสะสม ${fmtNum(st.all.km,1)} กม.</div>
   <div class="v385-next">${notice?'✧ ภารกิจถัดไป: '+esc(notice.title)+' · '+esc(notice.time)+' น.':'✧ ภารกิจที่กำหนดวันนี้ครบแล้ว'}</div>
+ </section>`;
+}
+// v3.8.8 — One full-width RPG status header, matching the requested screenshot.
+// Shares live level/EXP with the quest and Android widget; no stored duplicate state.
+function v388StatusHeader(){
+ const st=stats(),hunter=esc(String(data.profile?.name||'HUNTER').trim().slice(0,30)||'HUNTER');
+ const level=Number(st.lv.level)||1,rank=esc(String(st.lv.rank||'E'));
+ const xp=Number(st.lv.remaining)||0,needed=Math.max(1,Number(st.lv.needed)||1),pct=Math.min(100,Math.max(0,Math.round(xp/needed*100)));
+ return `<section class="v388-status" aria-label="สถานะ Hunter" id="v388-player-status">
+  <div class="v388-status-copy">
+   <div class="v388-eyebrow">✦ PLAYER STATUS · ${rank}-RANK</div>
+   <h2>ยินดีต้อนรับ, <span>${hunter}</span></h2>
+   <p>ทุกก้าวที่ดูแลตัวเอง ทุกกิโลที่วิ่ง และทุกคืนที่พักผ่อน<br class="v388-desktop-break"> คือ EXP ของการพัฒนาตัวคุณ</p>
+   <div class="v388-xp-track" role="progressbar" aria-label="EXP ไปยังเลเวลถัดไป" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><span style="width:${pct}%"></span></div>
+   <div class="v388-xp-meta"><span>EXP ${fmtNum(xp)} / ${fmtNum(needed)}</span><span>LEVEL ${level+1} →</span></div>
+  </div>
+  <div class="v388-status-level"><div class="v388-level-disc"><span>LEVEL</span><strong>${level}</strong></div><div class="v388-rank-badge">${rank}-RANK</div></div>
  </section>`;
 }
 function v385Home(){
@@ -1591,6 +1647,7 @@ function v385Home(){
  const meals=(d.meals||[]).length,mealCount=RECIPES.length,water=waterSlots(),waterDone=water.filter(w=>d.waterSlots?.[w.key]).length,nextWater=water.find(w=>!d.waterSlots?.[w.key]);
  const slept=d.sleep!==null&&d.sleep!==undefined;
  return `<div class="v385-home">
+  ${v388StatusHeader()}
   ${v385QuestHero()}
   <div class="v385-actions" aria-label="ภารกิจเสริมวันนี้">
    <div class="v385-task food"><span>🍽</span><div class="v385-task-copy"><b>อาหาร ${meals}/${mealCount}</b><small>บันทึกมื้อที่กินวันนี้</small></div><button type="button" data-v386-open="food">บันทึก</button></div>
@@ -1598,7 +1655,7 @@ function v385Home(){
    <div class="v385-task sleep"><span>☾</span><div class="v385-task-copy"><b>การนอน ${slept?'✓':'ยังไม่บันทึก'}</b><small>${slept?fmtNum(d.sleep,1)+' ชั่วโมง':'บันทึกเวลานอน'}</small></div><button type="button" data-v386-open="sleep">บันทึก</button></div>
   </div>
   <div class="v385-bottom" aria-label="โภชนาการวันนี้"><div class="v385-foodline"><span>⚡ <b>${fmtNum(n.calories)}</b> / ${fmtNum(b.calories)} kcal</span><span>🥚 <b>${fmtNum(n.protein)}</b> / ${fmtNum(b.protein)} กรัม</span><span>${n.calories>b.calories?'เกินเป้า '+fmtNum(n.calories-b.calories)+' kcal':'เหลือ '+fmtNum(Math.max(0,b.calories-n.calories))+' kcal'}</span></div><button type="button" data-v380-snack>＋ กินขนม / อาหารนอกแผน</button></div>
-  <nav class="v385-links" aria-label="เมนูเสริม"><button type="button" data-v386-open="stock">▦ คลังอาหาร / ซื้อของ</button><button type="button" data-v386-open="settings">⚙ ร่างกาย / เป้าหมาย</button><button type="button" data-v386-open="health">⌚ Health Connect</button></nav>
+  <nav class="v385-links" aria-label="เมนูเสริม"><button type="button" data-v386-open="stock">▦ คลังอาหาร / ซื้อของ</button><button type="button" data-v386-open="settings">⚙ ร่างกาย / เป้าหมาย</button><button type="button" data-v386-open="health">⌚ Health Connect</button><button type="button" data-v386-open="widget">▣ วิดเจ็ตหน้าจอ</button></nav>
   <button type="button" class="v386-detail-trigger" data-v386-open="details">☷ รายละเอียดเพิ่มเติม · ตารางภารกิจและ EXP <span>เปิด ↗</span></button>
  </div>`;
 }
@@ -1608,7 +1665,7 @@ dashboard=v385Home;
 // ASCENT v3.8.6 — One consistent modal for the Home quick actions.
 // Reuse the original meal, pantry, water, sleep, settings and Health Connect handlers.
 let v386Panel=null,v386ReturnFocus=null;
-const V386_NAMES={food:['🍽','บันทึกอาหาร'],stock:['▦','คลังอาหารและซื้อของ'],water:['💧','ดื่มน้ำวันนี้'],sleep:['☾','บันทึกการนอน'],settings:['⚙','ร่างกายและเป้าหมาย'],health:['⌚','Health Connect'],details:['✦','รายละเอียดภารกิจและ EXP']};
+const V386_NAMES={food:['🍽','บันทึกอาหาร'],stock:['▦','คลังอาหารและซื้อของ'],water:['💧','ดื่มน้ำวันนี้'],sleep:['☾','บันทึกการนอน'],settings:['⚙','ร่างกายและเป้าหมาย'],health:['⌚','Health Connect'],widget:['▣','วิดเจ็ตบนหน้าจอหลัก'],details:['✦','รายละเอียดภารกิจและ EXP']};
 function v386Node(){let node=document.getElementById('v386-overlay');if(!node){node=document.createElement('div');node.id='v386-overlay';node.hidden=true;node.innerHTML='<section class="v386-dialog" role="dialog" aria-modal="true" aria-labelledby="v386-title"><header class="v386-head"><div><small>ASCENT / QUICK ACTION</small><h2 id="v386-title"></h2></div><button type="button" class="v386-close" data-v386-close aria-label="ปิดหน้าต่าง">✕</button></header><div class="v386-scroll"></div></section>';document.body.append(node)}return node}
 function v386Content(){
  const d=day(localDate()),p=data.profile;
@@ -1629,6 +1686,15 @@ function v386Content(){
    return `<section class="v386-simple v386-form-wrap"><p class="v386-note">เปลี่ยนน้ำหนัก อายุ ส่วนสูง หรือกิจกรรมได้ตรงนี้ ตัวเลข BMI แคลอรี และโปรตีนจะคำนวณใหม่ก่อนกดบันทึก</p>${form?form.outerHTML:'<p>ไม่พบฟอร์มข้อมูลร่างกาย</p>'}</section>`;
  }
  if(v386Panel==='health')return `<section class="v386-simple">${v37HealthCard()}</section>`;
+ if(v386Panel==='widget'){
+   let status=null;
+   try{status=JSON.parse(window.AscentNative?.widgetStatus?.()||'null')}catch(e){}
+   const isNative=!!status?.native;
+   const label=isNative?`APK ที่ติดตั้ง: ${esc(status.version||'?')} (build ${Number(status.versionCode)||0})`:'ยังไม่ใช่แอป Android Native หรือเป็น APK รุ่นที่ไม่มีตัวตรวจวิดเจ็ต';
+   const detail=!isNative?'เปิดแอปจาก APK ที่ Build ใหม่ ไม่ใช่เว็บหรือทางลัด PWA':!status.registered?'⚠ Android ยังไม่ลงทะเบียนวิดเจ็ตจาก APK ที่ติดตั้งอยู่':`✓ Android ลงทะเบียนวิดเจ็ตแล้ว · เพิ่มบนหน้า Home ${Number(status.pinned)||0} อัน · Launcher ${status.pinSupported?'รองรับ':'ไม่รองรับ'}คำขอเพิ่มอัตโนมัติ`;
+   return `<section class="v386-simple v387-widget-panel"><div class="v386-statline"><div><small>ASCENT DAILY QUEST WIDGET</small><strong>▣ วิดเจ็ตหน้าจอ</strong><small>${label}</small></div></div><p class="v386-note">${detail}</p><button type="button" class="primary" data-v387-pin>＋ เพิ่มวิดเจ็ตบนหน้าจอหลัก</button><p class="v386-note">ถ้าใช้ Xiaomi/HyperOS ให้ไปที่หน้าจอหลัก → กดค้างพื้นที่ว่าง → วิดเจ็ต → เลื่อนหา “Android widgets / วิดเจ็ตจากแอป” → ASCENT Fitness RPG (หน้าค้นหาอาจแสดงเฉพาะวิดเจ็ตแนะนำ ไม่แสดงแอปทั้งหมด) หากยังไม่พบ ให้ตรวจ APK ที่ติดตั้งและรีสตาร์ต Launcher</p><p class="v386-note">วิดเจ็ตแสดง LV, Rank, EXP, ระยะวิ่งและเป้าหมายวันนี้ พร้อมปุ่มบันทึกน้ำ</p><button type="button" class="ghostbutton" data-v387-refresh>↻ ตรวจสถานะอีกครั้ง</button></section>`;
+ }
+
  if(v386Panel==='details'){
    const st=stats();return `<section class="v386-simple"><div class="v386-statline"><div><small>เลเวล / แรงก์</small><strong>LV.${st.lv.level} · ${st.lv.rank}</strong></div><div><small>EXP สะสม</small><strong>${fmtNum(st.x)}</strong></div></div>${v34DailyHub()}<div class="v386-rowbuttons"><button class="v386-shortcut" data-v386-open="food">🍽 บันทึกอาหาร</button><button class="v386-shortcut" data-v386-open="settings">⚙ เป้าหมาย</button></div></section>`;
  }
@@ -1638,10 +1704,17 @@ function v386Mount(){if(!v386Panel)return;const node=v386Node(),scroller=node.qu
 function v386Close(force=false){if(!v386Panel)return true;if(v383Dirty&&v34FoodView==='stock'&&!force&&!confirm('มีการแก้ไขคลังที่ยังไม่ได้บันทึก ต้องการทิ้งการแก้ไขหรือไม่?'))return false;if(v34FoodView==='stock'&&v383Dirty){v383Draft=null;v383Touched.clear();v383Dirty=false}v386Panel=null;const root=document.getElementById('v386-overlay');if(root)root.hidden=true;document.body.classList.remove('v386-overlay-open');if(v386ReturnFocus?.isConnected)v386ReturnFocus.focus({preventScroll:true});v386ReturnFocus=null;return true}
 function v386Open(name){if(name==='snack'){if(!v386Close())return;v380OpenSnack();return}if(!V386_NAMES[name])return;if(v386Panel&&v386Panel!==name&&!v386Close())return;if(!v386ReturnFocus)v386ReturnFocus=document.activeElement;v386Node().querySelector('.v386-scroll').scrollTop=0;if(v34RunModalOpen)v34CloseRun();v386Panel=name;if(name==='food'){v34FoodView='meals';selected=localDate()}if(name==='stock'){v34FoodView='stock';selected=localDate()}v386Mount();v386Node().querySelector('.v386-close').focus({preventScroll:true})}
 // Render after each successful data commit, keeping the dialog open and its numbers fresh.
-const v386EarlierRender=render;render=function(){v386EarlierRender();if(v386Panel)v386Mount();document.title=document.title.replace('3.8.5','3.8.6')};
+const v386EarlierRender=render;render=function(){v386EarlierRender();if(v386Panel)v386Mount();document.title=document.title.replace(/3\.8\.[0-7]/g,'3.8.8')};
 // Native GPS and snack popups take priority; never stack two different dialog surfaces.
 const v386EarlierRun=v34OpenRun;v34OpenRun=function(){if(!v386Close())return;document.getElementById('v380-snack-modal')?.classList.remove('open');v386EarlierRun()};
 const v386EarlierSnack=v380OpenSnack;v380OpenSnack=function(){if(!v386Close())return;v386EarlierSnack()};
+ document.addEventListener('click',e=>{
+ const btn=e.target.closest('[data-v387-pin],[data-v387-refresh]');if(!btn)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ if(btn.hasAttribute('data-v387-refresh')){v386Mount();return}
+ if(typeof window.AscentNative?.pinWidget==='function'){window.AscentNative.pinWidget();return}
+ toast('ต้องใช้ APK ASCENT v3.8.8 รุ่น Android Native จึงจะเพิ่มวิดเจ็ตได้');
+ },true);
 document.addEventListener('click',e=>{const el=e.target.closest('[data-v386-open],[data-v386-close]');if(el){e.preventDefault();e.stopImmediatePropagation();if(el.hasAttribute('data-v386-close'))v386Close();else v386Open(el.dataset.v386Open);return}if(e.target?.id==='v386-overlay')v386Close()},true);
 document.addEventListener('keydown',e=>{if(!v386Panel)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();v386Close();return}if(e.key!=='Tab')return;const node=v386Node();const focusables=[...node.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href]')].filter(el=>el.getClientRects().length);if(!focusables.length)return;const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}},true);
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:minWidth="245dp" android:minHeight="155dp"
+    android:minWidth="245dp" android:minHeight="155dp" android:targetCellWidth="4" android:targetCellHeight="2"
     android:minResizeWidth="180dp" android:minResizeHeight="135dp"
-    android:updatePeriodMillis="1800000" android:initialLayout="@layout/quest_widget"
+    android:updatePeriodMillis="1800000" android:previewImage="@drawable/widget_preview" android:previewLayout="@layout/quest_widget" android:description="@string/ascent_widget_description" android:initialLayout="@layout/quest_widget"
     android:resizeMode="horizontal|vertical" android:widgetCategory="home_screen" />
